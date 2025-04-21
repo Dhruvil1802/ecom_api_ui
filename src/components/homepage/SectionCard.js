@@ -1,12 +1,41 @@
 import React from 'react';
 import './SectionCard.css';
 
+const sectionImages = {
+  'NEW ARRIVALS': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ],
+  'SPRING BEAUTY': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ],
+  'DAILY ESSENTIALS': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ],
+  'DAILY ESSENTIALS1': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ],
+  'DAILY ESSENTIALS2': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ]
+};
+
 const SectionCard = ({ title }) => {
-  const images = [
-    { label: 'Furniture', src: '/images/furniture.png' },
-    { label: 'Electronics', src: '/images/electronics.png' },
-    { label: 'Winter', src: '/images/winter.png' },
-  ];
+  const images = sectionImages[title] || [];
 
   return (
     <div className="section-card">

@@ -14,7 +14,7 @@
   
   .product-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* ✅ 2 columns */
     gap: 2rem;
     justify-items: center;
   }
@@ -35,10 +35,10 @@
     margin-top: 2rem;
     padding: 0.8rem 2rem;
     border-radius: 1.5rem;
-    background: #f6f6f6;
+    background: #ffffff;
     border: none;
     font-weight: bold;
     font-size: 1rem;
+    color:rgb(84, 84, 217);
     cursor: pointer;
   }
-  

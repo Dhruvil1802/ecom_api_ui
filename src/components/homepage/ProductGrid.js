@@ -3,7 +3,7 @@ import './ProductGrid.css';
 import SectionCard from './SectionCard';
 
 const ProductGrid = () => {
-  const sections = ['BEST SELLER', 'SEASONAL', 'CLEARANCE'];
+  const sections = ['NEW ARRIVALS', 'SPRING BEAUTY', 'DAILY ESSENTIALS'];
 
   return (
     <div className="grid-container">
