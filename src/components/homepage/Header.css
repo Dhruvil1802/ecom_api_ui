@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0b0b0b;
+    padding: 1.5rem 3rem;
+    color: white;
+  }
+  
+  .brand {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 0.3rem;
+    width: 45%;
+    height: 50px;
+  }
+  
+  .search-bar input {
+    border: none;
+    outline: none;
+    padding: 0.8rem;
+    width: 100%;
+    font-size: 1rem;
+  }
+  
+  .search-icon {
+    padding: 0.8rem;
+    background: #ffbf47;
+    border-radius: 0 12px 12px 0;
+    color: black;
+    font-size: 1.2rem;
+  }
+  
+  .user-cart {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  
