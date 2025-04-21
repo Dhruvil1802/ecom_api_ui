@@ -1,4 +1,3 @@
-// SideMenu.jsx
 import React, { useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
 import './SideMenu.css';

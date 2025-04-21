@@ -31,6 +31,36 @@ const sectionImages = {
     { label: 'Fitness', src: '/images/dumbbell.png' },
     { label: 'Electronics', src: '/images/cap.png' },
     { label: 'Furniture', src: '/images/jacket.png' }
+  ],
+  'DAILY ESSENTIALS3': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ],
+  'DAILY ESSENTIALS4': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ],
+  'DAILY ESSENTIALS5': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ],  
+  'DAILY ESSENTIALS6': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
+  ],
+  'DAILY ESSENTIALS7': [
+    { label: 'Electronics', src: '/images/hairdryer.png' },
+    { label: 'Fitness', src: '/images/dumbbell.png' },
+    { label: 'Electronics', src: '/images/cap.png' },
+    { label: 'Furniture', src: '/images/jacket.png' }
   ]
 };
 

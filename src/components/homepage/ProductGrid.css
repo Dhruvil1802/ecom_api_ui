@@ -1,8 +1,65 @@
+.scroll-wrapper-container {
+  position: relative;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.grid-scroll-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  padding: 1rem 2rem;
+}
 
 .grid-container {
-    margin-top: 10%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-    gap: 3rem;
-    padding: 3rem;
-  }
+  display: inline-flex;
+  gap: 2rem;
+}
+
+/* Scroll Buttons */
+.scroll-btn-container {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  font-size: 2rem;
+  background: linear-gradient(135deg, #f2f2f2, #5b5b5b); /* Gradient background */
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  z-index: 10;
+  pointer-events: all;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Hover Effect */
+.scroll-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Left Button */
+.scroll-btn.left {
+  left: 0rem; 
+  transform: translateY(-50%);
+}
+
+/* right Button */
+.scroll-btn.right {
+  right: 0rem; 
+  transform: translateY(-50%);
+}
+
+.scroll-btn:hover {
+  transform: translateY(-50%) scale(1.15); /* Slight grow */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); /* Enhanced shadow */
+  background: linear-gradient(135deg, #5b5b5b, #f2f2f2); /* Slight color shift */
+}

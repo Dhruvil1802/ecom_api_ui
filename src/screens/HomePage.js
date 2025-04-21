@@ -13,8 +13,8 @@ const HomePage = () => {
 
       <div className="hero">
         <div className="hero-buttons">
-          <button className="btn-primary">Buy Now</button>
-          <button className="btn-secondary">Shop All</button>
+          {/* <button className="btn-primary">Buy Now</button>
+          <button className="btn-secondary">Shop All</button> */}
         </div>
       </div>
 

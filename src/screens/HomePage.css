@@ -6,7 +6,6 @@
     overflow: hidden;
   }
   
-  /* Apply background and zoom here */
   .homepage::before {
     content: '';
     position: absolute;
@@ -17,14 +16,12 @@
     background-image: url('/public/images/homepage.png');
     background-repeat: no-repeat;
     background-size: 245% auto; 
-    background-position: center 20%; 
+    background-position: center 25%; 
     z-index: -1;
     opacity: 1;
   }
   
-  /* Everything else remains the same */
 
-  
   .hero-content {
     text-align: center;
     color: white;
@@ -49,11 +46,12 @@
     height: 60vh;
     position: relative;
     padding: 2rem;
+    margin-bottom:2rem; 
   }
   
   .hero-buttons {
     position: absolute;
-    bottom: -17%; 
+    bottom: 5%; 
     left: 20%;    
     display: flex;
     gap: 4rem;
