@@ -63,7 +63,7 @@
 }
 
 .icon {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .signin-btn {
@@ -81,8 +81,9 @@
 }
 
 .cart-icon {
-  font-size: 3.5rem;
+  font-size: 3rem;
   margin-left: 4rem; 
+  margin-top: 2%
 }
 
 .user span {
