@@ -2,9 +2,10 @@ import React, { useRef } from 'react';
 import './ProductGrid.css';
 import SectionCard from './SectionCard';
 
-const ProductGrid = () => {
-  const sections = ['NEW ARRIVALS', 'SPRING BEAUTY', 'DAILY ESSENTIALS', 'DAILY ESSENTIALS1', 'DAILY ESSENTIALS2','DAILY ESSENTIALS3', 'DAILY ESSENTIALS4', 'DAILY ESSENTIALS5', 'DAILY ESSENTIALS6', 'DAILY ESSENTIALS7'];
+
+const ProductGrid = ({features}) => {
   const navRef  = useRef();
+
 
   const handleNav = (direction) => {
     if (direction === 'left') {
@@ -23,9 +24,10 @@ const ProductGrid = () => {
 
       <div className="grid-scroll-wrapper" ref={navRef}>
         <div className="grid-container">
-          {sections.map((section, index) => (
-            <SectionCard key={index} title={section} />
-          ))}
+        
+        {features?.map((feature, index) => (
+        <SectionCard key={index} feature={feature} />
+        ))}
         </div>
       </div>
     </div>

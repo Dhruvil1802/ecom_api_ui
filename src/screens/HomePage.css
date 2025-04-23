@@ -4,6 +4,9 @@
     padding-bottom: 4rem;
     z-index: 1;
     overflow: hidden;
+    background-size: cover;
+  background-position: center;
+  min-height: 400px;
   }
   
   .homepage::before {
@@ -13,13 +16,15 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background-image: url('/public/images/31.png');
+    /* background-image: url('/images/31.png'); */
     background-repeat: no-repeat;
-    background-size: 245% auto; 
-    background-position: center 25%; 
+    background-size: 245% auto;
+    background-position: center 25%;
     z-index: -1;
     opacity: 1;
+    min-height: 400px;
   }
+  
   
 
   .hero-content {
