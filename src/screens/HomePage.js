@@ -6,7 +6,7 @@ import SideMenu from '../components/homepage/SideMenu';
 import './HomePage.css';
 
 const local = "http://127.0.0.1:8000";
-const host = "http://ecomapi-production-f9d8.up.railway.app"
+const host = "https://ecomapi-production-f9d8.up.railway.app"
 
 
 const HomePage = () => {
