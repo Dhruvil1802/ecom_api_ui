@@ -42,9 +42,9 @@ const HomePage = () => {
 
   return (
     <div className="homepage"    
-    style={{
-      backgroundImage: banner ? `url("${host}${banner.banner_image}")` : "none",
-    }}>
+    // style={{
+    //   backgroundImage: banner ? `url("${host}${banner.banner_image}")` : "none",
+    // }}>
       <Header />
       <SideMenu />
 
