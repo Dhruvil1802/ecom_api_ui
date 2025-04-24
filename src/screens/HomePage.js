@@ -43,7 +43,7 @@ const HomePage = () => {
   return (
     <div className="homepage"    
     style={{
-      backgroundImage: `url("${host}/Media/banner/31.png")`,
+      backgroundImage: "https://ecomapi-production-f9d8.up.railway.app/Media/banner/31.png",
     }}>
       <Header />
       <SideMenu />
