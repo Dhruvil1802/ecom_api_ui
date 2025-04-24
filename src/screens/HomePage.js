@@ -18,7 +18,7 @@ const HomePage = () => {
       async function getHomePageDetails(){
         try{
           const res = await fetch(
-            `${local}/homepage/web/`,
+            `${host}/homepage/web/`,
             { 
               method: "GET",
               headers: {
@@ -43,7 +43,7 @@ const HomePage = () => {
   return (
     <div className="homepage"    
     style={{
-      backgroundImage: banner ? `url("http://127.0.0.1:8000${banner.banner_image}")` : "none",
+      backgroundImage: banner ? `url("${host}${banner.banner_image}")` : "none",
     }}>
       <Header />
       <SideMenu />
