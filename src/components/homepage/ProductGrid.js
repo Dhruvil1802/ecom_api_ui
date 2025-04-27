@@ -1,11 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './ProductGrid.css';
 import SectionCard from './SectionCard';
 
-
-const ProductGrid = ({features}) => {
-  const navRef  = useRef();
-
+const ProductGrid = ({ features }) => {
+  const navRef = useRef();
 
   const handleNav = (direction) => {
     if (direction === 'left') {
@@ -13,7 +11,33 @@ const ProductGrid = ({features}) => {
     } else if (direction === 'right') {
       navRef.current.scrollLeft += 420;
     }
-  }; 
+  };
+
+  useEffect(() => {
+    const container = navRef.current;
+
+    const updateDots = () => {
+      const scrollLeft = container.scrollLeft;
+      const totalWidth = container.scrollWidth - container.clientWidth;
+      const totalDots = 4; // Adjust to match the number of dots
+      const activeIndex = Math.round((scrollLeft / totalWidth) * (totalDots - 1));
+
+      const dots = document.querySelectorAll('.scroll-dots .dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+      });
+    };
+
+    if (container) {
+      container.addEventListener('scroll', updateDots);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', updateDots);
+      }
+    };
+  }, []);
 
   return (
     <div className="scroll-wrapper-container">
@@ -24,11 +48,17 @@ const ProductGrid = ({features}) => {
 
       <div className="grid-scroll-wrapper" ref={navRef}>
         <div className="grid-container">
-        
-        {features?.map((feature, index) => (
-        <SectionCard key={index} feature={feature} />
-        ))}
+          {features?.map((feature, index) => (
+            <SectionCard key={index} feature={feature} />
+          ))}
         </div>
+      </div>
+
+      <div className="scroll-dots">
+        <span className="dot active"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
       </div>
     </div>
   );
