@@ -19,7 +19,7 @@ function App() {
 
       <Route
         path="/homepage"
-        element={<HomePage/>}
+        element={<HomePage navigate={navigate} />}
       />
 
       <Route

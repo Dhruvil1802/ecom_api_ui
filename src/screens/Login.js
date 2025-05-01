@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import ErrorMessage from '../error/errorMessage';
 import './Login.css';
 
 const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app"
+const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 function Login({showHomePage, setToken}) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [isErrorVisible, setIsErrorVisible] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     const togglePassword = () => {
         if (isPasswordVisible === true) {   
@@ -26,7 +29,7 @@ function Login({showHomePage, setToken}) {
         
         async function LoginHandler() {
             try {
-              const res = await fetch(`${host}/customer/login/`, {
+              const res = await fetch(`${local}/customer/login/`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -40,16 +43,30 @@ function Login({showHomePage, setToken}) {
                 localStorage.setItem("token", data.data.customer_refresh_token);
                 setToken(data.data.customer_refresh_token)
                 showHomePage();
+
               }
-      
+
+              if (data.status.code === 400 || data.status.code === 404)
+              {
+                
+                setIsErrorVisible(true)
+                setErrorMessage(data.status.message)
+                setTimeout(()=>setIsErrorVisible(false), 5000);
+              }
+
+              
             } catch (err) {
+                setIsErrorVisible(true)
+                setErrorMessage("service unavailable")
+                setTimeout(()=>setIsErrorVisible(false), 5000);
             }
           }
-      
+
           LoginHandler();
     };
 
     return (
+        <>
         <div className="login_page">
            
             <img src="/images/login_background.png" className="background_image" />
@@ -88,6 +105,9 @@ function Login({showHomePage, setToken}) {
                 </form>
             </div>
         </div>
+                    {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
+        </>
+
     );
 }
 

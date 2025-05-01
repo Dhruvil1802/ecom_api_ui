@@ -4,7 +4,10 @@ import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 
 import './Header.css';
 
-const Header = () => {
+const Header = ({navigate}) => {
+  function OpenSignIn(){
+    navigate("/login")
+  }
   return (
     <header className="header">
       <div className="brand">NAME</div>
@@ -20,7 +23,7 @@ const Header = () => {
       <div className="user">
         <BsPersonCircle className="icon" />
         <span>Hello, </span>
-        <button className="signin-btn">Sign in</button>
+        <button className="signin-btn" onClick={OpenSignIn}>Sign in</button>
         
       </div>
       <FiShoppingCart className="cart-icon" />

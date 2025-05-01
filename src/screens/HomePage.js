@@ -6,10 +6,10 @@ import SideMenu from '../components/homepage/SideMenu';
 import './HomePage.css';
 
 const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app"
+const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-const HomePage = () => {
+const HomePage = ({navigate}) => {
   const [banner, setBanner] = useState(); 
   const [features,setfeatures] = useState();
 
@@ -18,7 +18,7 @@ const HomePage = () => {
       async function getHomePageDetails(){
         try{
           const res = await fetch(
-            `${host}/homepage/web/`,
+            `${local}/homepage/web/`,
             { 
               method: "GET",
               headers: {
@@ -43,9 +43,9 @@ const HomePage = () => {
   return (
     <div className="homepage"    
     style={{
-      backgroundImage: `url("${host}/Media/banner/31.png")`,
+      backgroundImage: `url("${local}/staticfiles/banner/31.png")`,
     }}>
-      <Header />
+      <Header navigate={navigate} />
       <SideMenu />
 
       <div className="hero">

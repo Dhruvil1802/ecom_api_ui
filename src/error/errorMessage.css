@@ -1,0 +1,41 @@
+
+.error_container{
+    position:fixed;
+    padding: 20px;
+    border:2px solid red;
+    background-color: white;
+    color: red;
+    z-index: 10;
+    top:1%;
+    right:1%;
+    border-radius:1rem;
+    max-width: 13%;
+    overflow: hidden;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.error_message{
+    margin-top: 20%;
+}
+.cross_container{
+    border:2px solid rgb(0, 0, 0);
+    left:0;
+    top:0;
+    width:100%;
+    height:35%;
+    border:none;
+    border-bottom:2px solid red;
+    position:absolute;
+}
+.cross{
+    top:13%;
+    right:10%;
+    margin-bottom:100px;
+    color:red;
+    background-color: transparent;
+    border: none;
+    position:absolute;
+    
+    
+}
