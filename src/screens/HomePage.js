@@ -18,7 +18,7 @@ const HomePage = ({navigate}) => {
       async function getHomePageDetails(){
         try{
           const res = await fetch(
-            `${local}/homepage/web/`,
+            `${host}/homepage/web/`,
             { 
               method: "GET",
               headers: {
@@ -43,7 +43,7 @@ const HomePage = ({navigate}) => {
   return (
     <div className="homepage"    
     style={{
-      backgroundImage: `url("${local}/staticfiles/banner/31.png")`,
+      backgroundImage: `url("${host}/staticfiles/banner/31.png")`,
     }}>
       <Header navigate={navigate} />
       <SideMenu />
