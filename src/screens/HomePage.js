@@ -43,7 +43,7 @@ const HomePage = ({navigate}) => {
   return (
     <div className="homepage"    
     style={{
-      backgroundImage: `url("${host}/staticfiles/banner/31.png")`,
+      backgroundImage: `url("${host}/static/banner/31.png")`,
     }}>
       <Header navigate={navigate} />
       <SideMenu />
