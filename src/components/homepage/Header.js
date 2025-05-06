@@ -4,17 +4,28 @@ import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 
 import './Header.css';
 
-const Header = ({navigate}) => {
+
+
+const Header = ({navigate, customerName, setSearch, search}) => {
+
+
+
   function OpenSignIn(){
     navigate("/login")
   }
+  function OpenProducts(){
+    navigate("/products")
+  }
+  
+  
   return (
     <header className="header">
       <div className="brand">NAME</div>
 
       <div className="search-bar">
-        <input type="text" placeholder="Search" />
-        <button className="search-button">
+        <input type="text" placeholder="Search"   onChange={(e) => setSearch(e.target.value)}
+        />
+        <button className="search-button" onClick={()=>search!==""?OpenProducts():{}}>
           <FiSearch />
         </button>
       </div>
@@ -23,7 +34,7 @@ const Header = ({navigate}) => {
       <div className="user">
         <BsPersonCircle className="icon" />
         <span>Hello, </span>
-        <button className="signin-btn" onClick={OpenSignIn}>Sign in</button>
+        <button className="signin-btn" onClick={customerName?()=>{}:OpenSignIn}>{customerName ? `${customerName}` : 'Sign in'}</button>
         
       </div>
       <FiShoppingCart className="cart-icon" />

@@ -9,9 +9,10 @@ const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-const HomePage = ({navigate}) => {
+const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch, search, searchPageNumber}) => {
   const [banner, setBanner] = useState(); 
   const [features,setfeatures] = useState();
+  const [customerName, setCustomerName] = useState();
 
   // fetching homepage details
   useEffect(() => {
@@ -22,6 +23,7 @@ const HomePage = ({navigate}) => {
             { 
               method: "GET",
               headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json",
               },
             }
@@ -31,6 +33,7 @@ const HomePage = ({navigate}) => {
           if (data.status.code === 200) {
             setBanner(data.data.banner[0]);
             setfeatures(data.data.features);
+            setCustomerName(data.data.customer_name)
           }
         }
         catch {
@@ -45,10 +48,16 @@ const HomePage = ({navigate}) => {
     style={{
       backgroundImage: `url("${host}/static/banner/31.png")`,
     }}>
-      <Header navigate={navigate} />
+      <Header navigate={navigate} 
+              customerName={customerName} 
+              setSearchPageNumber={setSearchPageNumber} 
+              setSearch={setSearch} 
+              search={search}
+              setSearchedProducts={setSearchedProducts} 
+              searchPageNumber={searchPageNumber}/>
       <SideMenu />
 
-      <div className="hero">
+      <div className="hero">  
         <div className="hero-buttons">
           {/* <button className="btn-primary">Buy Now</button>
           <button className="btn-secondary">Shop All</button> */}

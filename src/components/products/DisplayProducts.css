@@ -1,0 +1,331 @@
+.product_page{
+    height:max-content;
+    width:105%;
+    margin-top:7%;
+}
+
+
+.left_side {
+    position: absolute;
+    left: 0;
+    height: 170%;
+    width: 19.8%;
+    border-right: 4px solid black;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;    /* Center items horizontally */
+    justify-content: flex-start; /* Align items at the top */
+    z-index:1000;
+}
+
+.price_range {
+    width: 90%;
+    margin-top: 5%; /* Add space at the top */
+    padding: 10px;
+}
+
+/* #5e63f7 */
+/* Style the slider track */
+.custom-slider .MuiSlider-track {
+    background-color: #5e63f7;  /* Track color */
+    height: 8px;                 /* Track height */
+    border-radius: 4px;         /* Rounded corners */
+}
+
+/* Style the slider rail (background below the track) */
+.custom-slider .MuiSlider-rail {
+    background-color: #c3cad1;  /* Rail color */
+    height: 8px;                 /* Rail height */
+    border-radius: 4px;          /* Rounded corners */
+    
+
+}
+
+/* Style the slider thumb */
+.custom-slider .MuiSlider-thumb {
+    background-color: #5e63f7;  /* Thumb color */
+    border: 2px solid #5e63f7;  /* Thumb border */
+    width: 2rem;                /* Thumb size */
+    height: 2rem;               /* Thumb size */
+    border-radius: 50%;         /* Round thumb */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add shadow */
+    
+}
+
+/* Style the value label that appears when the thumb is hovering */
+.custom-slider .MuiSlider-valueLabel {
+    background-color: #5e63f7;   /* Value label background color */
+    color: #ffffff;              /* Text color */
+    font-weight: bold;           /* Bold text */
+    font-size: 14px;             /* Font size */
+    border-radius: 4px;          /* Rounded corners */
+    padding: 2px 6px;            /* Padding around the text */
+}
+
+
+.sorting {
+    margin-top: 20px;  /* Add margin to push sorting below the slider */
+    width: 90%;         /* Make it the same width as the slider */
+    text-align: left; /* Center the sorting label */
+}
+
+.sorting_options {
+    display: flex;
+    flex-direction: column;
+}
+
+.sorting_options label {
+    margin: 10px 5px;
+    font-size: 140%;
+    display: flex;
+}
+
+.sorting_options input[type="radio"] {
+    margin-right: 6%;
+    transform: scale(1.5); 
+    border:2px solid black;
+}
+
+.star-filter {
+    margin-top: 20px;
+    width: 90%; /* Ensure it takes the full width of the container */
+    align-items: flex-start; /* Align items to the left */
+    text-align: left; /* Align text and input to the left */
+}
+
+.star-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.star-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right:6%;
+
+}
+
+.stars {
+    color: gold;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+  
+.right_side{
+    position:absolute;
+    left:19.5%;
+    height:100%;
+    width:80.5%;
+    border:none;
+    }
+
+.results{
+    font-size: 35px;
+    margin-left: 3%;
+}
+.special-offer-card {
+    display: flex;
+    background: white;
+    border: 4px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    height:60%;
+    width:70%;
+    margin-left:15%
+
+}
+
+.offer-image-section {
+    flex: 1;
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.offer-image-section img {
+    max-width: 114%;
+    height:114.5%;
+    border-top-left-radius: 17px;
+    border-bottom-left-radius: 17px;
+}
+
+.offer-details {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    margin-left:1px;
+    width:50%;
+}
+
+.offer-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 0 5px 0 5px;
+    font-size: 0.9rem;
+}
+
+.offer-product-img {
+    width: 114%;
+    height: 70%;
+    margin-left:-3.7%;
+    margin-top:-5.5%;
+}
+
+.offer-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+}
+
+.offer-old-price {
+    font-size: 1.2rem;
+    color: gray;
+    text-decoration: line-through;
+}
+
+.offer-add-btn {
+    background-color: #5e63f7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.offer-add-btn:hover {
+    background-color: #4a50e1;
+}
+
+
+.products_listing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);    
+    gap: 50px;
+    padding: 30px;
+    background-color: white;
+}
+
+.product-card {
+    background-color: #d9d9d9;
+    border: 4px solid #000000;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    text-align: left;
+    transition: transform 0.2s ease;
+    height: 100%;    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+}
+
+.product-image {
+    width: 100%;
+    height: 75%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.product-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 0px;
+}
+
+.product-price {
+    color: #000000;
+    font-size: 1.8rem;    
+    font-weight: 800;
+    margin-bottom: 8px;
+    
+}
+
+.product-rating {
+    color: gold;
+    font-size: 2.3rem;
+    margin-bottom: 10px;
+}
+
+.shop-btn {
+    background-color: #5e63f7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: auto;  /* Ensures the button stays at the bottom */
+}
+
+.shop-btn:hover {
+    background-color: #4a50e1;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #bbb; /* gray background */
+    padding: 10px 20px;
+    border-radius: 20px;
+    gap: 12px;
+    font-family: sans-serif;
+    margin-left: 20%;
+    width:60%;
+  }
+  
+  .pagination-button,
+  .pagination-arrow {
+    background: none;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+    min-width: 36px;
+    text-align: center;
+    transition: background-color 0.2s;
+  }
+  
+  .pagination-button:hover,
+  .pagination-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .pagination-button.active {
+    background-color: white;
+    border: 2px solid black;
+    font-weight: bold;
+  }
+  
+  .pagination-arrow:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  .pagination-ellipsis {
+    font-size: 18px;
+    padding: 0 5px;
+  }
+  
