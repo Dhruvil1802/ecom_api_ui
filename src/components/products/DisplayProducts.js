@@ -17,7 +17,7 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
 
           try{
             const res = await fetch(
-              `${local}/products/search/?search=${search}&page_size=3&page_no=${searchPageNumber}`,
+              `${host}/products/search/?search=${search}&page_size=3&page_no=${searchPageNumber}`,
               { 
                 method: "GET",
                 headers: {

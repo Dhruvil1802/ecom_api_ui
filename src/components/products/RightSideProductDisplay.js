@@ -18,11 +18,11 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
 
             <div className="special-offer-card">
                 <div className="offer-image-section">
-                    <img src={`${local}/Media/features/special_product.png`} alt="Special Offer Headphones" />
+                    <img src={`${host}/Media/features/special_product.png`} alt="Special Offer Headphones" />
                 </div>
                 <div className="offer-details">
                     <div className="offer-badge">Special Offer</div>
-                    <img src={`${local}${searchedProducts[0]?.product_image}`} alt="Headphones" className="offer-product-img" />
+                    <img src={`${host}${searchedProducts[0]?.product_image}`} alt="Headphones" className="offer-product-img" />
                     <h2 className="offer-price">{searchedProducts[0]?.product_price}</h2>
                     <p className="offer-old-price">Was: <span>$3300</span></p>
                     
@@ -49,7 +49,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                 {searchedProducts?.map((product, index) => (
                     <div className="product-card" key={index}>
                     
-                        <img src={`${local}${product.product_image}`} alt={product.product_name} className="product-image" />
+                        <img src={`${host}${product.product_image}`} alt={product.product_name} className="product-image" />
                         
                         <div className="product-rating">{"★".repeat(product.product_rating)}{"☆".repeat(5 - product.product_rating)}</div>
                         <h3 className="product-name">{product.product_name}</h3>

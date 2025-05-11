@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import ErrorMessage from '../error/errorMessage';
 import './Login.css';
@@ -29,7 +29,7 @@ function Login({showHomePage, setToken}) {
         
         async function LoginHandler() {
             try {
-              const res = await fetch(`${local}/customer/login/`, {
+              const res = await fetch(`${host}/customer/login/`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

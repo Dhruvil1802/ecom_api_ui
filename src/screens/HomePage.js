@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Footer from '../components/homepage/Footer';
 import Header from '../components/homepage/Header';
 import ProductGrid from '../components/homepage/ProductGrid';
@@ -17,7 +17,7 @@ const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch
       async function getHomePageDetails(){
         try{
           const res = await fetch(
-            `${local}/homepage/web/`,
+            `${host}/homepage/web/`,
             { 
               method: "GET",
               headers: {
@@ -44,7 +44,7 @@ const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch
   return (
     <div className="homepage"    
     style={{
-      backgroundImage: `url("${local}/static/banner/31.png")`,
+      backgroundImage: `url("${host}/static/banner/31.png")`,
     }}>
       <Header navigate={navigate} 
               customerName={customerName} 
