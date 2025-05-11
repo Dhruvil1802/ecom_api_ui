@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../components/homepage/Footer';
 import Header from '../components/homepage/Header';
 import ProductGrid from '../components/homepage/ProductGrid';
@@ -9,17 +9,15 @@ const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch, search, searchPageNumber}) => {
-  const [banner, setBanner] = useState(); 
-  const [features,setfeatures] = useState();
-  const [customerName, setCustomerName] = useState();
+const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch, search, searchPageNumber, banner, setBanner, features, setFeatures, customerName, setCustomerName}) => {
+
 
   // fetching homepage details
   useEffect(() => {
       async function getHomePageDetails(){
         try{
           const res = await fetch(
-            `${host}/homepage/web/`,
+            `${local}/homepage/web/`,
             { 
               method: "GET",
               headers: {
@@ -32,7 +30,7 @@ const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch
 
           if (data.status.code === 200) {
             setBanner(data.data.banner[0]);
-            setfeatures(data.data.features);
+            setFeatures(data.data.features);
             setCustomerName(data.data.customer_name)
           }
         }
@@ -46,7 +44,7 @@ const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch
   return (
     <div className="homepage"    
     style={{
-      backgroundImage: `url("${host}/static/banner/31.png")`,
+      backgroundImage: `url("${local}/static/banner/31.png")`,
     }}>
       <Header navigate={navigate} 
               customerName={customerName} 
@@ -54,7 +52,8 @@ const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch
               setSearch={setSearch} 
               search={search}
               setSearchedProducts={setSearchedProducts} 
-              searchPageNumber={searchPageNumber}/>
+              searchPageNumber={searchPageNumber}
+              />
       <SideMenu />
 
       <div className="hero">  

@@ -29,7 +29,7 @@ function Login({showHomePage, setToken}) {
         
         async function LoginHandler() {
             try {
-              const res = await fetch(`${host}/customer/login/`, {
+              const res = await fetch(`${local}/customer/login/`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

@@ -1,4 +1,3 @@
-import React from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 
@@ -37,7 +36,7 @@ const Header = ({navigate, customerName, setSearch, search}) => {
         <button className="signin-btn" onClick={customerName?()=>{}:OpenSignIn}>{customerName ? `${customerName}` : 'Sign in'}</button>
         
       </div>
-      <FiShoppingCart className="cart-icon" />
+      <FiShoppingCart className="header-cart-icon" />
       </div>
     </header>
   );

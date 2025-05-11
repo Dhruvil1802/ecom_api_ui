@@ -1,0 +1,106 @@
+.left_side {
+    position: absolute;
+    left: 0;
+    height: 170%;
+    width: 19.8%;
+    border-right: 4px solid black;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;    /* Center items horizontally */
+    justify-content: flex-start; /* Align items at the top */
+    z-index:1000;
+}
+
+.price_range {
+    width: 90%;
+    margin-top: 5%; /* Add space at the top */
+    padding: 10px;
+}
+
+/* #5e63f7 */
+/* Style the slider track */
+.custom-slider .MuiSlider-track {
+    background-color: #5e63f7;  /* Track color */
+    height: 8px;                 /* Track height */
+    border-radius: 4px;         /* Rounded corners */
+}
+
+/* Style the slider rail (background below the track) */
+.custom-slider .MuiSlider-rail {
+    background-color: #c3cad1;  /* Rail color */
+    height: 8px;                 /* Rail height */
+    border-radius: 4px;          /* Rounded corners */
+    
+
+}
+
+/* Style the slider thumb */
+.custom-slider .MuiSlider-thumb {
+    background-color: #5e63f7;  /* Thumb color */
+    border: 2px solid #5e63f7;  /* Thumb border */
+    width: 2rem;                /* Thumb size */
+    height: 2rem;               /* Thumb size */
+    border-radius: 50%;         /* Round thumb */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add shadow */
+    
+}
+
+/* Style the value label that appears when the thumb is hovering */
+.custom-slider .MuiSlider-valueLabel {
+    background-color: #5e63f7;   /* Value label background color */
+    color: #ffffff;              /* Text color */
+    font-weight: bold;           /* Bold text */
+    font-size: 14px;             /* Font size */
+    border-radius: 4px;          /* Rounded corners */
+    padding: 2px 6px;            /* Padding around the text */
+}
+
+
+.sorting {
+    margin-top: 20px;  /* Add margin to push sorting below the slider */
+    width: 90%;         /* Make it the same width as the slider */
+    text-align: left; /* Center the sorting label */
+}
+
+.sorting_options {
+    display: flex;
+    flex-direction: column;
+}
+
+.sorting_options label {
+    margin: 10px 5px;
+    font-size: 140%;
+    display: flex;
+}
+
+.sorting_options input[type="radio"] {
+    margin-right: 6%;
+    transform: scale(1.5); 
+    border:2px solid black;
+}
+
+.star-filter {
+    margin-top: 20px;
+    width: 90%; /* Ensure it takes the full width of the container */
+    align-items: flex-start; /* Align items to the left */
+    text-align: left; /* Align text and input to the left */
+}
+
+.star-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.star-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right:6%;
+
+}
+
+.stars {
+    color: gold;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}

@@ -15,7 +15,12 @@ function App() {
   const [searchedProducts, setSearchedProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [searchPageNumber, setSearchPageNumber] = useState(1);
-
+  const [banner, setBanner] = useState([]); 
+  const [features,setFeatures] = useState([]);
+  const [customerName, setCustomerName] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 8000]);
+  const [currentPage, setCurrentPage] = useState(1);  
+  const [totalPages, setTotalPages] = useState(4); 
 
   const showHomePage = () => {
     navigate("/homepage");
@@ -33,6 +38,12 @@ function App() {
                     setSearch={setSearch} 
                     search={search}
                     setSearchedProducts={setSearchedProducts} 
+                    banner={banner}
+                    setBanner={setBanner}
+                    features={features}
+                    setFeatures={setFeatures}
+                    customerName={customerName}
+                    setCustomerName={setCustomerName}
 
                     />}
       />
@@ -51,6 +62,14 @@ function App() {
         search={search}
         setSearchedProducts={setSearchedProducts}
         searchedProducts={searchedProducts}
+        customerName={customerName}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+        setTotalPages={setTotalPages}
+
         />}
       />
 
