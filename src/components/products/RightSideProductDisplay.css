@@ -1,5 +1,6 @@
 
 .right_side{
+    font-family: Arial, sans-serif;
     position:absolute;
     left:19.5%;
     height:100%;
@@ -51,6 +52,8 @@
     position: relative;
     margin-left:15%;
     width:20%;
+    cursor: pointer;
+
 }
 
 .offer-badge {
@@ -137,6 +140,8 @@
   
   .add-to-cart-button:hover {
     background-color: #4f46e5;
+    transform: scale(1.03);
+
   }
   
   .icon-container {
@@ -180,6 +185,10 @@
 
 }
 
+.add-to-favourite-button:hover{
+    background-color: #4f46e5;
+    color: white;
+}
 
 
 .products_listing {
@@ -202,6 +211,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer;
+
 
 }
 

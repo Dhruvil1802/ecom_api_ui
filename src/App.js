@@ -5,6 +5,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 
 import HomePage from "./screens/HomePage";
 import Login from "./screens/Login";
+import ProductDetails from "./screens/ProductDetails";
 import Products from "./screens/Products";
 
 function App() { 
@@ -14,6 +15,7 @@ function App() {
 
   const [searchedProducts, setSearchedProducts] = useState([]);
   const [search, setSearch] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
   const [searchPageNumber, setSearchPageNumber] = useState(1);
   const [banner, setBanner] = useState([]); 
   const [features,setFeatures] = useState([]);
@@ -21,6 +23,9 @@ function App() {
   const [priceRange, setPriceRange] = useState([0, 8000]);
   const [currentPage, setCurrentPage] = useState(1);  
   const [totalPages, setTotalPages] = useState(4); 
+  const [productDetails, setProductDetails] = useState();
+  const [productId, setProductId] = useState();
+  
 
   const showHomePage = () => {
     navigate("/homepage");
@@ -37,6 +42,7 @@ function App() {
                     searchPageNumber={searchPageNumber}
                     setSearch={setSearch} 
                     search={search}
+                    setIsSearch={setIsSearch}
                     setSearchedProducts={setSearchedProducts} 
                     banner={banner}
                     setBanner={setBanner}
@@ -50,27 +56,42 @@ function App() {
 
       <Route
         path="/login"
-        element={<Login showHomePage={showHomePage} setToken={setToken}/>}
+        element={<Login showHomePage={showHomePage} setToken={setToken} />}
       />
       
       <Route
         path="/products"
         element={<Products navigate={navigate}
-        setSearchPageNumber={setSearchPageNumber} 
-        searchPageNumber={searchPageNumber}
-        setSearch={setSearch} 
-        search={search}
-        setSearchedProducts={setSearchedProducts}
-        searchedProducts={searchedProducts}
-        customerName={customerName}
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalPages={totalPages}
-        setTotalPages={setTotalPages}
+          setSearchPageNumber={setSearchPageNumber} 
+          searchPageNumber={searchPageNumber}
+          setSearch={setSearch} 
+          search={search}
+          isSearch={isSearch}
+          setSearchedProducts={setSearchedProducts}
+          searchedProducts={searchedProducts}
+          customerName={customerName}
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+          setTotalPages={setTotalPages}
+          setProductId={setProductId}
 
-        />}
+        />} 
+      />
+      <Route
+        path="/productdetails"
+        element={<ProductDetails 
+              productDetails={productDetails} 
+              setProductDetails={setProductDetails} 
+              navigate={navigate}
+              setSearch={setSearch} 
+              search={search}
+              productId={productId}
+
+
+               />}
       />
 
     </Routes>

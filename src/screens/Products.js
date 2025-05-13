@@ -1,11 +1,10 @@
-import React from 'react';
 import Header from '../components/homepage/Header';
 import SideMenu from '../components/homepage/SideMenu';
 import DisplayProducts from '../components/products/DisplayProducts';
 
 
 
-function Products({navigate, search, setSearchPageNumber, searchPageNumber, setSearch, setSearchedProducts, searchedProducts, customerName}){
+function Products({navigate, search, setSearchPageNumber, searchPageNumber, setSearch, setSearchedProducts, searchedProducts, customerName, setProductId, isSearch}){
 
 
 
@@ -23,8 +22,11 @@ function Products({navigate, search, setSearchPageNumber, searchPageNumber, setS
                 searchPageNumber={searchPageNumber}
                 setSearch={setSearch} 
                 search={search}
+                isSearch={isSearch}
                 setSearchedProducts={setSearchedProducts}
-                searchedProducts={searchedProducts}/> 
+                searchedProducts={searchedProducts}
+                setProductId={setProductId}
+                /> 
             </>)
 }
 

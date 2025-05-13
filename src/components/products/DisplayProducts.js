@@ -6,7 +6,7 @@ import DisplayProductRightSide from './RightSideProductDisplay';
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumber, setSearch, setSearchedProducts, searchedProducts}){
+function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumber, setSearch, isSearch, setSearchedProducts, searchedProducts, setProductId}){
 
     const [priceRange, setPriceRange] = useState([0, 8000]);
     const [currentPage, setCurrentPage] = useState(1);  
@@ -31,12 +31,13 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
             
               setSearchedProducts(data.data);
             }
+
           }
           catch(error) {
           }
           }
           fetchProducts();
-      },[search, searchPageNumber])
+      },[])
 
 
 
@@ -49,7 +50,9 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
                                     setCurrentPage={setCurrentPage} 
                                     currentPage={currentPage}
                                     setSearchPageNumber={setSearchPageNumber}
-                                    setTotalPages={setTotalPages}/>
+                                    setTotalPages={setTotalPages}
+                                    navigate={navigate}
+                                    setProductId={setProductId}/>
             
             
         </div>

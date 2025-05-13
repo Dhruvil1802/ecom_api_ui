@@ -5,7 +5,7 @@ import './Header.css';
 
 
 
-const Header = ({navigate, customerName, setSearch, search}) => {
+const Header = ({navigate, customerName, setSearch, search, setIsSearch}) => {
 
 
 
@@ -13,7 +13,8 @@ const Header = ({navigate, customerName, setSearch, search}) => {
     navigate("/login")
   }
   function OpenProducts(){
-    navigate("/products")
+    setIsSearch(true)
+    navigate("/products") 
   }
   
   
@@ -33,8 +34,10 @@ const Header = ({navigate, customerName, setSearch, search}) => {
       <div className="user">
         <BsPersonCircle className="icon" />
         <span>Hello, </span>
-        <button className="signin-btn" onClick={customerName?()=>{}:OpenSignIn}>{customerName ? `${customerName}` : 'Sign in'}</button>
-        
+        {console.log("customer name",customerName)}
+          <button className="signin-btn" onClick={customerName ? () => {} : OpenSignIn}>
+            {customerName ? `${customerName}` : 'Sign in'}
+          </button>        
       </div>
       <FiShoppingCart className="header-cart-icon" />
       </div>

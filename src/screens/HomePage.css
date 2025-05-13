@@ -1,12 +1,13 @@
 .homepage {
     position: relative;
+    font-family: Arial, sans-serif;
     min-height: 100vh;
     padding-bottom: 4rem;
     z-index: 1;
     overflow: hidden;
     background-size: cover;
-  background-position: center;
-  min-height: 400px;
+    background-position: center;
+    min-height: 400px;
   }
   
   .homepage::before {

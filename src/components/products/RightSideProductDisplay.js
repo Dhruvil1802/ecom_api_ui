@@ -5,14 +5,18 @@ import './RightSideProductDisplay.css';
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, currentPage, setSearchPageNumber, setTotalPages}){
+function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, currentPage, setSearchPageNumber, setTotalPages, navigate, setProductId}){
     const paginate = (pageNumber) => {
         if (pageNumber >= 1 && pageNumber <= totalPages) {
             setCurrentPage(pageNumber);  
             setSearchPageNumber(pageNumber);  
         }
     };
-    console.log(searchedProducts)
+    function handleViewProductDetails(product_id){
+
+         setProductId(product_id);
+         navigate("/productdetails")
+    }
     return(
         <div className="right_side">
 
@@ -20,7 +24,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                 <div className="offer-image-section">
                     <img src={`${host}/Media/features/special_product.png`} alt="Special Offer Headphones" />
                 </div>
-                <div className="offer-details">
+                <div className="offer-details" onClick={()=>handleViewProductDetails(searchedProducts[0].product_id)}>
                     <div className="offer-badge">Special Offer</div>
                     <img src={`${host}${searchedProducts[0]?.product_image}`} alt="Headphones" className="offer-product-img" />
                     <h2 className="offer-price">{searchedProducts[0]?.product_price}</h2>
@@ -47,7 +51,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                 <div className='products_listing'>
                 
                 {searchedProducts?.map((product, index) => (
-                    <div className="product-card" key={index}>
+                    <div className="product-card" key={index} onClick={()=>handleViewProductDetails(product.product_id)}>
                     
                         <img src={`${host}${product.product_image}`} alt={product.product_name} className="product-image" />
                         
@@ -114,4 +118,4 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
     )
 }
 
-export default DisplayProductRightSide
+export default DisplayProductRightSide;

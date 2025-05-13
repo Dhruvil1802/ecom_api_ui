@@ -9,7 +9,7 @@ const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch, search, searchPageNumber, banner, setBanner, features, setFeatures, customerName, setCustomerName}) => {
+const HomePage = ({navigate, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setIsSearch}) => {
 
 
   // fetching homepage details
@@ -48,11 +48,9 @@ const HomePage = ({navigate, setSearchPageNumber, setSearchedProducts, setSearch
     }}>
       <Header navigate={navigate} 
               customerName={customerName} 
-              setSearchPageNumber={setSearchPageNumber} 
               setSearch={setSearch} 
               search={search}
-              setSearchedProducts={setSearchedProducts} 
-              searchPageNumber={searchPageNumber}
+              setIsSearch={setIsSearch}
               />
       <SideMenu />
 
