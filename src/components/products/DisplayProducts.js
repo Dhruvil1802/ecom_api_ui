@@ -37,7 +37,7 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
           }
           }
           fetchProducts();
-      },[])
+      },[searchPageNumber, search]);
 
 
 
