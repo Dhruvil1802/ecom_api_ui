@@ -114,7 +114,7 @@ function Details({ productId, setProductDetails, productDetails }) {
                 <h4>Rating & Reviews</h4>
 
                 <div className="average-rating">
-                    <span className="avg-number">4</span>
+                    <span className="avg-number">{details?.product_rating}</span>
                     <span className='big-star'>★</span>
                     <h6>Rated by {productDetails?.number_of_ratings} customers</h6>
                 </div>
