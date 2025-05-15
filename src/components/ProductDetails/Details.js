@@ -1,3 +1,5 @@
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 import './Details.css';
 
@@ -135,22 +137,35 @@ function Details({ productId, setProductDetails, productDetails }) {
                     </div>
                     </div>
                 ))}
+
+                <div className='rate-and-review'>
+                    <button>Rate and Review</button>
+                    <div className="next-symbol">{">"}</div>
                 </div>
+            </div>
 
 
 
-        {/* <div className="reviews">
+        <div className="reviews-section">
             <h4>Customer Says</h4>
             {productDetails?.product_ratings.map((review, index) => (
                 <div key={index} className="review">
-                <div className="review-header">
-                    <span className="reviewer-name">{review?.customer_id}</span>
-                    <span className="review-rating">{review?.product_rating} ★</span>
-                </div>
-                <p className="review-text">{review?.product_review}</p>
+                    <div className="review-header">
+                        <span className="reviewer-name">{review?.customer_id}</span>
+                        <span className="review-rating small-star">{'★ '.repeat(review?.product_rating)}</span>
+                        <span className="review-date">Reviewed on {review?.updated_at}</span>
+                    </div>
+                    <p className="review-text">{review?.product_review}</p>
+                        <button className="like-button">
+                            <div className="like-icon-container">
+                            <FontAwesomeIcon icon={faThumbsUp} className="like-icon" />
+                            </div>
+                            <span className="like-text">LIKE</span>
+                            
+                        </button>
                 </div>
             ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );

@@ -1,17 +1,17 @@
 
 import Header from "../components/homepage/Header";
-import SideMenu from "../components/homepage/SideMenu";
 import Details from "../components/ProductDetails/Details";
 
-function ProductDetails({navigate, customerName, setSearch, search, productDetails, setProductDetails, productId }) {
+function ProductDetails({navigate, customerName, setSearch, search, productDetails, setProductDetails, productId,setSearched }) {
   return (
     <>
             <Header navigate={navigate} 
               customerName={customerName} 
               setSearch={setSearch} 
+              setSearched={setSearched}
               search={search}
               />
-            <SideMenu />
+            {/* <SideMenu /> */}
             <Details productDetails={productDetails} setProductDetails={setProductDetails} productId={productId}/>
     </>
   );

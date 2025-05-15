@@ -2,14 +2,13 @@ import { useEffect } from 'react';
 import Footer from '../components/homepage/Footer';
 import Header from '../components/homepage/Header';
 import ProductGrid from '../components/homepage/ProductGrid';
-import SideMenu from '../components/homepage/SideMenu';
 import './HomePage.css';
 
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-const HomePage = ({navigate, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setIsSearch}) => {
+const HomePage = ({navigate, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setSearched}) => {
 
 
   // fetching homepage details
@@ -50,9 +49,9 @@ const HomePage = ({navigate, setSearch, search, banner, setBanner, features, set
               customerName={customerName} 
               setSearch={setSearch} 
               search={search}
-              setIsSearch={setIsSearch}
+              setSearched={setSearched}
               />
-      <SideMenu />
+      {/* <SideMenu /> */}
 
       <div className="hero">  
         <div className="hero-buttons">

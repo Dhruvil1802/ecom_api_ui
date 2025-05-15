@@ -13,7 +13,6 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
         }
     };
     function handleViewProductDetails(product_id){
-
          setProductId(product_id);
          navigate("/productdetails")
     }
