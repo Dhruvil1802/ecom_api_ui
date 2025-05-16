@@ -250,7 +250,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 0rem;
 }
 .big-star {
   color: gold;
@@ -271,8 +271,11 @@
   align-items: center;
   gap: 5px;
   margin-bottom: 8px;
+  margin-left:3rem;
 }
-
+.avg-number{
+  font-size:4rem;
+}
 .bar-container {
   flex: 1;
   height: 1.2rem;
