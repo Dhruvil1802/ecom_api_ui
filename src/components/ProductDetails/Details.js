@@ -1,12 +1,17 @@
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
+import { BsPersonCircle } from 'react-icons/bs';
+
+import { useEffect, useState } from 'react';
 import './Details.css';
 
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 function Details({ productId, setProductDetails, productDetails }) {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     async function getProductDetails() {
       try {
@@ -35,6 +40,9 @@ function Details({ productId, setProductDetails, productDetails }) {
 
   const details = productDetails?.product_details;
 
+  const toggleModal = () => {
+  setIsModalOpen(!isModalOpen); 
+  };
   return (
     <div className="product-details-page">
       <div className="upper-part">
@@ -106,7 +114,60 @@ function Details({ productId, setProductDetails, productDetails }) {
                 </table>
             </div>:""}
           </div>
+          <div>
+            
+            <button className="additional-specification-btn" onClick={toggleModal}>
+            Additional Specification  
+          </button>
+            
+          </div>
         </div>
+      {/* Modal Dialog */}
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>All Specifications</h2>
+            <button className="close-modal" onClick={toggleModal}>×</button>
+            <div className="specs-description-box">
+              <h4>Description</h4>
+              <p>{details?.product_description}</p>
+            </div>
+            <h4>Product Dimensions</h4>
+              <table className="specs-product-table">
+                  <tbody>
+                  <tr>
+                      <td><strong>Brand</strong></td>
+                      <td>{details?.product_brand}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Colour</strong></td>
+                      <td>{details?.product_color}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Weight</strong></td>
+                      <td>{details?.product_weight}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Dimensions</strong></td>
+                      <td>{details?.product_dimension}</td>
+                  </tr>
+                  </tbody>
+              </table>
+            <h4>Additional Specification</h4>
+            <table className="specs-product-table">
+              <tbody>
+                {details?.additional_specification.map((spec, index) => (
+                  <tr key={index}>
+                    <td><strong>{Object.keys(spec)[0]}</strong></td>
+                    <td>{spec[Object.keys(spec)[0]]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
       </div>
 
       <div className="lower-part">
@@ -115,7 +176,7 @@ function Details({ productId, setProductDetails, productDetails }) {
 
                 <div className="average-rating">
                     <span className="avg-number">{details?.product_rating}</span>
-                    <span className='big-star'>★</span>
+                    {/* <span className='big-star'>★</span> */}
                     <h6>Rated by {productDetails?.number_of_ratings} customers</h6>
                 </div>
 
@@ -147,11 +208,14 @@ function Details({ productId, setProductDetails, productDetails }) {
 
 
         <div className="reviews-section">
-            <h4>Customer Says</h4>
+            <h4>Customer's Say</h4>
             {productDetails?.product_ratings.map((review, index) => (
                 <div key={index} className="review">
                     <div className="review-header">
-                        <span className="reviewer-name">{review?.customer_id}</span>
+                        <span className="reviewer-name">
+                          <div className="icon-container"><BsPersonCircle className="user_icon" /></div>
+                          <span className="name">{review?.customer_id}</span>
+                        </span>
                         <span className="review-rating small-star">{'★ '.repeat(review?.product_rating)}</span>
                         <span className="review-date">Reviewed on {review?.updated_at}</span>
                     </div>

@@ -28,7 +28,6 @@
   
   .filter-icon {
     background: none;
-    /* color: black; */
     border: none;
     cursor: pointer;
   }
@@ -59,7 +58,7 @@
 .brand {
   font-size: 2rem;
   font-weight: bold;
-  margin-left:-5%;
+  margin-left:-2%;
 }
 
 .search-bar {

@@ -40,17 +40,17 @@ function Login({showHomePage, setToken}) {
               const data = await res.json();
 
               if (data.status.code === 201) {
-                localStorage.setItem("token", data.data.customer_refresh_token);
-                setToken(data.data.customer_refresh_token)
+                localStorage.setItem("token", data?.data?.customer_refresh_token);
+                setToken(data?.data?.customer_refresh_token)
                 showHomePage();
 
               }
 
-              if (data.status.code === 400 || data.status.code === 404)
+              if (data?.status?.code === 400 || data?.status?.code === 404)
               {
                 
                 setIsErrorVisible(true)
-                setErrorMessage(data.status.message)
+                setErrorMessage(data?.status?.message)
                 setTimeout(()=>setIsErrorVisible(false), 5000);
               }
 
