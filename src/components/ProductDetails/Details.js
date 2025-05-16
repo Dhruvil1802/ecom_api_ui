@@ -153,7 +153,7 @@ function Details({ productId, setProductDetails, productDetails }) {
                   </tr>
                   </tbody>
               </table>
-            <h4>Additional Specification</h4>
+            <h4>All Specifications</h4>
             <table className="specs-product-table">
               <tbody>
                 {details?.additional_specification.map((spec, index) => (

@@ -19,26 +19,52 @@ const Header = ({navigate, customerName, setSearch, search, setSearched}) => {
     setSearched(search)
     navigate("/products") 
   }
+  function openHomePage(){
+    navigate("/homepage")
+  }
   
   
   return (
     <header className="header">
-      <div className="filter-bar">
+      <div className="side_menu_bar">
               <button className="filter-icon" onClick={() => setIsOpen(!isOpen)}>
                 <BsFilterLeft size={28} color="black" />
               </button>
       </div>
       {/* Slide-out Side Menu (optional content) */}
-      {/* {isOpen && (
+      {isOpen && (
         <div className="side-menu-panel">
-          <ul>
-            <li>Category 1</li>
-            <li>Category 2</li>
-            <li>Category 3</li>
-          </ul>
+          <div className="side-header">
+            <BsPersonCircle className="side_nav_bar_icon" />
+            <span className="sign-text">
+              Hello,{' '}
+              <button className="side_nav_bar_signin_btn" onClick={customerName ? () => {} : OpenSignIn}>
+                {customerName ? customerName : 'Sign in'}
+              </button>
+            </span>
+          </div>
+
+          <div className="side-section">
+            <h3 className="side-heading">Trending 🔥</h3>
+            <div className="side-item">New Arrivals <span className="arrow">▶</span></div>
+            <div className="side-item">Best Sellers <span className="arrow">▶</span></div>
+          </div>
+
+          <div className="side-section">
+            <h3 className="side-heading">Your Account</h3>
+            <div className="side-item">Profile <span className="arrow">▶</span></div>
+            <div className="side-item">Orders <span className="arrow">▶</span></div>
+            <div className="side-item">Help <span className="arrow">▶</span></div>
+            <div className="side-item">About us <span className="arrow">▶</span></div>
+          </div>
+
+          <div className="signout-container">
+            <button className="signout-btn">Sign out</button>
+          </div>
         </div>
-      )} */}
-      <div className="brand">NAME</div>
+      )}
+
+      <div className="brand" onClick={()=>openHomePage()}>NAME</div>
 
       <div className="search-bar">
         <input type="text" placeholder="Search"   onChange={(e) => setSearch(e.target.value)}

@@ -17,7 +17,7 @@
 
 }
 /* faf9ff */
-.filter-bar {
+.side_menu_bar {
     background-color: #ffffff;
     color:black;
     height: 2rem;
@@ -35,11 +35,10 @@
     .side-menu-panel {
     position: absolute;
     top: 3.5rem; 
-    left: 0;
-    width: 100px;
+    left: 3rem !important;
+    width: 21rem !important;
     background-color: #fff;
     border-right: 2px solid #ffbf47;
-    padding: 1rem;
     z-index: 999;
   }
   
@@ -49,7 +48,7 @@
     margin: 0;
   }
   
-  .side-menu-panel li {
+  .side-menu-panel div {
     padding: 0.5rem 0;
     font-weight: 500;
     cursor: pointer;
@@ -59,13 +58,14 @@
   font-size: 2rem;
   font-weight: bold;
   margin-left:-2%;
+  cursor: pointer;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
   background: white;
-  border-radius: 12px;
+  border-radius: 1rem;
   width: 48%;
   height: 40px;
   overflow: hidden;
@@ -112,6 +112,13 @@
 .icon {
   font-size: 3rem;
 }
+.side_nav_bar_icon{
+  font-size: 2rem;
+  /* margin-left: 2rem !important; */
+  display:flex;
+  margin-left:2rem;
+  margin-left:1rem;
+}
 
 .signin-btn {
   background: none;
@@ -119,6 +126,19 @@
   color: rgb(0, 0, 0);
   font-weight: 700;
   font-size: 1.7rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.signin-btn:hover {
+  color: #4d4d4d !important;
+}
+.side_nav_bar_signin_btn {
+  background: none;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-weight: 200;
+  font-size: 1.3rem;
   cursor: pointer;
   padding: 0;
 }
@@ -136,4 +156,83 @@
 .user span {
   font-size: 1.7rem;
   font-weight: 700;
+}
+
+.side-menu-panel {
+  position: absolute;
+  top: 6.5rem;
+  left: 2.5rem !important;
+  width: 19rem !important;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 1.2rem;
+  /* padding: 1rem; */
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+.side-header {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 1rem !important;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+
+  gap: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.side-section {
+  border-bottom: 2px solid #000000;
+}
+
+.side-heading {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+}
+
+.side-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  font-size: 1rem;
+  cursor: pointer;
+    margin-left: 1rem;
+    margin-right:1rem;
+
+}
+
+.side-item:hover {
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  padding-left: 0.5rem;
+}
+
+.arrow {
+  font-size: 1rem;
+}
+
+.signout-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.signout-btn {
+  background: linear-gradient(to right, #ffe680, #ff9966);
+  border: none;
+  padding: 0.6rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.signout-btn:hover {
+  opacity: 0.9;
 }
