@@ -10,11 +10,8 @@ function Products({navigate, search, setSearchPageNumber, searchPageNumber, setP
     return(<>
             <Header navigate={navigate} 
               customerName={customerName} 
-              setSearchPageNumber={setSearchPageNumber} 
               setSearch={setSearch} 
               search={search}
-              setSearchedProducts={setSearchedProducts} 
-              searchPageNumber={searchPageNumber}
               setSearched={setSearched}
 />
             {/* <SideMenu /> */}

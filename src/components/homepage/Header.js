@@ -22,7 +22,9 @@ const Header = ({navigate, customerName, setSearch, search, setSearched}) => {
   function openHomePage(){
     navigate("/homepage")
   }
-  
+  function openCart(){
+    navigate("/cart")
+  }
   
   return (
     <header className="header">
@@ -82,7 +84,7 @@ const Header = ({navigate, customerName, setSearch, search, setSearched}) => {
             {customerName ? `${customerName}` : 'Sign in'}
           </button>        
       </div>
-      <FiShoppingCart className="header-cart-icon" />
+      <FiShoppingCart className="header-cart-icon" onClick={()=>openCart()}/>
       </div>
     </header>
   );

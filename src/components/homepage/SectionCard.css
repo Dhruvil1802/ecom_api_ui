@@ -3,9 +3,13 @@
     padding: 2rem;
     border-radius: 2rem;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
-  
+.section-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+    transform: scale(1.01);
+  }
   .section-card h2 {
     font-size: 2rem;
     font-weight: bold;

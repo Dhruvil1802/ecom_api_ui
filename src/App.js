@@ -3,6 +3,7 @@ import "./App.css";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
+import Cart from "./screens/Cart";
 import HomePage from "./screens/HomePage";
 import Login from "./screens/Login";
 import ProductDetails from "./screens/ProductDetails";
@@ -86,18 +87,27 @@ function App() {
       <Route
         path="/productdetails"
         element={<ProductDetails 
-              productDetails={productDetails} 
-              setProductDetails={setProductDetails} 
+              customerName={customerName}
               navigate={navigate}
               setSearch={setSearch} 
               search={search}
               setSearched={setSearched}
+              productDetails={productDetails} 
+              setProductDetails={setProductDetails} 
               productId={productId}
 
 
                />}
       />
-
+      <Route
+        path="/cart"
+        element={<Cart               
+              customerName={customerName}
+              navigate={navigate}
+              setSearch={setSearch} 
+              search={search}
+              setSearched={setSearched}/>
+        }/>
     </Routes>
   );
 }

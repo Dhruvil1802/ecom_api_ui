@@ -150,7 +150,8 @@
 .header-cart-icon {
   font-size: 3rem;
   margin-left: 4rem; 
-  margin-top: 2%
+  margin-top: 2%;
+  cursor: pointer;
 }
 
 .user span {

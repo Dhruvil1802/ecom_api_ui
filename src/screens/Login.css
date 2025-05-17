@@ -74,7 +74,7 @@ body, html, #root {
 }
 
 .input_field::placeholder {
-    color: #4d4c4c;
+    color: #929292;
     font-size: 100%;
 }
 
