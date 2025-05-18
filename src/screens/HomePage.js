@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '../components/homepage/Footer';
 import Header from '../components/homepage/Header';
 import ProductGrid from '../components/homepage/ProductGrid';
+import ErrorMessage from '../error/errorMessage';
+
 import './HomePage.css';
 
 const local = "http://127.0.0.1:8000";
@@ -10,7 +12,8 @@ const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 const HomePage = ({navigate, token, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setSearched}) => {
 
-
+      const [isErrorVisible, setIsErrorVisible] = useState(false)
+      const [errorMessage, setErrorMessage] = useState("")
   // fetching homepage details
   useEffect(() => {
       async function getHomePageDetails(){
@@ -31,10 +34,24 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
             setBanner(data.data.banner[0]);
             setFeatures(data.data.features);
             setCustomerName(data.data.customer_name)
+
           }
+
+          if (data?.status?.code === 400 || data?.status?.code === 404)
+              {
+                
+                setIsErrorVisible(true)
+                setErrorMessage(data?.status?.message)
+                setTimeout(()=>setIsErrorVisible(false), 5000);
+              }
         }
         catch {
-   
+
+                
+                setIsErrorVisible(true)
+                setErrorMessage("something went wrong")
+                setTimeout(()=>setIsErrorVisible(false), 5000);
+              
         }
       }
       getHomePageDetails();
@@ -63,6 +80,8 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
 
       <ProductGrid features={features}/>
       <Footer/>
+                          {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
+
     </div>
   );
 };

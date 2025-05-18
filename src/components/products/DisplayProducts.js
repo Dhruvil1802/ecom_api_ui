@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ErrorMessage from '../../error/errorMessage';
 import './DisplayProducts.css';
 import LeftSideDisplayProducts from './LeftSideProductDisplay';
 import DisplayProductRightSide from './RightSideProductDisplay';
@@ -11,7 +12,8 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
     const [priceRange, setPriceRange] = useState([0, 8000]);
     const [currentPage, setCurrentPage] = useState(1);  
     const [totalPages, setTotalPages] = useState(4);   
-
+    const [isErrorVisible, setIsErrorVisible] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
     useEffect(()=>{
         async function fetchProducts(){
 
@@ -30,10 +32,22 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
             if (data.status.code === 200) {
             
               setSearchedProducts(data.data);
+
+              
+            }
+            if (data?.status?.code === 400 || data?.status?.code === 404)
+            {
+              
+              setIsErrorVisible(true)
+              setErrorMessage(data?.status?.message)
+              setTimeout(()=>setIsErrorVisible(false), 5000);
             }
 
           }
           catch(error) {
+            setIsErrorVisible(true)
+                setErrorMessage("service unavailable")
+                setTimeout(()=>setIsErrorVisible(false), 5000);
           }
           }
           fetchProducts();
@@ -54,7 +68,7 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
                                     navigate={navigate}
                                     setProductId={setProductId}/>
             
-            
+            {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
         </div>
     );
 }

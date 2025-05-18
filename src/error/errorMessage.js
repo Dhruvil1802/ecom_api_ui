@@ -1,5 +1,5 @@
+import { MdWarning } from 'react-icons/md';
 import "./errorMessage.css";
-
 
 function ErrorMessage({message})
 {
@@ -13,7 +13,9 @@ function ErrorMessage({message})
                 <button className="cross">
                     ✖
                 </button>
+                <MdWarning className="warning-icon" size={50} color="red" />
             </div>
+
 
             <div className="error_message">
                 {message}

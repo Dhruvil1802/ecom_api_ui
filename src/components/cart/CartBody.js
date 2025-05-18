@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import ErrorMessage from '../../error/errorMessage';
 import "./CartBody.css";
 
 const local = "http://127.0.0.1:8000";
@@ -12,6 +13,9 @@ function CartBody() {
     const [shipping, setShipping] = useState();
     const [tax, setTax] = useState();
     const [total, setTotal] = useState();
+
+    const [isErrorVisible, setIsErrorVisible] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
         async function getProductList() {
@@ -33,13 +37,20 @@ function CartBody() {
               setShipping(data?.data?.delivery_fees);
               setTax(data?.data?.tax);
               setTotal(data?.data?.total);
-
-            } else {
-              console.log("Something went wrong");
-            }
+              
+            }         
+            if (data?.status?.code === 400 || data?.status?.code === 404)
+            {
+              
+              setIsErrorVisible(true)
+              setErrorMessage(data?.status?.message)
+              setTimeout(()=>setIsErrorVisible(false), 5000);
+            
+        }
           } catch (error) {
-            console.error("Error while fetching details");
-          }
+                setIsErrorVisible(true)
+                setErrorMessage("service unavailable")
+                setTimeout(()=>setIsErrorVisible(false), 5000);           }
         }
         getProductList();
       }, []);
@@ -102,7 +113,8 @@ function CartBody() {
         </div>
       </div>
 
-      
+      {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
+
     </div>
   );
 }
