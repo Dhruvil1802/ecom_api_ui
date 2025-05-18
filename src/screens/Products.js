@@ -3,12 +3,13 @@ import DisplayProducts from '../components/products/DisplayProducts';
 
 
 
-function Products({navigate, search, setSearchPageNumber, searchPageNumber, setProductId, setSearch, setSearchedProducts, searchedProducts, customerName, searched,setSearched}){
+function Products({navigate, token, search, setSearchPageNumber, searchPageNumber, setProductId, setSearch, setSearchedProducts, searchedProducts, customerName, searched,setSearched}){
 
 
 
     return(<>
             <Header navigate={navigate} 
+              token={token}
               customerName={customerName} 
               setSearch={setSearch} 
               search={search}

@@ -89,7 +89,7 @@ function Login({showHomePage, setToken}) {
                         <label htmlFor="password" className="input_label">PASSWORD</label>
                         
                         <input type={isPasswordVisible ? "text" : "password"} className="input_field" 
-                        placeholder='********' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        placeholder='' value={password} onChange={(e) => setPassword(e.target.value)} required />
                         
                         <div className="password_toggle_icon" onClick={togglePassword}>
                             {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}

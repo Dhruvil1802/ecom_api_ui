@@ -41,6 +41,7 @@ function App() {
         path="/homepage"
         element={<HomePage 
                     navigate={navigate} 
+                    token={token}
                     setSearchPageNumber={setSearchPageNumber} 
                     searchPageNumber={searchPageNumber}
                     setSearch={setSearch} 
@@ -65,6 +66,7 @@ function App() {
       <Route
         path="/products"
         element={<Products navigate={navigate}
+          token={token}
           setSearchPageNumber={setSearchPageNumber} 
           searchPageNumber={searchPageNumber}
           setSearch={setSearch} 
@@ -95,6 +97,7 @@ function App() {
               productDetails={productDetails} 
               setProductDetails={setProductDetails} 
               productId={productId}
+              token={token}
 
 
                />}
@@ -103,6 +106,7 @@ function App() {
         path="/cart"
         element={<Cart               
               customerName={customerName}
+              token={token}
               navigate={navigate}
               setSearch={setSearch} 
               search={search}

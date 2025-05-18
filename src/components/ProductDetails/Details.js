@@ -8,10 +8,13 @@ import './Details.css';
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function Details({ productId, setProductDetails, productDetails }) {
+function Details({ productId, setProductDetails, productDetails, token }) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isRateAndReviewOpen, setIsRateAndReviewOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
+  
   useEffect(() => {
     async function getProductDetails() {
       try {
@@ -39,6 +42,45 @@ function Details({ productId, setProductDetails, productDetails }) {
   }, []);
 
   const details = productDetails?.product_details;
+
+
+  function openRateAndReview(){
+    if (!token){
+      alert("Please sign in to view your cart")
+      return
+    }
+    setIsRateAndReviewOpen(true);
+  }
+
+  async function submitRating(){
+
+
+      const payload = {"product_id": details?.product_id, 
+                        "product_rating": rating, 
+                        "product_review": review}
+
+      try {
+        const res = await fetch(`${host}/products/rating/`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        if (data.status.code === 201) {
+          alert(data.status.message);
+
+        } else {
+          alert(data.status.message);
+        }
+      }
+      catch (err) {
+        console.error("Error while adding data");}  
+  }
+
 
   const toggleModal = () => {
   setIsModalOpen(!isModalOpen); 
@@ -116,13 +158,13 @@ function Details({ productId, setProductDetails, productDetails }) {
           </div>
           <div>
             
-            <button className="additional-specification-btn" onClick={toggleModal}>
+            <button className="additional-specification-btn" onClick={()=>toggleModal()}>
             Additional Specification  
           </button>
             
           </div>
         </div>
-      {/* Modal Dialog */}
+
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -168,6 +210,7 @@ function Details({ productId, setProductDetails, productDetails }) {
         </div>
       )}
 
+      
       </div>
 
       <div className="lower-part">
@@ -199,10 +242,35 @@ function Details({ productId, setProductDetails, productDetails }) {
                     </div>
                 ))}
 
-                <div className='rate-and-review'>
-                    <button>Rate and Review</button>
+                <div className='rate-and-review' onClick={openRateAndReview}>
+                    <button >Rate and Review</button>
                     <div className="next-symbol">{">"}</div>
                 </div>
+
+                {isRateAndReviewOpen && (
+                <div className="rate-and-review-dialog">
+                  <button className="close-modal" onClick={()=>setIsRateAndReviewOpen(false)}>×</button>
+                  <h3 className="rate-in-modal">Rate</h3>
+                  <div className="rating-star ">{[1, 2, 3, 4, 5].map((star, index) => (
+                  <span
+                    key={index}
+                    className="single-star"
+                    onClick={() => setRating(index + 1)}
+                    style={{ cursor: 'pointer', color: index < rating ? 'gold' : 'white' }}
+                  >
+                    ★
+                  </span>
+                ))}</div>
+
+                  <h3 className="review-in-modal">Review</h3>
+                  <div className="review-text-container">
+                    <textarea className="review_text" placeholder='Leave a review...' onChange={(e) => setReview(e.target.value)}></textarea>
+                  </div>
+                  <button className='rateandreview_submit_btn' onClick={()=>submitRating()}>submit</button>
+                  <div className="rate-and-review-form">
+                  </div>
+               </div>
+            )}
             </div>
 
 
@@ -236,3 +304,7 @@ function Details({ productId, setProductDetails, productDetails }) {
 }
 
 export default Details;
+
+
+
+ 

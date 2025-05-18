@@ -60,10 +60,13 @@
   margin-top:-1rem;
   width:80%;
   /* margin-left:10%; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 }
 .add-to-cart-btn:hover {
     transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
 }
 .description-box {
   padding: 15px;
@@ -112,36 +115,38 @@
     border-radius: 1rem;
     margin-top: 1rem;
     width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .additional-specification-btn:hover {
     background-color: #d4d4d4;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
     transform: scale(1.03);
 }
-/* Modal overlay */
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Make sure modal is above all content */
+  z-index: 1000; 
 
 }
 
-/* Modal content */
 .modal-content {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   width: 40%;
   max-height: 80vh;
-  overflow-y: auto; /* Scroll if content exceeds height */
+  overflow-y: auto; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative; /* This is important for positioning the close button */
+  position: relative; 
   
 }
 .modal-content h2 {
@@ -163,15 +168,14 @@
     color:#553cff
 
 }
-/* Close button */
+
 .close-modal {
   position: absolute;
-  top: 0.3rem; /* Adjust to position the close button */
-  right: 0.5rem; /* Place it on the top-right corner */
+  top: 0.3rem; 
+  right: 0.5rem; 
   background-color: transparent;
-  color:red !important;
+  color:rgb(0, 0, 0) ;
   border: none;
-  color: #000;
   font-size: 1.5rem;
   cursor: pointer;
   padding: 5px;
@@ -179,7 +183,7 @@
 
 .close-modal:hover {
     transform: scale(1.2);
-
+    color: red;
 }
 
 
@@ -297,11 +301,16 @@
     margin-top: 4rem;
     margin-left: 1rem;
     background-color: #eeeeee;
-    border: 2px solid #8f8f8f;
     border-radius: 1rem;
     justify-content: left;
     align-items: left;
     cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+.rate-and-review:hover{
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 
 }
 .rate-and-review button{
@@ -324,6 +333,62 @@
     margin-left:35%;
 }
 
+.rate-and-review-dialog{
+    position:fixed;
+    z-index: 1000;
+    display: block;
+    gap: 1rem;
+    top:25%;
+    left:32.5%;
+    width:35%;
+    height:48%;
+    /* max-height:40%; */
+    max-width:60%;
+    background-color: #ebe9e9;
+    border-radius: 1rem;
+    justify-content: left;
+    align-items: left;
+    cursor: pointer;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.rate-and-review-dialog:hover{
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
+}
+.rating-star{
+ 
+  color: rgb(255, 217, 0);
+  font-size: 2rem;
+  letter-spacing:0.5rem;
+
+}
+
+
+.review-in-modal{
+    display: flex;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    justify-content: left;
+    align-items: left;
+}
+.review_text{
+    display: flex;
+    width:29rem;
+    height:9rem; 
+    border-radius: 1rem;   
+    border:none;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    padding:1rem
+}
+.review_text:focus {
+  border: none;
+  outline: none; 
+}
 .reviews-section {
   width:59rem;
   padding: 1rem;
@@ -333,10 +398,32 @@
   margin-left:1rem;
 
 }
+
+.rateandreview_submit_btn{
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-left:30%;
+    width: 40%;
+    /* color:white; */
+}
+.rateandreview_submit_btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+    transform: scale(1.03);
+}
 .review{
     margin-top:1rem;
     border-top: 1px solid #e4e4e4;
-    padding:0.5rem
+    padding:0.5rem;
+    /* border:1px solid black; */
 }
 
 .reviews-section h4 {
@@ -410,6 +497,7 @@
   margin-top:1rem;
   margin-left: 0.5rem;
 }
+
 .like-icon-container {
     flex: 0 0 2rem;  
     height: 2rem;

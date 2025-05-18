@@ -7,7 +7,7 @@ import './Header.css';
 
 
 
-const Header = ({navigate, customerName, setSearch, search, setSearched}) => {
+const Header = ({navigate, token, customerName, setSearch, search, setSearched}) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,6 +23,10 @@ const Header = ({navigate, customerName, setSearch, search, setSearched}) => {
     navigate("/homepage")
   }
   function openCart(){
+    if (!token){
+      alert("Please sign in to view your cart")
+      return
+    }
     navigate("/cart")
   }
   

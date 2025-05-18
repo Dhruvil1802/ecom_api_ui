@@ -2,7 +2,7 @@
 import Header from "../components/homepage/Header";
 import Details from "../components/ProductDetails/Details";
 
-function ProductDetails({navigate, customerName, setSearch, search, productDetails, setProductDetails, productId,setSearched }) {
+function ProductDetails({navigate, customerName, setSearch, search, productDetails, setProductDetails, productId,setSearched, token }) {
   return (
     <>
             <Header navigate={navigate}   
@@ -10,9 +10,10 @@ function ProductDetails({navigate, customerName, setSearch, search, productDetai
               setSearch={setSearch} 
               setSearched={setSearched}
               search={search}
+              token={token}
               />
             {/* <SideMenu /> */}
-            <Details productDetails={productDetails} setProductDetails={setProductDetails} productId={productId}/>
+            <Details productDetails={productDetails} setProductDetails={setProductDetails} productId={productId} token={token}/>
     </>
   );
 }

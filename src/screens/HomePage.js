@@ -8,7 +8,7 @@ const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-const HomePage = ({navigate, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setSearched}) => {
+const HomePage = ({navigate, token, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setSearched}) => {
 
 
   // fetching homepage details
@@ -46,6 +46,7 @@ const HomePage = ({navigate, setSearch, search, banner, setBanner, features, set
       backgroundImage: `url("${host}/static/banner/31.png")`,
     }}>
       <Header navigate={navigate} 
+              token={token}
               customerName={customerName} 
               setSearch={setSearch} 
               search={search}
