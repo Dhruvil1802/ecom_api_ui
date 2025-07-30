@@ -1,7 +1,7 @@
 import { Slider, Typography } from '@mui/material';
 import './LeftSideProductDisplay.css';
 
-function LeftSideDisplayProducts({priceRange,setPriceRange}){
+function LeftSideDisplayProducts({priceRange, setPriceRange, setSortType, setFilterRating}){
     return(
         <div className="left_side">
 
@@ -27,22 +27,27 @@ function LeftSideDisplayProducts({priceRange,setPriceRange}){
                                     type="radio"
                                     value="Top rated"
                                     name="sorting"
+                                    onClick={()=>setSortType("top_rated")}
                                 />
                                 Top rated
                         </label>
                         <label>
                                 <input
                                     type="radio"
-                                    value="price (max - min)"
+                                    value="price desc"
                                     name="sorting"
+                                    onClick={()=>setSortType("price_desc")}
+
                                 />
                                 Price (max - min)
                         </label>
                         <label>
                                 <input
                                     type="radio"
-                                    value="price (min - max)"
+                                    value="price asc"
                                     name="sorting"
+                                    onClick={()=>setSortType("price_asc")}
+
                                 />
                                 Price (min - max)
                         </label>
@@ -51,6 +56,8 @@ function LeftSideDisplayProducts({priceRange,setPriceRange}){
                                     type="radio"
                                     value="Popularity"
                                     name="sorting"
+                                    onClick={()=>setSortType("popularity")}
+
                                 />
                                 Popularity
                         </label>
@@ -59,6 +66,8 @@ function LeftSideDisplayProducts({priceRange,setPriceRange}){
                                     type="radio"
                                     value="Discount"
                                     name="sorting"
+                                    onClick={()=>setSortType("discount")}
+
                                 />
                                 Discount
                         </label>
@@ -69,23 +78,23 @@ function LeftSideDisplayProducts({priceRange,setPriceRange}){
                     <h1><b>FILTER</b></h1>
                     <label className="star-option">
                         <input type="checkbox" />
-                        <span className="stars">★★★★★</span>
+                        <span className="stars" onClick={()=>{setFilterRating(5)}}>★★★★★</span>
                     </label>
                     <label className="star-option">
                         <input type="checkbox" />
-                        <span className="stars">★★★★</span>
+                        <span className="stars" onClick={()=>{setFilterRating(4)}}>★★★★</span>
                     </label>
                     <label className="star-option">
                         <input type="checkbox" />
-                        <span className="stars">★★★</span>
+                        <span className="stars" onClick={()=>{setFilterRating(3)}}>★★★</span>
                     </label>
                     <label className="star-option">
                         <input type="checkbox" />
-                        <span className="stars">★★</span>
+                        <span className="stars" onClick={()=>{setFilterRating(2)}}>★★</span>
                     </label>
                     <label className="star-option">
                         <input type="checkbox" />
-                        <span className="stars">★</span>
+                        <span className="stars" onClick={()=>{setFilterRating(1)}}>★</span>
                     </label>
                     </div>
 
