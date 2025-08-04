@@ -7,7 +7,7 @@ import './Header.css';
 
 
 
-const Header = ({navigate, token, customerName, setSearch, search, setSearched}) => {
+const Header = ({navigate, token, customerName, setCurrentPage, setSearch, search, setSearched}) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,7 +16,9 @@ const Header = ({navigate, token, customerName, setSearch, search, setSearched})
     navigate("/login")
   }
   function OpenProducts(){
+
     setSearched(search)
+    setCurrentPage(1) 
     navigate("/products") 
   }
   function openHomePage(){
@@ -73,7 +75,7 @@ const Header = ({navigate, token, customerName, setSearch, search, setSearched})
       <div className="brand" onClick={()=>openHomePage()}>NAME</div>
 
       <div className="search-bar">
-        <input type="text" placeholder="Search"   onChange={(e) => setSearch(e.target.value)}
+        <input type="text" placeholder="Search Products...."   onChange={(e) => setSearch(e.target.value)}
         />
         <button className="search-button" onClick={()=>search!==""?OpenProducts():{}}>
           <FiSearch />

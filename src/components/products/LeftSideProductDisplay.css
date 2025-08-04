@@ -1,35 +1,53 @@
+/* :root{
+    --medium: #56bd5a;
+    --light: #72aa70;
+    --dark: #169312;
+} */
+
 .left_side {
     position: absolute;
     font-family: Arial, sans-serif;
     left: 0;
-    height: 170%;
+    height: auto;
     width: 19.8%;
-    border-right: 4px solid black;
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     align-items: center;    /* Center items horizontally */
     justify-content: flex-start; /* Align items at the top */
-    z-index:1000;
+    /* z-index:1000; */
+    padding:1rem; 
+
+
+
 }
+
 
 .price_range {
     width: 90%;
-    margin-top: 5%; /* Add space at the top */
-    padding: 10px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    
 }
 
-/* #5e63f7 */
+.price_range h3 {
+    margin-bottom: 1rem; /* Add some space below the heading */
+}
+
 /* Style the slider track */
 .custom-slider .MuiSlider-track {
-    background-color: #5e63f7;  /* Track color */
-    height: 8px;                 /* Track height */
-    border-radius: 4px;         /* Rounded corners */
+    background-color: var(--light); /* Track color */
+    height: 6px;                 /* Track height */
+    border-radius: 1rem;        
+    border:none;
 }
 
 /* Style the slider rail (background below the track) */
 .custom-slider .MuiSlider-rail {
-    background-color: #c3cad1;  /* Rail color */
-    height: 8px;                 /* Rail height */
+    background-color: var(--lightest);  /* Rail color */
+    height: 4px;                 /* Rail height */
     border-radius: 4px;          /* Rounded corners */
     
 
@@ -37,10 +55,10 @@
 
 /* Style the slider thumb */
 .custom-slider .MuiSlider-thumb {
-    background-color: #5e63f7;  /* Thumb color */
-    border: 2px solid #5e63f7;  /* Thumb border */
-    width: 2rem;                /* Thumb size */
-    height: 2rem;               /* Thumb size */
+    background-color: var(--dark);  /* Thumb color */
+    /* border: 2px solid #88b887;   */
+    width: 1.5rem;                /* Thumb size */
+    height: 1.5rem;               /* Thumb size */
     border-radius: 50%;         /* Round thumb */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add shadow */
     
@@ -48,7 +66,7 @@
 
 /* Style the value label that appears when the thumb is hovering */
 .custom-slider .MuiSlider-valueLabel {
-    background-color: #5e63f7;   /* Value label background color */
+    background-color: var(--dark);   /* Value label background color */
     color: #ffffff;              /* Text color */
     font-weight: bold;           /* Bold text */
     font-size: 14px;             /* Font size */
@@ -66,11 +84,12 @@
 .sorting_options {
     display: flex;
     flex-direction: column;
+    margin-top:1rem;
 }
 
 .sorting_options label {
-    margin: 10px 5px;
-    font-size: 140%;
+    margin: 7px 5px;
+    font-size: 100%;
     display: flex;
 }
 
@@ -81,21 +100,24 @@
 }
 
 .star-filter {
-    margin-top: 20px;
+    margin-top: 1rem;
     width: 90%; /* Ensure it takes the full width of the container */
     align-items: flex-start; /* Align items to the left */
     text-align: left; /* Align text and input to the left */
+    /* margin-bottom:5%; */
+
 }
+
 
 .star-option {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    
 }
 
 .star-option input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     margin-right:6%;
 
 }
@@ -104,4 +126,19 @@
     color: gold;
     font-size: 1.5rem;
     letter-spacing: 2px;
+}
+
+
+.collapsible-heading {
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    
+    display: flex;
+    justify-content: space-between; /* Push content to both ends */
+    align-items: center;
 }

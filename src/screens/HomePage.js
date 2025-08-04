@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
+import BuyerCategories from '../components/homepage/BuyerCategories';
 import Footer from '../components/homepage/Footer';
 import Header from '../components/homepage/Header';
 import ProductGrid from '../components/homepage/ProductGrid';
 import ErrorMessage from '../error/errorMessage';
-
 import './HomePage.css';
 
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-const HomePage = ({navigate, token, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setSearched}) => {
+const HomePage = ({navigate, token, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setSearched, setCurrentPage}) => {
 
       const [isErrorVisible, setIsErrorVisible] = useState(false)
       const [errorMessage, setErrorMessage] = useState("")
@@ -42,6 +42,7 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
                 
                 setIsErrorVisible(true)
                 setErrorMessage(data?.status?.message)
+                // setErrorMessage("asdfas")
                 setTimeout(()=>setIsErrorVisible(false), 5000);
               }
         }
@@ -60,7 +61,7 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
   return (
     <div className="homepage"    
     style={{
-      backgroundImage: `url("${host}/static/banner/31.png")`,
+      // backgroundImage: `url("${host}/static/banner/31.png")`,
     }}>
       <Header navigate={navigate} 
               token={token}
@@ -68,6 +69,8 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
               setSearch={setSearch} 
               search={search}
               setSearched={setSearched}
+              setCurrentPage={setCurrentPage}
+
               />
       {/* <SideMenu /> */}
 
@@ -77,8 +80,9 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
           <button className="btn-secondary">Shop All</button> */}
         </div>
       </div>
-
+          
       <ProductGrid features={features}/>
+      <BuyerCategories></BuyerCategories>
       <Footer/>
                           {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
 

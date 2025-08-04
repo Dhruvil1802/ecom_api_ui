@@ -1,26 +1,68 @@
 import { Slider, Typography } from '@mui/material';
+import { useState } from 'react';
 import './LeftSideProductDisplay.css';
 
 function LeftSideDisplayProducts({priceRange, setPriceRange, setSortType, setFilterRating}){
+
+    const [showSortBy, setShowSortBy] = useState(false);
+    const [showCategories, setShowCategories] = useState(false);
+    const [showFilter, setShowFilter] = useState(false);
+
     return(
         <div className="left_side">
 
-                <div className="price_range">
-                    <Typography variant="h5"><strong>Price</strong></Typography>
-                        <Typography variant="h5"><strong>${priceRange[0]} - ${priceRange[1]}</strong></Typography>
-                        <Slider
-                        value={priceRange}
-                        onChange={(e, newValue) => setPriceRange(newValue)}
-                        valueLabelDisplay="auto"
-                        min={0}
-                        max={8000}
-                        disableSwap
-                        className="custom-slider" 
-                    />            
+
+                <div className="star-filter">
+                    <h3 onClick={() => setShowFilter(!showFilter)} className="collapsible-heading">
+                        <span>FILTER</span>
+                        <span>{showFilter ? "▲" : "▼"}</span>
+                    </h3>
+                    {showFilter && (<div className="filter_options">
+                    <div className="price_range">
+                        <h4>PRICE RANGE</h4>
+                            <Typography variant="h6"><strong>${priceRange[0]} - ${priceRange[1]}</strong></Typography>
+                            <Slider
+                            value={priceRange}
+                            onChange={(e, newValue) => setPriceRange(newValue)}
+                            valueLabelDisplay="auto"
+                            min={0}
+                            max={8000}
+                            disableSwap
+                            className="custom-slider" 
+                        />            
+                    </div>
+
+                    <h4>RATING</h4>
+
+                    <label className="star-option">
+                        <input type="checkbox" />
+                        <span className="stars" onClick={()=>{setFilterRating(5)}}>★★★★★</span>
+                    </label>
+                    <label className="star-option">
+                        <input type="checkbox" />
+                        <span className="stars" onClick={()=>{setFilterRating(4)}}>★★★★</span>
+                    </label>
+                    <label className="star-option">
+                        <input type="checkbox" />
+                        <span className="stars" onClick={()=>{setFilterRating(3)}}>★★★</span>
+                    </label>
+                    <label className="star-option">
+                        <input type="checkbox" />
+                        <span className="stars" onClick={()=>{setFilterRating(2)}}>★★</span>
+                    </label>
+                    <label className="star-option">
+                        <input type="checkbox" />
+                        <span className="stars" onClick={()=>{setFilterRating(1)}}>★</span>
+                    </label>
+                    </div>)}
                 </div>
 
                 <div className="sorting">
-                    <h1><b>SORT BY</b></h1>
+                    <h3 onClick={() => setShowSortBy(!showSortBy)} className="collapsible-heading">
+                        <span>SORT BY</span>
+                        <span>{showSortBy ? "▲" : "▼"}</span>
+                    </h3>
+                    {showSortBy && (
                     <div className="sorting_options">
                         <label>
                                 <input
@@ -72,31 +114,50 @@ function LeftSideDisplayProducts({priceRange, setPriceRange, setSortType, setFil
                                 Discount
                         </label>
                     </div>
+                    )}
                 </div>
 
-                <div className="star-filter">
-                    <h1><b>FILTER</b></h1>
-                    <label className="star-option">
-                        <input type="checkbox" />
-                        <span className="stars" onClick={()=>{setFilterRating(5)}}>★★★★★</span>
-                    </label>
-                    <label className="star-option">
-                        <input type="checkbox" />
-                        <span className="stars" onClick={()=>{setFilterRating(4)}}>★★★★</span>
-                    </label>
-                    <label className="star-option">
-                        <input type="checkbox" />
-                        <span className="stars" onClick={()=>{setFilterRating(3)}}>★★★</span>
-                    </label>
-                    <label className="star-option">
-                        <input type="checkbox" />
-                        <span className="stars" onClick={()=>{setFilterRating(2)}}>★★</span>
-                    </label>
-                    <label className="star-option">
-                        <input type="checkbox" />
-                        <span className="stars" onClick={()=>{setFilterRating(1)}}>★</span>
-                    </label>
+                <div className="sorting">
+                <h3 onClick={() => setShowCategories(!showCategories)} className="collapsible-heading">
+                    <span>CATEGORIES</span>
+                    <span>{showCategories ? "▲" : "▼"}</span>
+                </h3>
+                {showCategories && (
+                        <div className="sorting_options">
+                        <label>
+                                <input
+                                    type="radio"
+                                    value="Male"
+                                    name="Category"
+                                    onClick={()=>setSortType("top_rated")}
+                                />
+                                Male
+                        </label>
+                        <label>
+                                <input
+                                    type="radio"
+                                    value="Female"
+                                    name="Category"
+                                    onClick={()=>setSortType("price_desc")}
+
+                                />
+                                Female
+                        </label>
+                        <label>
+                                <input
+                                    type="radio"
+                                    value="Kids"
+                                    name="Category"
+                                    onClick={()=>setSortType("price_asc")}
+
+                                />
+                                Kids
+                        </label>
                     </div>
+                )}
+                </div>
+
+                
 
             </div>
     )

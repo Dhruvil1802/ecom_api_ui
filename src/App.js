@@ -17,13 +17,11 @@ function App() {
   const [searchedProducts, setSearchedProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [searched, setSearched] = useState();
-  const [searchPageNumber, setSearchPageNumber] = useState(1);
   const [banner, setBanner] = useState([]); 
   const [features,setFeatures] = useState([]);
   const [customerName, setCustomerName] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 8000]);
   const [currentPage, setCurrentPage] = useState(1);  
-  const [totalPages, setTotalPages] = useState(4); 
   const [productDetails, setProductDetails] = useState();
   const [productId, setProductId] = useState();
   
@@ -42,8 +40,7 @@ function App() {
         element={<HomePage 
                     navigate={navigate} 
                     token={token}
-                    setSearchPageNumber={setSearchPageNumber} 
-                    searchPageNumber={searchPageNumber}
+     
                     setSearch={setSearch} 
                     search={search}
                     setSearched={setSearched}
@@ -54,6 +51,8 @@ function App() {
                     setFeatures={setFeatures}
                     customerName={customerName}
                     setCustomerName={setCustomerName}
+                    setCurrentPage={setCurrentPage
+                    }
 
                     />}
       />
@@ -67,8 +66,6 @@ function App() {
         path="/products"
         element={<Products navigate={navigate}
           token={token}
-          setSearchPageNumber={setSearchPageNumber} 
-          searchPageNumber={searchPageNumber}
           setSearch={setSearch} 
           search={search}
           searched={searched}
@@ -80,8 +77,7 @@ function App() {
           setPriceRange={setPriceRange}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          totalPages={totalPages}
-          setTotalPages={setTotalPages}
+
           setProductId={setProductId}
 
         />} 

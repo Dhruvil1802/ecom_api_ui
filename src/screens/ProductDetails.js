@@ -4,7 +4,7 @@ import Details from "../components/ProductDetails/Details";
 
 function ProductDetails({navigate, customerName, setSearch, search, productDetails, setProductDetails, productId,setSearched, token }) {
   return (
-    <>
+    < >
             <Header navigate={navigate}   
               customerName={customerName} 
               setSearch={setSearch} 

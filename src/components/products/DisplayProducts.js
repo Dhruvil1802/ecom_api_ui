@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ErrorMessage from '../../error/errorMessage';
 import './DisplayProducts.css';
 import LeftSideDisplayProducts from './LeftSideProductDisplay';
 import DisplayProductRightSide from './RightSideProductDisplay';
@@ -6,15 +7,15 @@ import DisplayProductRightSide from './RightSideProductDisplay';
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumber, searched, setSearchedProducts, searchedProducts, setProductId}){
+function DisplayProducts({navigate, search, currentPage, setCurrentPage, searched, setSearchedProducts, searchedProducts, setProductId}){
 
     const [priceRange, setPriceRange] = useState([0, 8000]);
-    const [currentPage, setCurrentPage] = useState(1);  
-    const [totalPages, setTotalPages] = useState(4);   
+    const [totalPages, setTotalPages] = useState();   
     const [isErrorVisible, setIsErrorVisible] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
     const [filterRating, setFilterRating] = useState()
     const [sortType, setSortType] = useState()
+    const [category, setCategory] = useState();
 
 
      useEffect(()=>{
@@ -22,7 +23,7 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
 
           try{
             const res = await fetch(
-              `${host}/products/search/?search=${search}&page_size=3&page_no=${searchPageNumber}`,
+              `${host}/products/search/?search=${search}&page_size=8&page_no=${currentPage}`,
               { 
                 method: "GET",
                 headers: {
@@ -35,7 +36,8 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
             if (data.status.code === 200) {
             
               setSearchedProducts(data.data);
-
+              console.log("searched productsssss",data.data)
+              setTotalPages(Math.ceil(data.data.length / 3));
               
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
@@ -54,17 +56,15 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
           }
           }
           fetchProducts();
-      },[ searched]);
+      },[ searched, currentPage]);
 
 
     useEffect(()=>{
         async function fetchProducts(){
 
           try{  
-            console.log("search",search, "searchPageNumber",searchPageNumber,"sortType",sortType, "priceRange",priceRange, "filterRating",filterRating)
-            console.log("ffffffffff",sortType)
             const res = await fetch(
-              `${host}/products/sortandfilter/?search=${search}&page_no=${searchPageNumber}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=9`,
+              `${host}/products/sortandfilter/?search=${search}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=8`,
               { 
                 method: "GET",
                 headers: {
@@ -73,12 +73,11 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
               }
             );
             const data = await res.json();
-            console.log(data.data)
 
             if (data.status.code === 200) {
             
               setSearchedProducts(data.data);
-              console.log(data.data)
+              console.log("searched products",data.data)
               
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
@@ -97,20 +96,18 @@ function DisplayProducts({navigate, search, setSearchPageNumber, searchPageNumbe
           }
           }
           fetchProducts();
-      },[searchPageNumber, sortType, priceRange, filterRating]);
+      },[ sortType, priceRange, filterRating, currentPage]);
 
 
 
       return (
         <div className="product_page">
-            <LeftSideDisplayProducts priceRange={priceRange} setPriceRange={setPriceRange} setSortType={setSortType} setFilterRating={setFilterRating}/>
+            <LeftSideDisplayProducts priceRange={priceRange} setPriceRange={setPriceRange} setSortType={setSortType} setFilterRating={setFilterRating} setCategory={setCategory}/>
            
             <DisplayProductRightSide searchedProducts={searchedProducts} 
                                     totalPages={totalPages} 
                                     setCurrentPage={setCurrentPage} 
                                     currentPage={currentPage}
-                                    setSearchPageNumber={setSearchPageNumber}
-                                    setTotalPages={setTotalPages}
                                     navigate={navigate}
                                     setProductId={setProductId}
                                     />
