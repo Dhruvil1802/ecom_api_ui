@@ -84,7 +84,7 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
       <ProductGrid features={features}/>
       <BuyerCategories></BuyerCategories>
       <Footer/>
-                          {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
+      {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
 
     </div>
   );

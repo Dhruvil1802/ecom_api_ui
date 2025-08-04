@@ -134,11 +134,17 @@
     font-weight: bold;
     color: #333;
     margin-bottom: 0.5rem;
-    border: 1px solid black;
     border-radius: 1rem;
     padding: 0.5rem;
-    
+    background-color: #e0f3df;
     display: flex;
     justify-content: space-between; /* Push content to both ends */
     align-items: center;
+}
+.collapsible-heading:hover {
+    background-color: #a3d4a3; /* Lighter shade on hover */
+}
+
+.collapsible-heading span {
+    font-weight: 800; 
 }
