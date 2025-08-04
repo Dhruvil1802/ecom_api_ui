@@ -92,16 +92,19 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                     ⟨ Previous
                 </button>
 
-                {[1, 2, 3].map((page) => (
-                    <button
-                    key={page}
-                    className={`pagination-button ${currentPage === page ? 'active' : ''}`}
-                    onClick={() => paginate(page)}
-                    >
-                    {page}
-                    </button>
-                ))}
-
+                {Array.from({ length: totalPages -1}).map((_, index) => {
+                    const page = index + 1;
+                    return (
+                        <button
+                        key={page}
+                        className={`pagination-button ${currentPage === page ? 'active' : ''}`}
+                        onClick={() => paginate(page)}
+                        >
+                        {page}
+                        </button>
+                    );
+                })}
+            {console.log("Total Pages:", totalPages)}
             {totalPages>=10?<span className="pagination-ellipsis">..........</span>:""}
 
                 <button
