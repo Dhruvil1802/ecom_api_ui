@@ -1,7 +1,8 @@
 .scroll-wrapper-container {
   position: relative;
   width: 100%;
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
+  /* border:1px solid black; */
 }
 
 .category-title{
@@ -18,14 +19,18 @@
   padding-bottom:0.5rem;
   width:95%;
   margin-left:2.5%;
+  margin-bottom:0rem;
   color: #000000;
+  /* border:1px solid black; */
 }
 .grid-scroll-wrapper {
   overflow-x: auto;
   white-space: nowrap;
   scroll-behavior: smooth;
   padding: 1rem 2rem;
-
+  margin-left: 1rem;
+  /* border:1px solid black; */
+  margin-top:0rem !important;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
@@ -36,7 +41,7 @@
 
 .grid-container {
   display: inline-flex;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 /* Scroll Buttons */
@@ -102,19 +107,19 @@
 
 /* Dummy data */
 .section-card {
-  background: #ffffff;
-  border: 1px solid #eee;
-  border-radius: 8px;
+  background: white;
+  border: 2px solid #e7e7e7;
+  border-radius: 2rem;
   padding: 1rem;
   text-align: center;
-  width: 10rem;
-  height: 12rem;
+  width: 15rem;
+  height: 10rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); */
 }
 .section-card:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
@@ -122,20 +127,13 @@
   transform: scale(1.02);
 }
 
+
 .section-card h2 {
-  font-size: 1.6rem;         /* Reduce if needed */
-  word-wrap: break-word;     /* Wrap long words */
-  white-space: normal;       /* Allow wrapping */
-  overflow-wrap: break-word; /* Modern fallback */
-  max-width: 100%;           /* Ensure text doesn't overflow */
-  text-align: center;
-  height:50%;
+  font-size: 2.1rem !important;
+
 }
 
 .section-card h3 {
-  height:50%;
-  font-size: 1.4rem;
-  color: #666;
-  white-space: normal;       /* Allow wrapping */
 
+  color: #adadad;
 }

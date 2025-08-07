@@ -57,18 +57,18 @@
     position: relative;
     padding: 2rem;
     margin-top: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     border: 1px solid #e5efe2;
     border-radius: 1rem;
     background-image: url("http://127.0.0.1:8000/static/banner/32.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); */
   }
 
   .hero:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); */
     transition: box-shadow 0.3s ease;
     transform: scale(1.01);
   }

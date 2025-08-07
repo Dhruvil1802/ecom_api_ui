@@ -22,7 +22,7 @@ function BasicDetails({ details }) {
         </div>
 
         <div className="product-all-details">
-          <h2 className="product-name">{details?.product_name}</h2>
+          <h1 className="product-name">{details?.product_name}</h1>
           <h3 className="product-price">${details?.product_price}</h3>
           <button className="add-to-cart-btn">ADD TO CART</button>
 

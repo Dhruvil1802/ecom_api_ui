@@ -37,6 +37,11 @@
   padding:1rem;
 }
 
+.rating-section h4 {
+  color: #553cff;
+  margin-top: 0rem !important;
+}
+
 .average-rating {
   font-size: 48px;
   font-weight: bold;
@@ -89,23 +94,27 @@
     gap: 1rem;
     margin-top: 4rem;
     margin-left: 1rem;
-    background-color: #eeeeee;
+    background-color: var(--olive);
     border-radius: 1rem;
     justify-content: left;
     align-items: left;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease;
+    color:white;
 
 }
 .rate-and-review:hover{
-    transform: scale(1.02);
+    transform: scale(1.01);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
 
 }
 .rate-and-review button{
-    background-color: #eeeeee;
-    width:50%;
-    color: rgb(0, 0, 0);
+    background-color: var(--olive);
+    width:100%;
+    height:2.5rem;
+    color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 0.5rem;
@@ -115,8 +124,10 @@
     border-radius: 1rem;
     justify-content: left;
     align-items: left;
+    font-size: 1.2rem;
 
 }
+
 .next-symbol{
     font-size:2rem;
     margin-left:35%;
@@ -130,16 +141,17 @@
     top:25%;
     left:32.5%;
     width:35%;
-    height:48%;
+    height:55%;
     /* max-height:40%; */
     max-width:60%;
-    background-color: #ebe9e9;
+    background-color: #f8f8e1;
     border-radius: 1rem;
     justify-content: left;
     align-items: left;
     cursor: pointer;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -148,12 +160,46 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 
 }
+
+.rate-and-review-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* optional spacing between star and image */
+  /* border: 1px solid black; */
+  height:5rem;
+  overflow: visible;
+}
+
 .rating-star{
  
   color: rgb(255, 217, 0);
-  font-size: 2rem;
+  font-size: 3rem;
   letter-spacing:0.5rem;
+  /* margin-left: 1rem; */
 
+}
+
+.single-star{
+  color: rgb(255, 217, 0);
+  font-size: 3rem;
+}
+
+.rate-and-review-img-container{
+    display: flex;
+    justify-content: center;
+    height:8rem;
+    width:80%;
+    align-items: center;
+    margin-right: 1rem;
+    margin-top:1rem;
+    /* border:1px solid black; */
+}
+
+.rate-and-review-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
 }
 
 
@@ -170,7 +216,7 @@
     height:9rem; 
     border-radius: 1rem;   
     border:none;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
     margin-top: 1rem;
     padding:1rem
 }
@@ -189,8 +235,8 @@
 }
 
 .rateandreview_submit_btn{
-    background-color: #ffffff;
-    color: #000000;
+    background-color: var(--olive);
+    color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 0.5rem;
@@ -201,12 +247,15 @@
     margin-top: 1rem;
     margin-left:30%;
     width: 40%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease;
     /* color:white; */
 }
 .rateandreview_submit_btn:hover {
-    background-color: #000000;
+    background-color: #82be6a;
     color: #ffffff;
     transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 .review{
     margin-top:1rem;
@@ -285,6 +334,11 @@
   width:4.5rem;
   margin-top:1rem;
   margin-left: 0.5rem;
+
+}
+.like-button:hover {
+    /* background-color: darkred; */
+    transform: scale(1.05);
 }
 
 .like-icon-container {

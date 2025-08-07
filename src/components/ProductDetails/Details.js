@@ -15,7 +15,6 @@ function Details({ productId, setProductDetails, productDetails, token }) {
     const [errorMessage, setErrorMessage] = useState("")
     const [reload,setReload] = useState("")
   useEffect(() => {
-    console.log("reloaded_successfully",reload)
     async function getProductDetails() {
       try {
         const res = await fetch(

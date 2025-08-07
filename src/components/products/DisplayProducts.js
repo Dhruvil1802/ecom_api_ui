@@ -36,7 +36,6 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
             if (data.status.code === 200) {
             
               setSearchedProducts(data.data);
-              console.log("searched productsssss",data.data)
               setTotalPages(Math.ceil(data.data.length / 3));
               
             }
@@ -77,8 +76,6 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
             if (data.status.code === 200) {
             
               setSearchedProducts(data.data);
-              console.log("searched products",data.data)
-              
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
             {

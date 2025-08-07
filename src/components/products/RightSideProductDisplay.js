@@ -54,7 +54,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                            <img src={`${host}${product.product_image}`} alt={product.product_name} className="product-image" />
                         </div>
                         <div className="products-other-details">
-                            <h3 className="product-name">{product.product_name}</h3>
+                            <h3 className="searched-product-name">{product.product_name}</h3>
                             
                             <div className="price-rating-wrapper">
                                 <div className="product-rating">
@@ -104,7 +104,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                         </button>
                     );
                 })}
-            {console.log("Total Pages:", totalPages)}
+                
             {totalPages>=10?<span className="pagination-ellipsis">..........</span>:""}
 
                 <button

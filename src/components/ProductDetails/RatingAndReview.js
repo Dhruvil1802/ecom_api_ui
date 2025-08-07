@@ -93,28 +93,37 @@ function RatingAndReview({details, productDetails, setReload, token}) {
                 ))}
 
                 <div className='rate-and-review' onClick={openRateAndReview}>
-                    <button >Rate and Review</button>
-                    <div className="next-symbol">{">"}</div>
+                    <button >Rate and Review </button>
+                    
                 </div>
-
                 {isRateAndReviewOpen && (
                 <div className="rate-and-review-dialog">
                   <button className="close-modal" onClick={()=>setIsRateAndReviewOpen(false)}>×</button>
-                  <h3 className="rate-in-modal">Rate</h3>
-                  <div className="rating-star ">{[1, 2, 3, 4, 5].map((star, index) => (
-                  <span
-                    key={index}
-                    className="single-star"
-                    onClick={() => setRating(index + 1)}
-                    style={{ cursor: 'pointer', color: index < rating ? 'gold' : 'white' }}
-                  >
-                    ★
-                  </span>
-                ))}</div>
-
-                  <h3 className="review-in-modal">Review</h3>
+                  <h3 className="rate-in-modal">How was the item?</h3>
+                  <div className="rate-and-review-header">
+                  <div className="rating-star">
+                    {[1, 2, 3, 4, 5].map((star, index) => (
+                      <span
+                        key={index}
+                        className="single-star"
+                        onClick={() => setRating(index + 1)}
+                        style={{ cursor: 'pointer', color: index < rating ? 'gold' : 'white' }}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <div className="rate-and-review-img-container">
+                    <img 
+                      src={`${host}${details?.product_image}`} 
+                      alt={details?.product_name} 
+                      className="image"
+                    />
+                  </div>
+                </div>
+                  <h3 className="review-in-modal">Write a review</h3>
                   <div className="review-text-container">
-                    <textarea className="review_text" placeholder='Leave a review...' onChange={(e) => setReview(e.target.value)}></textarea>
+                    <textarea className="review_text" placeholder='What should other customer know?' onChange={(e) => setReview(e.target.value)}></textarea>
                   </div>
                   <button className='rateandreview_submit_btn' onClick={()=>submitRating()}>submit</button>
                   <div className="rate-and-review-form">

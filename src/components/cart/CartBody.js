@@ -58,7 +58,7 @@ function CartBody() {
     <div className="cart-body">
 
       <div className="Left_Side">
-        <button className="back-button"><p>{"<"}</p></button>
+        {/* <button className="back-button"><p>{"<"}</p></button> */}
 
         <div className="Product_listing">
             {cartProducts.map((product, index) => (
@@ -76,9 +76,13 @@ function CartBody() {
                     </div>
                     <div className="product_cart_quantity">
                         <button className="sub-in-cart-button"><p>-</p></button>
-                        <h1>{product?.product_quantity}</h1>
+                        <h2>{product?.product_quantity}</h2>
                         <button className="add-in-cart-button">+</button>
                     </div>
+                    <div className="product_total">
+                      <h2>${product?.product_quantity * product?.product_price}</h2>
+                    </div>
+
 
                 </div>
             ))}
@@ -87,7 +91,14 @@ function CartBody() {
       <div className="Right_Side">
 
         <div className="payment-details">
-            <h1>Payment Details</h1>
+            <h1>Order Summary</h1>
+            <div className="promotion">
+              <input type="text"
+                    placeholder="Enter Coupon Code"
+                    className="promotion-input"
+              />  
+              <button className="apply-promotion-button">Apply</button>
+            </div>
             <table className="payment-details-table">
                 <tr>
                     <td>Sub Total</td>
@@ -100,6 +111,11 @@ function CartBody() {
                  <tr>
                     <td>Tax</td>
                     <td className="payment-details-value">{tax}</td>
+
+                </tr>
+                <tr>
+                    <td>Discount</td>
+                    <td className="payment-details-value">200</td>
 
                 </tr>
             </table>
