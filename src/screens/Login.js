@@ -66,47 +66,54 @@ function Login({showHomePage, setToken}) {
     };
 
     return (
-        <>
         <div className="login_page">
-           
-            <img src="/images/login_background.png" className="background_image" />
-            <div className="form_div">
-               
-                <form className="login_form" onSubmit={handleSubmit}>
-                  
-                    <h1 className="login_title">Log in</h1>
-                    
-                    <div className="input_div">
-                        
-                        <label htmlFor="email" className="input_label">EMAIL ADDRESS</label>
-                        <input type="email" className="input_field" placeholder='hello@example.com' 
-                        value={email} onChange={(e) => setEmail(e.target.value)} required />
-                   
+            <div className="sub_login_page">
+                <div className='img-div'>
+                <img src={`${local}/Media/login_image/loginpage.jpeg`} className="background_image" />
+                </div>
+                <div className="form_div">
+                    <div className="logo_div">
+                        <span><h1>LOGO</h1></span>
                     </div>
+                    <form className="login_form" onSubmit={handleSubmit}>
                     
-                    <div className="input_div">
+                        <h1 className="login_title">Sign in</h1>
                         
-                        <label htmlFor="password" className="input_label">PASSWORD</label>
-                        
-                        <input type={isPasswordVisible ? "text" : "password"} className="input_field" 
-                        placeholder='********' value={password} onChange={(e) => setPassword(e.target.value)} required />
-                        
-                        <div className="password_toggle_icon" onClick={togglePassword}>
-                            {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                        <div className="input_div">
+                            
+                            <label htmlFor="email" className="input_label">EMAIL ADDRESS</label>
+                            <input type="email" className="input_field" placeholder='hello@example.com' 
+                            value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    
                         </div>
-                    
-                    </div>
-                    
-                    <button type="button" className="forgot_button">Forgot password?</button>
-                    <button type="submit" className="login_button">Log in</button>
-                    <div className="divider">or</div>
-                    <button type="button" className="signup_button">Sign Up </button>
-               
-                </form>
+                        
+                        <div className="input_div">
+                            
+                            <label htmlFor="password" className="input_label">PASSWORD</label>
+                            
+                            <input type={isPasswordVisible ? "text" : "password"} className="input_field" 
+                            placeholder='********' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                            
+                            <div className="password_toggle_icon" onClick={togglePassword}>
+                                {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                            </div>
+                        
+                        </div>
+                        <button type="submit" className="login_button">Login</button>
+                        <button type="button" className="forgot_button">Forgot password?</button>
+                        <div className="sign_up_div">          
+                            <span>Don't have an account?</span>              
+                            <button type="button" className="signup_button">Sign Up</button>
+                        </div>
+
+                        {/* <div className="divider">or</div> */}
+                        {/* <button type="button" className="signup_button">Sign Up </button> */}
+                
+                    </form>
+                </div>
             </div>
-        </div>
                     {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
-        </>
+        </div>
 
     );
 }

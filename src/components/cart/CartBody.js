@@ -17,43 +17,192 @@ function CartBody() {
     const [isErrorVisible, setIsErrorVisible] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
-    useEffect(() => {
-        async function getProductList() {
-          try {
-            const res = await fetch(
-              `${host}/cart/management/`,
-              {
-                method: "GET",
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-            const data = await res.json();
-            if (data.status.code === 200) {
-              setCartProducts(data?.data?.products);
-              setSubTotal(data?.data?.sub_total);
-              setShipping(data?.data?.delivery_fees);
-              setTax(data?.data?.tax);
-              setTotal(data?.data?.total);
+    // useEffect(() => {
+    //                   getProductList();
+    //                 }, []);
+  
+    // async function getProductList() {
+    //       try {
+    //         const res = await fetch(
+    //           `${local}/cart/management/`,
+    //           {
+    //             method: "GET",
+    //             headers: {
+    //               Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //               "Content-Type": "application/json",
+    //             },
+    //           }
+    //         );
+    //         const data = await res.json();
+    //         if (data.status.code === 200) {
+    //           setCartProducts(data?.data?.products);
+    //           setSubTotal(data?.data?.sub_total);
+    //           setShipping(data?.data?.delivery_fees);
+    //           setTax(data?.data?.tax);
+    //           setTotal(data?.data?.total);
               
-            }         
-            if (data?.status?.code === 400 || data?.status?.code === 404)
-            {
+    //         }         
+    //         if (data?.status?.code === 400 || data?.status?.code === 404)
+    //         {
               
-              setIsErrorVisible(true)
-              setErrorMessage(data?.status?.message)
-              setTimeout(()=>setIsErrorVisible(false), 5000);
+    //           setIsErrorVisible(true)
+    //           setErrorMessage(data?.status?.message)
+    //           setTimeout(()=>setIsErrorVisible(false), 5000);
             
-        }
-          } catch (error) {
-                setIsErrorVisible(true)
-                setErrorMessage("service unavailable")
-                setTimeout(()=>setIsErrorVisible(false), 5000);           }
-        }
-        getProductList();
-      }, []);
+    //     }
+    //       } catch (error) {
+    //             setIsErrorVisible(true)
+    //             setErrorMessage("service unavailable")
+    //             setTimeout(()=>setIsErrorVisible(false), 5000);           }
+    //     }
+
+      
+      
+    //   function increaseQuantity(product_id) {
+    //     async function increaseQuantityHandler() {
+    //               console.log("increaseQuantity called with product_id:", product_id);
+
+    //       try {
+    //         const res = await fetch(
+    //         `${local}/cart/management/`,
+    //           {
+    //             method: "POST",
+    //             headers: {
+    //               Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //               "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({product_id:product_id}),
+
+    //           }
+    //         );
+    //         const data = await res.json();
+    //         console.log("data",data);
+
+    //         if (data.status.code === 200) {
+    //           getProductList()
+    //         }
+    //       } catch (error) {
+    //         setIsErrorVisible(true)
+    //         setErrorMessage("service unavailable")
+    //         setTimeout(()=>setIsErrorVisible(false), 5000);
+    //       }
+    //     }
+    //     increaseQuantityHandler();
+
+    //   }
+    //   function decreaseQuantity(product_id) {
+    //     async function decreaseQuantityHandler() {
+    //               console.log("decreaseQuantity called with product_id:", product_id);
+
+    //       try {
+    //         const res = await fetch(
+    //           `${local}/cart/management/`,
+    //           {
+    //             method: "POST",
+    //             headers: {
+    //               Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //               "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({action:"remove", product_id:product_id}),
+
+    //           }
+    //         );
+    //         const data = await res.json();
+    //         if (data.status.code === 200) {
+    //            getProductList()
+    //         }
+    //       } catch (error) {
+    //         setIsErrorVisible(true)
+    //         setErrorMessage("service unavailable")
+    //         setTimeout(()=>setIsErrorVisible(false), 5000);
+    //       }
+    //     }
+    //     decreaseQuantityHandler();
+    //   }
+
+    useEffect(() => {
+  getProductList();
+}, []);
+
+async function getProductList() {
+    console.log("fetch data")
+
+  try {
+    const res = await fetch(`${local}/cart/management/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (data.status.code === 200) {
+      setCartProducts(data?.data?.products);
+      setSubTotal(data?.data?.sub_total);
+      setShipping(data?.data?.delivery_fees);
+      setTax(data?.data?.tax);
+      setTotal(data?.data?.total);
+    }
+  } catch (error) {
+    setIsErrorVisible(true);
+    setErrorMessage("service unavailable");
+    setTimeout(() => setIsErrorVisible(false), 5000);
+  }
+}
+async function increaseQuantity(product_id) {
+    console.log("increase quantity")
+
+  try {
+    const res = await fetch(`${local}/cart/management/`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ product_id }),
+    });
+    const data = await res.json();
+    console.log("I", data)
+    if (data.status.code === 201) {
+      console.log("before increase")
+      await getProductList(); // wait for fresh cart
+            console.log("after increase")
+
+    }
+  } catch (error) {
+    setIsErrorVisible(true);
+    setErrorMessage("service unavailable");
+    setTimeout(() => setIsErrorVisible(false), 5000);
+  }
+}
+
+async function decreaseQuantity(product_id) {
+  console.log("decrease quantity")
+  try {
+    const res = await fetch(`${local}/cart/management/`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ action: "remove", product_id }),
+    });
+    const data = await res.json();
+        // console.log("D", data)
+
+    if (data.status.code === 201) {
+      console.log("before decrease")
+      await getProductList(); // wait for fresh cart
+      console.log("after decrease")
+
+    }
+  } catch (error) {
+    setIsErrorVisible(true);
+    setErrorMessage("service unavailable");
+    setTimeout(() => setIsErrorVisible(false), 5000);
+  }
+}
+
   return (
     <div className="cart-body">
 
@@ -61,11 +210,11 @@ function CartBody() {
         {/* <button className="back-button"><p>{"<"}</p></button> */}
 
         <div className="Product_listing">
-            {cartProducts.map((product, index) => (
-                <div className="product_cart" key={index}>
+            {cartProducts.map((product) => (
+                <div className="product_cart" key={product.product_id}>
                     <div className="product_cart_image_container">
                         <img
-                        src={`${host}/Media/${product?.product_image}`}
+                        src={`${local}/Media/${product?.product_image}`}
                         alt={product?.product_name}
                         className="product-image"
                         />
@@ -75,9 +224,9 @@ function CartBody() {
                         <h2>${product?.product_price}</h2>
                     </div>
                     <div className="product_cart_quantity">
-                        <button className="sub-in-cart-button"><p>-</p></button>
+                        <button className="sub-in-cart-button" onClick={()=>decreaseQuantity(product?.product_id)}><p>-</p></button>
                         <h2>{product?.product_quantity}</h2>
-                        <button className="add-in-cart-button">+</button>
+                        <button className="add-in-cart-button" onClick={()=>increaseQuantity(product?.product_id)}><p>+</p></button>
                     </div>
                     <div className="product_total">
                       <h2>${product?.product_quantity * product?.product_price}</h2>
