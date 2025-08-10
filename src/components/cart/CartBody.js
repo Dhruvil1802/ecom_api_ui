@@ -17,118 +17,15 @@ function CartBody() {
     const [isErrorVisible, setIsErrorVisible] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
-    // useEffect(() => {
-    //                   getProductList();
-    //                 }, []);
-  
-    // async function getProductList() {
-    //       try {
-    //         const res = await fetch(
-    //           `${local}/cart/management/`,
-    //           {
-    //             method: "GET",
-    //             headers: {
-    //               Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //               "Content-Type": "application/json",
-    //             },
-    //           }
-    //         );
-    //         const data = await res.json();
-    //         if (data.status.code === 200) {
-    //           setCartProducts(data?.data?.products);
-    //           setSubTotal(data?.data?.sub_total);
-    //           setShipping(data?.data?.delivery_fees);
-    //           setTax(data?.data?.tax);
-    //           setTotal(data?.data?.total);
-              
-    //         }         
-    //         if (data?.status?.code === 400 || data?.status?.code === 404)
-    //         {
-              
-    //           setIsErrorVisible(true)
-    //           setErrorMessage(data?.status?.message)
-    //           setTimeout(()=>setIsErrorVisible(false), 5000);
-            
-    //     }
-    //       } catch (error) {
-    //             setIsErrorVisible(true)
-    //             setErrorMessage("service unavailable")
-    //             setTimeout(()=>setIsErrorVisible(false), 5000);           }
-    //     }
 
-      
-      
-    //   function increaseQuantity(product_id) {
-    //     async function increaseQuantityHandler() {
-    //               console.log("increaseQuantity called with product_id:", product_id);
-
-    //       try {
-    //         const res = await fetch(
-    //         `${local}/cart/management/`,
-    //           {
-    //             method: "POST",
-    //             headers: {
-    //               Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //               "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({product_id:product_id}),
-
-    //           }
-    //         );
-    //         const data = await res.json();
-    //         console.log("data",data);
-
-    //         if (data.status.code === 200) {
-    //           getProductList()
-    //         }
-    //       } catch (error) {
-    //         setIsErrorVisible(true)
-    //         setErrorMessage("service unavailable")
-    //         setTimeout(()=>setIsErrorVisible(false), 5000);
-    //       }
-    //     }
-    //     increaseQuantityHandler();
-
-    //   }
-    //   function decreaseQuantity(product_id) {
-    //     async function decreaseQuantityHandler() {
-    //               console.log("decreaseQuantity called with product_id:", product_id);
-
-    //       try {
-    //         const res = await fetch(
-    //           `${local}/cart/management/`,
-    //           {
-    //             method: "POST",
-    //             headers: {
-    //               Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //               "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({action:"remove", product_id:product_id}),
-
-    //           }
-    //         );
-    //         const data = await res.json();
-    //         if (data.status.code === 200) {
-    //            getProductList()
-    //         }
-    //       } catch (error) {
-    //         setIsErrorVisible(true)
-    //         setErrorMessage("service unavailable")
-    //         setTimeout(()=>setIsErrorVisible(false), 5000);
-    //       }
-    //     }
-    //     decreaseQuantityHandler();
-    //   }
-
-    useEffect(() => {
+useEffect(() => {
   getProductList();
 }, []);
 
 async function getProductList() {
-    console.log("fetch data")
 
   try {
-    const res = await fetch(`${local}/cart/management/`, {
+    const res = await fetch(`${host}/cart/management/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -150,10 +47,9 @@ async function getProductList() {
   }
 }
 async function increaseQuantity(product_id) {
-    console.log("increase quantity")
 
   try {
-    const res = await fetch(`${local}/cart/management/`, {
+    const res = await fetch(`${host}/cart/management/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -162,11 +58,8 @@ async function increaseQuantity(product_id) {
       body: JSON.stringify({ product_id }),
     });
     const data = await res.json();
-    console.log("I", data)
     if (data.status.code === 201) {
-      console.log("before increase")
       await getProductList(); // wait for fresh cart
-            console.log("after increase")
 
     }
   } catch (error) {
@@ -177,9 +70,8 @@ async function increaseQuantity(product_id) {
 }
 
 async function decreaseQuantity(product_id) {
-  console.log("decrease quantity")
   try {
-    const res = await fetch(`${local}/cart/management/`, {
+    const res = await fetch(`${host}/cart/management/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -188,12 +80,9 @@ async function decreaseQuantity(product_id) {
       body: JSON.stringify({ action: "remove", product_id }),
     });
     const data = await res.json();
-        // console.log("D", data)
 
     if (data.status.code === 201) {
-      console.log("before decrease")
-      await getProductList(); // wait for fresh cart
-      console.log("after decrease")
+      await getProductList(); 
 
     }
   } catch (error) {
@@ -214,7 +103,7 @@ async function decreaseQuantity(product_id) {
                 <div className="product_cart" key={product.product_id}>
                     <div className="product_cart_image_container">
                         <img
-                        src={`${local}/Media/${product?.product_image}`}
+                        src={`${host}/Media/${product?.product_image}`}
                         alt={product?.product_name}
                         className="product-image"
                         />
