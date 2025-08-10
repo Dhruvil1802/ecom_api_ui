@@ -69,7 +69,7 @@ function Login({showHomePage, setToken}) {
         <div className="login_page">
             <div className="sub_login_page">
                 <div className='img-div'>
-                <img src={`${local}/Media/login_image/loginpage.jpeg`} className="background_image" />
+                <img src={`${host}/Media/login_image/loginpage.jpeg`} className="background_image" />
                 </div>
                 <div className="form_div">
                     <div className="logo_div">
