@@ -32,11 +32,13 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
               }
             );
             const data = await res.json();
-
+            console.log(data.data.product_list)
             if (data.status.code === 200) {
             
-              setSearchedProducts(data.data);
-              setTotalPages(Math.ceil(data.data.length / 3));
+              setSearchedProducts(data.data.product_list);
+              setTotalPages(Math.ceil(data.data.total_pages));
+              console.log("searchedproducts",setSearchedProducts)
+              console.log("totalpages",setTotalPages)
               
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
@@ -63,7 +65,7 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
 
           try{  
             const res = await fetch(
-              `${host}/products/sortandfilter/?search=${search}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=8`,
+              `${local}/products/sortandfilter/?search=${search}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=8`,
               { 
                 method: "GET",
                 headers: {
@@ -72,6 +74,7 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
               }
             );
             const data = await res.json();
+            console.log(data.data.product_list)
 
             if (data.status.code === 200) {
             
