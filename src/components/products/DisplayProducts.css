@@ -1,10 +1,10 @@
 .product_page{
     height:max-content;
     font-family: Arial, sans-serif;
-    width:105%;
+    width:100%;
     margin-top:1%;
-    background-color: #b5b59d !important;
-
+    /* background-color: #b5b59d !important; */
+    display:flex;
 }
 
   

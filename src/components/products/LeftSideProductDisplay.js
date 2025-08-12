@@ -7,9 +7,11 @@ function LeftSideDisplayProducts({priceRange, setPriceRange, setSortType, setFil
     const [showSortBy, setShowSortBy] = useState(false);
     const [showCategories, setShowCategories] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
+    const [openLeft, setOpenLeft] = useState(true);
 
     return(
-        <div className="left_side">
+
+        <div className={`${openLeft?"opened_left_side":"closed_left_side"}`}>
 
 
                 <div className="star-filter">

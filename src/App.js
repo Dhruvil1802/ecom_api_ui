@@ -8,6 +8,7 @@ import HomePage from "./screens/HomePage";
 import Login from "./screens/Login";
 import ProductDetails from "./screens/ProductDetails";
 import Products from "./screens/Products";
+import Profile from "./screens/Profile";
 
 function App() { 
   const navigate = useNavigate();
@@ -92,6 +93,7 @@ function App() {
               setSearched={setSearched}
               productDetails={productDetails} 
               setProductDetails={setProductDetails} 
+              setCurrentPage={setCurrentPage}
               productId={productId}
               token={token}
 
@@ -106,8 +108,20 @@ function App() {
               navigate={navigate}
               setSearch={setSearch} 
               search={search}
-              setSearched={setSearched}/>
+              setSearched={setSearched}
+              setCurrentPage={setCurrentPage}/>
         }/>
+
+      <Route
+        path="/profile"
+        element={<Profile navigate={navigate} 
+              customerName={customerName} 
+              setSearch={setSearch} 
+              search={search}
+              setSearched={setSearched}
+              setCurrentPage={setCurrentPage}/>
+        }/>
+
     </Routes>
   );
 }

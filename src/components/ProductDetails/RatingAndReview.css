@@ -283,6 +283,7 @@
     display: flex; 
     align-items: center; 
     justify-content: flex-start; 
+    gap:1rem;
 }
 .user_icon {
     color: rgb(0, 0, 0);

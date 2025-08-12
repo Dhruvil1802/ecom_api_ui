@@ -1,7 +1,7 @@
 import CartBody from "../components/cart/CartBody";
 import Header from "../components/homepage/Header";
 
-function Cart({navigate, customerName, setSearch, search, setSearched}) {
+function Cart({navigate, customerName, setSearch, search, setSearched,setCurrentPage}) {
   return (
     <>
       <Header navigate={navigate} 
@@ -9,6 +9,8 @@ function Cart({navigate, customerName, setSearch, search, setSearched}) {
               setSearch={setSearch} 
               search={search}
               setSearched={setSearched}
+              setCurrentPage={setCurrentPage}
+
       />
       <CartBody/>
     </>

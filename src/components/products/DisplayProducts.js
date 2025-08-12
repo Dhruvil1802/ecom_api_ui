@@ -34,11 +34,10 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
             const data = await res.json();
             console.log(data.data.product_list)
             if (data.status.code === 200) {
-            
               setSearchedProducts(data.data.product_list);
-              setTotalPages(Math.ceil(data.data.total_pages));
+              setTotalPages(data.data.total_pages);
               console.log("searchedproducts",setSearchedProducts)
-              console.log("totalpages",setTotalPages)
+              console.log("totalpages",data.data.total_pages)
               
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)

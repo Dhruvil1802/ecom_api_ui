@@ -219,7 +219,7 @@
 
 .specs-description-box{
     background-color: #fffff5 !important;
-    padding: 15px;
+    /* padding: 15px; */
     /* border: none; */
     border-radius: 1rem;
     margin-bottom: 1rem;

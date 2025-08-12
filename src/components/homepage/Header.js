@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsFilterLeft, BsPersonCircle } from 'react-icons/bs';
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 
@@ -31,7 +31,35 @@ const Header = ({navigate, token, customerName, setCurrentPage, setSearch, searc
     }
     navigate("/cart")
   }
-  
+useEffect(() => {
+  if (isOpen==false) return;
+
+  function handleClickOutside(e) {
+    if (
+      !e.target.closest('.side-menu-panel') && // Not clicking inside menu
+      !e.target.closest('.filter-icon') // Not clicking menu button
+    ) {
+      setIsOpen(false);
+    }
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === 'Escape') setIsOpen(false);
+  }
+
+  document.addEventListener('mousedown', handleClickOutside);
+  document.addEventListener('keydown', handleKeyDown);
+
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+    document.removeEventListener('keydown', handleKeyDown);
+  };
+}, [isOpen]);
+
+  function OpenProfile(){
+    navigate("/profile")
+
+  }
   return (
     <header className="header">
       <div className="side_menu_bar">
@@ -60,7 +88,7 @@ const Header = ({navigate, token, customerName, setCurrentPage, setSearch, searc
 
           <div className="side-section">
             <h3 className="side-heading">Your Account</h3>
-            <div className="side-item">Profile <span className="arrow">▶</span></div>
+            <div className="side-item" onClick={()=>OpenProfile()}>Profile <span className="arrow">▶</span></div>
             <div className="side-item">Orders <span className="arrow">▶</span></div>
             <div className="side-item">Help <span className="arrow">▶</span></div>
             <div className="side-item">About us <span className="arrow">▶</span></div>
@@ -75,11 +103,15 @@ const Header = ({navigate, token, customerName, setCurrentPage, setSearch, searc
       <div className="brand" onClick={()=>openHomePage()}>NAME</div>
 
       <div className="search-bar">
-        <input type="text" placeholder="Search Products...."   onChange={(e) => setSearch(e.target.value)}
+        <input type="text" placeholder="Search Products...."   onChange={(e) => setSearch(e.target.value)}  onKeyDown={(e) => {
+      if (e.key === 'Enter' && search.trim() !== "") {
+        OpenProducts();
+      }
+    }}
         />
         <button className="search-button" onClick={()=>search!==""?OpenProducts():{}}>
           <FiSearch />
-        </button>
+        </button> 
       </div>
 
       <div className="user-cart">

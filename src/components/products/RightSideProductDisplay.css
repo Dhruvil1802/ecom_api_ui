@@ -10,10 +10,10 @@
 
 .right_side{
     font-family: Arial, sans-serif;
-    position:absolute;
-    left:19.5%;
+    position:relative;
+    margin-left:0rem;
     height:auto;
-    width:80.5%;
+    width:80%;
     border:none;
 
 
@@ -135,7 +135,7 @@
     gap: 10px;
     justify-content: left; 
     align-items: center;
-    margin-top: 0rem;
+    margin-top: 1rem;
     margin-left: 5%;
   }
 .button-spacing{
@@ -211,8 +211,13 @@
     border: 1px solid rgb(197, 197, 197);    margin-top:0rem;
     margin-left:1rem;
     background-color: white;
+    /* padding:0.3rem; */
     /* margin-left:15% */
 
+}
+
+.heart-icon{
+  margin-top:0.2rem;
 }
 
 .add-to-favourite-button:hover{
@@ -289,7 +294,7 @@
 .price-rating-wrapper {
   display: flex;
   /* align-items: center; */
-  gap: 1rem; /* horizontal spacing between rating and price */
+  gap: 2rem; /* horizontal spacing between rating and price */
   padding-left: 1rem;
 
 }
@@ -308,6 +313,7 @@
   margin-top: 0.5rem;
   
 }
+
 
 
 .pagination-container {

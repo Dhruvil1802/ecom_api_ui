@@ -155,7 +155,7 @@
   font-size: 1.8rem;
   font-weight:700;
   width:1.8rem;
-  height:100%;
+  height:1.8rem;
   background-color: var(--light);
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
@@ -169,15 +169,19 @@
     background-color: var(--medium);
 }
 
+.sub-in-cart-button p{
+    margin-top: -20% !important;
+    
+
+}
+
 .add-in-cart-button {
 
   font-size: 1.8rem;
   font-weight:700;
   width:1.8rem;
-  height:100%;
+  height:1.8rem;
   background-color: var(--light);
-  /* border-top-right-radius: 1rem; */
-  /* border-bottom-right-radius: 1.8; */
   color:rgb(255, 255, 255);
   cursor: pointer;
   border-radius:1.8rem;
@@ -189,11 +193,10 @@
     background-color: var(--medium);
 }
 
-.sub-in-cart-button p{
-    margin-top:-48%;
-    font-size: 3rem;
-    font-weight: 100;
+.add-in-cart-button p{
+    margin-top: -5% !important;
 }
+
 
 .product_total{
     width: 10%;

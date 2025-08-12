@@ -1,0 +1,10 @@
+.profile_content{
+    padding-left:2rem;
+        padding-right:2rem;
+    padding-bottom:2rem;
+
+    /* border:1px solid black; */
+    gap:1rem;
+    flex-direction: column;
+    display:flex;
+}
