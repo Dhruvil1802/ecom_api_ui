@@ -13,8 +13,12 @@
     position:relative;
     margin-left:0rem;
     height:auto;
-    width:80%;
+    /* width:80%; */
     border:none;
+    background-color: #fffff5;
+    right:0px;
+    position:absolute;
+    /* padding:1rem; */
 
 
     }
@@ -228,9 +232,10 @@
 
 .products_listing {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: repeat(5, 1fr); */
   grid-template-rows: repeat(2, 1fr); /* 2 equal rows */
-  gap: 3rem;
+  gap: 2.5rem;
+  /* gap:1rem; */
   padding: 30px;
   height: 60rem; /* or whatever total height you want */
 }
@@ -245,6 +250,7 @@
     text-align: left;
     transition: transform 0.2s ease;
     height: 26rem;    
+    width:16rem;
     display: flex;
     flex-direction: column;
     cursor: pointer;

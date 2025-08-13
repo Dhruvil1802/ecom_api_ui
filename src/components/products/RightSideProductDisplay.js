@@ -5,7 +5,7 @@ import './RightSideProductDisplay.css';
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, currentPage, setTotalPages, navigate, setProductId}){
+function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, currentPage, setTotalPages, navigate, setProductId, openLeft}){
     const paginate = (pageNumber) => {
         if (pageNumber >= 1 && pageNumber <= totalPages) {
             setCurrentPage(pageNumber);
@@ -46,7 +46,10 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                 </div>
             </div> */}
             <h1 className='results'>Results</h1>
-            <div className='products_listing'>
+            <div className='products_listing'   style={{
+                gridTemplateColumns: `${openLeft ? "repeat(4, 1fr)" : "repeat(5, 1fr)"}`,
+                gap: `${openLeft ? "3rem" : "2.5rem"}`
+            }}>
                 
                 {searchedProducts?.map((product, index) => (
                     <div className="product-card" key={index} onClick={()=>handleViewProductDetails(product.product_id)}>
@@ -92,7 +95,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                     ⟨ Previous
                 </button>
 
-                {Array.from({ length: totalPages -1}).map((_, index) => {
+                {Array.from({ length: totalPages > 7 ? 7 : totalPages}).map((_, index) => {
                     const page = index + 1;
                     return (
                         <button

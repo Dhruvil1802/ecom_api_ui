@@ -16,6 +16,8 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
     const [filterRating, setFilterRating] = useState()
     const [sortType, setSortType] = useState()
     const [category, setCategory] = useState();
+    const [openLeft, setOpenLeft] = useState(true);
+
 
 
      useEffect(()=>{
@@ -23,7 +25,7 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
 
           try{
             const res = await fetch(
-              `${host}/products/search/?search=${search}&page_size=8&page_no=${currentPage}`,
+              `${host}/products/search/?search=${search}&page_size=${openLeft?8:10}&page_no=${currentPage}`,
               { 
                 method: "GET",
                 headers: {
@@ -32,12 +34,10 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
               }
             );
             const data = await res.json();
-            console.log(data.data.product_list)
             if (data.status.code === 200) {
               setSearchedProducts(data.data.product_list);
               setTotalPages(data.data.total_pages);
-              console.log("searchedproducts",setSearchedProducts)
-              console.log("totalpages",data.data.total_pages)
+              
               
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
@@ -56,7 +56,7 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
           }
           }
           fetchProducts();
-      },[ searched, currentPage]);
+      },[ searched, currentPage, openLeft]);
 
 
     useEffect(()=>{
@@ -64,7 +64,7 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
 
           try{  
             const res = await fetch(
-              `${local}/products/sortandfilter/?search=${search}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=8`,
+              `${local}/products/sortandfilter/?search=${search}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`,
               { 
                 method: "GET",
                 headers: {
@@ -73,7 +73,6 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
               }
             );
             const data = await res.json();
-            console.log(data.data.product_list)
 
             if (data.status.code === 200) {
             
@@ -95,13 +94,17 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
           }
           }
           fetchProducts();
-      },[ sortType, priceRange, filterRating, currentPage]);
+      },[ sortType, priceRange, filterRating, currentPage, openLeft]);
 
 
 
       return (
         <div className="product_page">
+            <button className='toogle_left_button' onClick={() => setOpenLeft(!openLeft)}>⇅</button>
+            {openLeft?<div className="left_side_display">
             <LeftSideDisplayProducts priceRange={priceRange} setPriceRange={setPriceRange} setSortType={setSortType} setFilterRating={setFilterRating} setCategory={setCategory}/>
+            </div>:""}
+            
            
             <DisplayProductRightSide searchedProducts={searchedProducts} 
                                     totalPages={totalPages} 
@@ -109,6 +112,7 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
                                     currentPage={currentPage}
                                     navigate={navigate}
                                     setProductId={setProductId}
+                                    openLeft={openLeft}
                                     />
             
             {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}

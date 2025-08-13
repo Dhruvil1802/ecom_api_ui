@@ -5,7 +5,7 @@
     gap:1.5rem;
     flex-direction: column;
     display:flex;
-    background-color: #f9f9e4;
+    background-color: #ffffff;
 
 
 }
@@ -19,6 +19,8 @@
 }
 .address_div input {
   border: 1px solid rgb(181, 181, 181);
+    background-color: #ececec;
+
 }
 
 .address_div input:focus {
