@@ -64,7 +64,7 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
 
           try{  
             const res = await fetch(
-              `${local}/products/sortandfilter/?search=${search}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`,
+              `${host}/products/sortandfilter/?search=${search}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`,
               { 
                 method: "GET",
                 headers: {
