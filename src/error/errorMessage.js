@@ -3,7 +3,7 @@ import "./errorMessage.css";
 
 function ErrorMessage({message})
 {
-    console.log("error message")
+    // console.log("error message")
     
     return(
         
