@@ -1,19 +1,101 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useEffect, useState } from "react";
 import './RightSideProductDisplay.css';
+
 
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, currentPage, setTotalPages, navigate, setProductId, openLeft}){
+    
+    const [cartProducts, setCartProducts] = useState([]);
+    
     const paginate = (pageNumber) => {
+        console.log("current page", pageNumber); 
+
         if (pageNumber >= 1 && pageNumber <= totalPages) {
+            localStorage.setItem('current_page', pageNumber);
             setCurrentPage(pageNumber);
         }
     };
+
     function handleViewProductDetails(product_id){
          setProductId(product_id);
+         localStorage.setItem('product_id', product_id);
          navigate("/productdetails")
+    }
+
+    useEffect(()=>{
+        getProductList();
+    },[])
+
+    async function getProductList() {
+
+        try {
+            const res = await fetch(`${host}/cart/management/`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+            },
+            });
+            const data = await res.json();
+            if (data.status.code === 200) {
+            setCartProducts(data?.data?.products);
+            //   setSubTotal(data?.data?.sub_total);
+            //   setShipping(data?.data?.delivery_fees);
+            //   setTax(data?.data?.tax);
+            //   setTotal(data?.data?.total);
+            }
+        } catch (error) {
+            // setIsErrorVisible(true);
+            // setErrorMessage("service unavailable");
+            // setTimeout(() => setIsErrorVisible(false), 5000);
+        }
+        }
+    async function increaseQuantity(product_id) {
+
+        try {
+            const res = await fetch(`${host}/cart/management/`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ product_id }),
+            });
+            const data = await res.json();
+            if (data.status.code === 201) {
+            await getProductList(); 
+            }
+        } catch (error) {
+            // setIsErrorVisible(true);
+            // setErrorMessage("service unavailable");
+            // setTimeout(() => setIsErrorVisible(false), 5000);
+        }
+        }
+    async function decreaseQuantity(product_id) {
+        try {
+            const res = await fetch(`${host}/cart/management/`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ action: "remove", product_id }),
+            });
+            const data = await res.json();
+
+            if (data.status.code === 201) {
+            await getProductList(); 
+
+            }
+        } catch (error) {
+            // setIsErrorVisible(true);
+            // setErrorMessage("service unavailable");
+            // setTimeout(() => setIsErrorVisible(false), 5000);
+        }
     }
     return(
         <div className="right_side">
@@ -69,18 +151,48 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                         </div>
 
                         <div className="aligned-buttons button-spacing">
-                        <button className="add-to-cart-button">
-                            <div className="icon-container">
-                                <div className="circular-div">
-                                <ShoppingCartIcon className="cart-icon" />
+                            {/* {cartProducts.map((cartProduct) => cartProduct.product_id).includes(product.product_id)
+                            ? (<div className="product_cart_quantity">
+                                <button className="sub-in-cart-button" onClick={(e) => {
+                                    e.stopPropagation(); 
+                                    decreaseQuantity(product?.product_id);
+                                    }}><p>-</p></button>
+                                <h2>{cartProducts[index]?.product_quantity}</h2>
+                                {console.log("qqqqqqqqqq",cartProducts[index]?.product_quantity)}
+                                <button className="add-in-cart-button" onClick={(e) => {
+                                    e.stopPropagation(); 
+                                    increaseQuantity(product?.product_id);
+                                }}><p>+</p></button>
+                            </div> )
+                            :(<button className="add-to-cart-button" onClick={(e) => {
+                                e.stopPropagation(); 
+                                increaseQuantity(product?.product_id);
+                            }}>
+                                <div className="icon-container">
+                                    <div className="circular-div">
+                                    <ShoppingCartIcon className="cart-icon" />
+                                    </div>
                                 </div>
-                            </div>
-                            <span className="button-text">Add To Cart</span>
-                        </button>
-                        <button className="add-to-favourite-button">
-                                <FavoriteIcon  className="heart-icon" />
-                        </button>
-                    </div>
+                                <span className="button-text">Add To Cart</span>
+                            </button>)} */}
+                            
+                            <button className="add-to-cart-button" onClick={(e) => {
+                                e.stopPropagation(); 
+                                increaseQuantity(product?.product_id);
+                            }}>
+                                
+                                <div className="icon-container">
+                                    <div className="circular-div">
+                                    <ShoppingCartIcon className="cart-icon" />
+                                    </div>
+                                </div>
+                                <span className="button-text">Add To Cart</span>
+                            </button>
+                             
+                            <button className="add-to-favourite-button">
+                                    <FavoriteIcon  className="heart-icon" />
+                            </button>
+                        </div>
                     </div>
                     ))}
               
@@ -89,26 +201,28 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
             <div className="pagination-container">
                 <button
                     className="pagination-arrow"
-                    onClick={() => paginate(currentPage - 1)}
+                    onClick={() => paginate(Number(currentPage) - 1)}
                     disabled={currentPage === 1}
                 >
                     ⟨ Previous
                 </button>
 
-                {Array.from({ length: totalPages > 7 ? 7 : totalPages}).map((_, index) => {
+                {Array.from({ length: totalPages > 3 ? 3 : totalPages}).map((_, index) => {
                     const page = index + 1;
                     return (
                         <button
                         key={page}
-                        className={`pagination-button ${currentPage === page ? 'active' : ''}`}
+                        className={`pagination-button ${Number(currentPage) === page ? 'active' : ''}`}
                         onClick={() => paginate(page)}
                         >
                         {page}
+                        {                 
+}
                         </button>
                     );
                 })}
                 
-            {totalPages>=10?<span className="pagination-ellipsis">..........</span>:""}
+            {totalPages>=3?<span className="pagination-ellipsis">..........</span>:""}
 
                 <button
                     className={`pagination-button ${currentPage === totalPages ? 'active' : ''}`}
@@ -119,10 +233,10 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
 
                 <button
                     className="pagination-arrow"
-                    onClick={() => paginate(currentPage + 1)}
+                    onClick={() => paginate(Number(currentPage) + 1)}
                     disabled={currentPage === totalPages}
                 >
-                    Next ⟩
+                  Next ⟩
                 </button>   
                 </div>
 

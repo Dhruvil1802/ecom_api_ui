@@ -1,13 +1,24 @@
 import { Slider, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './LeftSideProductDisplay.css';
 
-function LeftSideDisplayProducts({priceRange, setPriceRange, setSortType, setFilterRating}){
+function LeftSideDisplayProducts({priceRange, setPriceRange, setSortType, sortType, setFilterRating, filterRating}){
 
     const [showSortBy, setShowSortBy] = useState(false);
     const [showCategories, setShowCategories] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
     // const [openLeft, setOpenLeft] = useState(true);
+    useEffect(()=>{
+        localStorage.setItem('priceRange',JSON.stringify(priceRange));
+    },[priceRange])
+
+    useEffect(()=>{
+        localStorage.setItem('sortType',sortType);
+    },[sortType])
+        useEffect(()=>{
+        localStorage.setItem('filterRating',filterRating);
+    },[filterRating])
+
 
     return(
 

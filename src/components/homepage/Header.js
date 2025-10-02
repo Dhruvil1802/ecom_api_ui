@@ -7,7 +7,7 @@ import './Header.css';
 
 
 
-const Header = ({navigate, token, customerName, setCurrentPage, setSearch, search, setSearched}) => {
+const Header = ({navigate, token, customerName, setSearch, search, setSearched, searched, setCurrentPage, setCustomerName}) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,8 +16,11 @@ const Header = ({navigate, token, customerName, setCurrentPage, setSearch, searc
     navigate("/login")
   }
   function OpenProducts(){
-
+    
     setSearched(search)
+    localStorage.setItem("search", search);
+    localStorage.setItem("searched", search);
+
     setCurrentPage(1) 
     navigate("/products") 
   }
@@ -31,13 +34,20 @@ const Header = ({navigate, token, customerName, setCurrentPage, setSearch, searc
     }
     navigate("/cart")
   }
+
+  
+  useEffect(() => {
+    const storedCustomerName = localStorage.getItem('customer_name') || "";
+    setCustomerName(storedCustomerName);
+  }, []);
+
 useEffect(() => {
   if (isOpen==false) return;
 
   function handleClickOutside(e) {
     if (
-      !e.target.closest('.side-menu-panel') && // Not clicking inside menu
-      !e.target.closest('.filter-icon') // Not clicking menu button
+      !e.target.closest('.side-menu-panel') && 
+      !e.target.closest('.filter-icon') 
     ) {
       setIsOpen(false);
     }

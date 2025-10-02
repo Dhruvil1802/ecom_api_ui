@@ -2,7 +2,7 @@ import Header from '../components/homepage/Header';
 import DisplayProducts from '../components/products/DisplayProducts';
 import './Products.css';
 
-function Products({navigate, token, search, currentPage, setCurrentPage, setProductId, setSearch, setSearchedProducts, searchedProducts, customerName, searched,setSearched}){
+function Products({navigate, token, search, setProductId, setSearch, setSearchedProducts, searchedProducts, customerName, searched, setSearched, setCurrentPage, currentPage, setCustomerName}){
 
     
 
@@ -14,6 +14,7 @@ function Products({navigate, token, search, currentPage, setCurrentPage, setProd
               search={search}
               setSearched={setSearched}
               setCurrentPage={setCurrentPage}
+              setCustomerName={setCustomerName}
 
 />
             {/* <SideMenu /> */}
@@ -24,6 +25,7 @@ function Products({navigate, token, search, currentPage, setCurrentPage, setProd
                 setSearchedProducts={setSearchedProducts}
                 searchedProducts={searchedProducts}
                 setProductId={setProductId}
+                setSearched={setSearched}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 

@@ -46,6 +46,7 @@ function RatingAndReview({details, productDetails, setReload, token}) {
         const data = await res.json();
         if (data.status.code === 201) {
           setReload("reload")
+          setIsRateAndReviewOpen(false);
         }
          if (data?.status?.code === 400 || data?.status?.code === 404)
             {

@@ -34,7 +34,8 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
             setBanner(data.data.banner[0]);
             setFeatures(data.data.features);
             setCustomerName(data.data.customer_name)
-
+            localStorage.setItem("customer_name", data.data.customer_name);
+            // setCurrentPage(1);
           }
 
           if (data?.status?.code === 400 || data?.status?.code === 404)
@@ -58,6 +59,7 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
       getHomePageDetails();
     },[]);
 
+
   return (
     <div className="homepage"    
     style={{
@@ -70,6 +72,7 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
               search={search}
               setSearched={setSearched}
               setCurrentPage={setCurrentPage}
+              setCustomerName={setCustomerName}
 
               />
       {/* <SideMenu /> */}

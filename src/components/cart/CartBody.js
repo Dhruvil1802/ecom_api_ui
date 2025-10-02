@@ -7,7 +7,7 @@ const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-function CartBody() {
+function CartBody({setProductId, navigate}) {
     const [cartProducts, setCartProducts] = useState([]);
     const [subTotal, setSubTotal] = useState();
     const [shipping, setShipping] = useState();
@@ -92,6 +92,10 @@ async function decreaseQuantity(product_id) {
   }
 }
 
+  function openProductDetails(product_id){
+         setProductId(product_id);
+         navigate("/productdetails")
+    }
   return (
     <div className="cart-body">
 
@@ -100,7 +104,7 @@ async function decreaseQuantity(product_id) {
 
         <div className="Product_listing">
             {cartProducts.map((product) => (
-                <div className="product_cart" key={product.product_id}>
+                <div className="product_cart" key={product.product_id} onClick={()=>{openProductDetails(product.product_id)}}>
                     <div className="product_cart_image_container">
                         <img
                         src={`${host}/Media/${product?.product_image}`}
@@ -113,9 +117,15 @@ async function decreaseQuantity(product_id) {
                         <h2>${product?.product_price}</h2>
                     </div>
                     <div className="product_cart_quantity">
-                        <button className="sub-in-cart-button" onClick={()=>decreaseQuantity(product?.product_id)}><p>-</p></button>
+                        <button className="sub-in-cart-button" onClick={(e) => {
+                              e.stopPropagation(); 
+                              decreaseQuantity(product?.product_id);
+                            }}><p>-</p></button>
                         <h2>{product?.product_quantity}</h2>
-                        <button className="add-in-cart-button" onClick={()=>increaseQuantity(product?.product_id)}><p>+</p></button>
+                        <button className="add-in-cart-button" onClick={(e) => {
+                            e.stopPropagation(); 
+                            increaseQuantity(product?.product_id);
+                          }}><p>+</p></button>
                     </div>
                     <div className="product_total">
                       <h2>${product?.product_quantity * product?.product_price}</h2>

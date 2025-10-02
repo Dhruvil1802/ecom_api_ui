@@ -7,25 +7,61 @@ import DisplayProductRightSide from './RightSideProductDisplay';
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function DisplayProducts({navigate, search, currentPage, setCurrentPage, searched, setSearchedProducts, searchedProducts, setProductId}){
+function DisplayProducts({navigate, search, setSearch, searched, setSearched, setSearchedProducts, searchedProducts, setProductId, setCurrentPage, currentPage}){
+    
+    const stored_priceRange = localStorage.getItem('priceRange')
+    ? JSON.parse(localStorage.getItem("priceRange"))
+    : [0,8000];
+    const [priceRange, setPriceRange] = useState(stored_priceRange);
 
-    const [priceRange, setPriceRange] = useState([0, 8000]);
+
     const [totalPages, setTotalPages] = useState();   
     const [isErrorVisible, setIsErrorVisible] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
-    const [filterRating, setFilterRating] = useState()
-    const [sortType, setSortType] = useState()
-    const [category, setCategory] = useState();
-    const [openLeft, setOpenLeft] = useState(true);
+
+    const stored_filterrating = localStorage.getItem('filterRating')
+    ? localStorage.getItem('filterRating')
+    : 0;
+    const [filterRating, setFilterRating] = useState(stored_filterrating)
+
+    const stored_sorttype = localStorage.getItem("sortType")
+    ? localStorage.getItem("sortType")
+    : "top_rated";
+    const [sortType, setSortType] = useState(stored_sorttype);
+
+    const stored_category = localStorage.getItem("category")
+    ? localStorage.getItem("category")
+    : "";
+    const [category, setCategory] = useState(stored_category);
+
+    // const stored_current_page = localStorage.getItem('current_page')
+    // ? localStorage.getItem('current_page')
+    // : 1;
+    // const [currentPage, setCurrentPage] = useState(stored_current_page);
+
+    const [openLeft, setOpenLeft] = useState(false);
 
 
 
-     useEffect(()=>{
+useEffect(() => { 
+
+  if (!searched) {
+    const storedSearched = localStorage.getItem('searched') || "";
+    setSearched(storedSearched);  
+  }
+
+  if (!currentPage) {
+    const storedCurrentPage = localStorage.getItem('current_page') || 1;
+    setCurrentPage(storedCurrentPage);
+  }
+  }, []); 
+    
+
+useEffect(()=>{
         async function fetchProducts(){
-
-          try{
+          try{  
             const res = await fetch(
-              `${host}/products/search/?search=${search}&page_size=${openLeft?8:10}&page_no=${currentPage}`,
+              `${host}/products/search/?search=${searched?searched:""}&page_size=${openLeft?8:10}&page_no=${currentPage}`,
               { 
                 method: "GET",
                 headers: {
@@ -59,12 +95,12 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
       },[ searched, currentPage, openLeft]);
 
 
+
     useEffect(()=>{
         async function fetchProducts(){
-
           try{  
             const res = await fetch(
-              `${host}/products/sortandfilter/?search=${search}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`,
+              `${host}/products/sortandfilter/?search=${searched?searched:""}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`,
               { 
                 method: "GET",
                 headers: {
@@ -73,6 +109,7 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
               }
             );
             const data = await res.json();
+
 
             if (data.status.code === 200) {
             
@@ -100,9 +137,16 @@ function DisplayProducts({navigate, search, currentPage, setCurrentPage, searche
 
       return (
         <div className="product_page">
-            <button className='toogle_left_button' onClick={() => setOpenLeft(!openLeft)}>⇅</button>
+            <button className='toogle_left_button' onClick = {() => setOpenLeft(!openLeft)}>⇅</button>
             {openLeft?<div className="left_side_display">
-            <LeftSideDisplayProducts priceRange={priceRange} setPriceRange={setPriceRange} setSortType={setSortType} setFilterRating={setFilterRating} setCategory={setCategory}/>
+            <LeftSideDisplayProducts priceRange={priceRange} 
+                                     setPriceRange={setPriceRange} 
+                                     setSortType={setSortType} 
+                                     sortType={sortType}
+                                     setFilterRating={setFilterRating} 
+                                     filterRating={filterRating}
+                                     setCategory={setCategory}
+                                     category={category}/>
             </div>:""}
             
            

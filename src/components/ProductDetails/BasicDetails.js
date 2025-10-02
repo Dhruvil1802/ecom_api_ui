@@ -11,12 +11,35 @@ function BasicDetails({ details }) {
   setIsModalOpen(!isModalOpen); 
   };
 
+  async function increaseQuantity(product_id) {
+
+  try {
+    const res = await fetch(`${host}/cart/management/`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ product_id }),
+    });
+    const data = await res.json();
+    if (data.status.code === 201) {
+      // await getProductList(); 
+      console.log("added to cart successfully");
+    }
+  } catch (error) {
+    // setIsErrorVisible(true);
+    // setErrorMessage("service unavailable");
+    // setTimeout(() => setIsErrorVisible(false), 5000);
+  }
+}
+
   return (
     <div className="upper-part">
         <div className='product-details-image'>
           <img 
             src={`${host}${details?.product_image}`} 
-            alt={details?.product_name} 
+            alt={details?.product_name}
             className="image"
           />
         </div>
@@ -24,7 +47,10 @@ function BasicDetails({ details }) {
         <div className="product-all-details">
           <h1 className="product-name">{details?.product_name}</h1>
           <h3 className="product-price">${details?.product_price}</h3>
-          <button className="add-to-cart-btn">ADD TO CART</button>
+          <button className="add-to-cart-btn" onClick={(e) => {
+                            e.stopPropagation(); 
+                            increaseQuantity(details?.product_id);
+                          }} >ADD TO CART</button>
 
           <div className="description-box">
             <h4>Description</h4>
@@ -83,7 +109,7 @@ function BasicDetails({ details }) {
           </div>
           <div>
             
-            <button className="additional-specification-btn" onClick={()=>toggleModal()}>
+          <button className="additional-specification-btn" onClick={()=>toggleModal()}>
             Additional Specification  
           </button>
             

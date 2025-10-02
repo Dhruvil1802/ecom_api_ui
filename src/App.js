@@ -13,20 +13,59 @@ import Profile from "./screens/Profile";
 function App() { 
   const navigate = useNavigate();
 
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  //token
+  const stored_token = localStorage.getItem('token')
+    ? localStorage.getItem('token')
+    : [];
+
+  const [token, setToken] = useState(stored_token);
+
+  //searched products
+  // const stored_searched_products = JSON.parse(localStorage.getItem('searched_products'))
+  //   ? JSON.parse(localStorage.getItem('searched_products'))
+  //   : [];
 
   const [searchedProducts, setSearchedProducts] = useState([]);
+
+  // searched
+  const stored_searched = localStorage.getItem('searched')
+    ? localStorage.getItem('searched')
+    : "";
+  const [searched, setSearched] = useState(stored_searched);
+
+  // search
+  const stored_search = localStorage.getItem('search')
+  ? localStorage.getItem('search')
+  : "";
   const [search, setSearch] = useState("");
-  const [searched, setSearched] = useState();
+
+  // current page
+  const stored_current_page = localStorage.getItem('current_page')
+  ? localStorage.getItem('current_page')
+  : 1;
+  const [currentPage, setCurrentPage] = useState(stored_current_page);
+
+  // customer name
+  const stored_customer_name = localStorage.getItem('customerName')
+    ? localStorage.getItem('customerName')
+    : "";
+  const [customerName, setCustomerName] = useState(stored_customer_name);
+
+  // product id
+  const stored_product_id = localStorage.getItem('product_id')
+    ? localStorage.getItem('product_id')
+    : "";
+  const [productId, setProductId] = useState(stored_product_id);
+
+
   const [banner, setBanner] = useState([]); 
   const [features,setFeatures] = useState([]);
-  const [customerName, setCustomerName] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 8000]);
-  const [currentPage, setCurrentPage] = useState(1);  
-  const [productDetails, setProductDetails] = useState();
-  const [productId, setProductId] = useState();
-  
 
+  const [priceRange, setPriceRange] = useState([0, 8000]);
+  // const [productDetails, setProductDetails] = useState();
+  
+  // console.log("token",token);
+  // console.log("searchedProducts",searchedProducts);
 
 
   const showHomePage = () => {
@@ -52,8 +91,8 @@ function App() {
                     setFeatures={setFeatures}
                     customerName={customerName}
                     setCustomerName={setCustomerName}
-                    setCurrentPage={setCurrentPage
-                    }
+                    setCurrentPage={setCurrentPage}
+
 
                     />}
       />
@@ -74,6 +113,7 @@ function App() {
           setSearchedProducts={setSearchedProducts}
           searchedProducts={searchedProducts}
           customerName={customerName}
+          setCustomerName={setCustomerName}
           priceRange={priceRange}
           setPriceRange={setPriceRange}
           currentPage={currentPage}
@@ -87,14 +127,17 @@ function App() {
         path="/productdetails"
         element={<ProductDetails 
               customerName={customerName}
+              setCustomerName={setCustomerName}
               navigate={navigate}
               setSearch={setSearch} 
               search={search}
               setSearched={setSearched}
-              productDetails={productDetails} 
-              setProductDetails={setProductDetails} 
+              // productDetails={productDetails} 
+              // setProductDetails={setProductDetails} 
               setCurrentPage={setCurrentPage}
               productId={productId}
+              setProductId={setProductId}
+
               token={token}
 
 
@@ -104,22 +147,29 @@ function App() {
         path="/cart"
         element={<Cart               
               customerName={customerName}
+              setCustomerName={setCustomerName}
               token={token}
               navigate={navigate}
               setSearch={setSearch} 
               search={search}
               setSearched={setSearched}
-              setCurrentPage={setCurrentPage}/>
+              setCurrentPage={setCurrentPage}
+              setProductId={setProductId}
+              
+              />
         }/>
 
       <Route
         path="/profile"
         element={<Profile navigate={navigate} 
               customerName={customerName} 
+              setCustomerName={setCustomerName}
               setSearch={setSearch} 
               search={search}
               setSearched={setSearched}
-              setCurrentPage={setCurrentPage}/>
+              setCurrentPage={setCurrentPage}
+              token={token}
+              />
         }/>
 
     </Routes>
