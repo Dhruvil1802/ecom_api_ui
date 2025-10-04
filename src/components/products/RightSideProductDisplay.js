@@ -32,7 +32,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
     async function getProductList() {
 
         try {
-            const res = await fetch(`${local}/cart/management/`, {
+            const res = await fetch(`${host}/cart/management/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -55,7 +55,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
         }
     async function increaseQuantity(product_id) {
         try {
-            const res = await fetch(`${local}/cart/management/`, {
+            const res = await fetch(`${host}/cart/management/`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,7 +80,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
         }
     async function decreaseQuantity(product_id) {
         try {
-            const res = await fetch(`${local}/cart/management/`, {
+            const res = await fetch(`${host}/cart/management/`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -139,7 +139,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                 {searchedProducts?.map((product, index) => (
                     <div className="product-card" key={index} onClick={()=>handleViewProductDetails(product.product_id)}>
                         <div className="product-image-container">
-                           <img src={`${local}${product.product_image}`} alt={product.product_name} className="product-image" />
+                           <img src={`${host}${product.product_image}`} alt={product.product_name} className="product-image" />
                         </div>
                         <div className="products-other-details">
                             <h3 className="searched-product-name">{product.product_name}</h3>

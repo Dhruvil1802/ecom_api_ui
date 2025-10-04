@@ -38,7 +38,7 @@ const HomePage = ({navigate,
       async function getHomePageDetails(){
         try{
           const res = await fetch(
-            `${local}/homepage/web/`,
+            `${host}/homepage/web/`,
             { 
               method: "GET",
               headers: {

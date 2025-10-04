@@ -25,7 +25,7 @@ useEffect(() => {
 async function getProductList() {
 
   try {
-    const res = await fetch(`${local}/cart/management/`, {
+    const res = await fetch(`${host}/cart/management/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -50,7 +50,7 @@ async function getProductList() {
 }
 async function increaseQuantity(product_id) {
   try {
-    const res = await fetch(`${local}/cart/management/`, {
+    const res = await fetch(`${host}/cart/management/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -73,7 +73,7 @@ async function increaseQuantity(product_id) {
 async function decreaseQuantity(product_id) {
 
   try {
-    const res = await fetch(`${local}/cart/management/`, {
+    const res = await fetch(`${host}/cart/management/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -108,7 +108,7 @@ async function decreaseQuantity(product_id) {
                 <div className="product_cart" key={product.product_id} onClick={()=>{openProductDetails(product.product_id)}}>
                     <div className="product_cart_image_container">
                         <img
-                        src={`${local}/Media/${product?.product_image}`}
+                        src={`${host}/Media/${product?.product_image}`}
                         alt={product?.product_name}
                         className="product-image"
                         />

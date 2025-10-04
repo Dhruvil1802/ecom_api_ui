@@ -57,9 +57,9 @@ useEffect(() => {
 //           try{  
 //             let url = "";
 //             if (content === "search") {
-//               url = `${local}/products/search/?search=${searched || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}`;
+//               url = `${host}/products/search/?search=${searched || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}`;
 //             } else if (content === "feature") {
-//               url = `${local}/products/features/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}`;
+//               url = `${host}/products/features/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}`;
 //             } else {
 //               return; 
 //             }
@@ -102,9 +102,9 @@ useEffect(() => {
           try{  
             let url = "";
             if (content === "search") {
-              url = `${local}/products/sortandfilter/?search=${searched?searched:""}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
+              url = `${host}/products/sortandfilter/?search=${searched?searched:""}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
             } else if (content === "feature") {
-              url = `${local}/products/featuredsorting/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
+              url = `${host}/products/featuredsorting/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
             } else {
               return; 
             }
