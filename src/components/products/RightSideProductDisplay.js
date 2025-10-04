@@ -1,18 +1,16 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import './RightSideProductDisplay.css';
 
 
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, currentPage, setTotalPages, navigate, setProductId, openLeft}){
+function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, currentPage, setTotalPages, navigate, setProductId, openLeft, cart, setCart, setProductDisplayTitle, productDisplayTitle}){
     
-    const [cartProducts, setCartProducts] = useState([]);
-    
+    // const [cartProducts, setCartProducts] = useState([]);
     const paginate = (pageNumber) => {
-        console.log("current page", pageNumber); 
 
         if (pageNumber >= 1 && pageNumber <= totalPages) {
             localStorage.setItem('current_page', pageNumber);
@@ -30,10 +28,11 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
         getProductList();
     },[])
 
+    
     async function getProductList() {
 
         try {
-            const res = await fetch(`${host}/cart/management/`, {
+            const res = await fetch(`${local}/cart/management/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,7 +41,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
             });
             const data = await res.json();
             if (data.status.code === 200) {
-            setCartProducts(data?.data?.products);
+            setCart(data?.data);
             //   setSubTotal(data?.data?.sub_total);
             //   setShipping(data?.data?.delivery_fees);
             //   setTax(data?.data?.tax);
@@ -55,19 +54,23 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
         }
         }
     async function increaseQuantity(product_id) {
-
         try {
-            const res = await fetch(`${host}/cart/management/`, {
+            const res = await fetch(`${local}/cart/management/`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ product_id }),
+            body: JSON.stringify({ product_id, cart }),
             });
             const data = await res.json();
             if (data.status.code === 201) {
             await getProductList(); 
+            }
+            if (data?.status?.code === 400 || data?.status?.code === 404)
+            {
+                alert(data?.status?.message)
+            
             }
         } catch (error) {
             // setIsErrorVisible(true);
@@ -77,13 +80,13 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
         }
     async function decreaseQuantity(product_id) {
         try {
-            const res = await fetch(`${host}/cart/management/`, {
+            const res = await fetch(`${local}/cart/management/`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ action: "remove", product_id }),
+            body: JSON.stringify({ action: "remove", product_id, cart }),
             });
             const data = await res.json();
 
@@ -127,7 +130,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
 
                 </div>
             </div> */}
-            <h1 className='results'>Results</h1>
+            <h1 className='results'>Results For : {productDisplayTitle} </h1>
             <div className='products_listing'   style={{
                 gridTemplateColumns: `${openLeft ? "repeat(4, 1fr)" : "repeat(5, 1fr)"}`,
                 gap: `${openLeft ? "3rem" : "2.5rem"}`
@@ -136,7 +139,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                 {searchedProducts?.map((product, index) => (
                     <div className="product-card" key={index} onClick={()=>handleViewProductDetails(product.product_id)}>
                         <div className="product-image-container">
-                           <img src={`${host}${product.product_image}`} alt={product.product_name} className="product-image" />
+                           <img src={`${local}${product.product_image}`} alt={product.product_name} className="product-image" />
                         </div>
                         <div className="products-other-details">
                             <h3 className="searched-product-name">{product.product_name}</h3>
@@ -151,14 +154,13 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                         </div>
 
                         <div className="aligned-buttons button-spacing">
-                            {/* {cartProducts.map((cartProduct) => cartProduct.product_id).includes(product.product_id)
+                            {cart?.products?.map((cartProduct) => cartProduct.product_id).includes(product.product_id)
                             ? (<div className="product_cart_quantity">
                                 <button className="sub-in-cart-button" onClick={(e) => {
                                     e.stopPropagation(); 
                                     decreaseQuantity(product?.product_id);
                                     }}><p>-</p></button>
-                                <h2>{cartProducts[index]?.product_quantity}</h2>
-                                {console.log("qqqqqqqqqq",cartProducts[index]?.product_quantity)}
+                                <h2>{cart.products.find((cartProduct) => cartProduct.product_id === product.product_id)?.product_quantity}</h2>
                                 <button className="add-in-cart-button" onClick={(e) => {
                                     e.stopPropagation(); 
                                     increaseQuantity(product?.product_id);
@@ -174,10 +176,11 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                                     </div>
                                 </div>
                                 <span className="button-text">Add To Cart</span>
-                            </button>)} */}
+                            </button>)}
                             
-                            <button className="add-to-cart-button" onClick={(e) => {
+                            {/* <button className="add-to-cart-button" onClick={(e) => {
                                 e.stopPropagation(); 
+                                getProductList();
                                 increaseQuantity(product?.product_id);
                             }}>
                                 
@@ -187,7 +190,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                                     </div>
                                 </div>
                                 <span className="button-text">Add To Cart</span>
-                            </button>
+                            </button> */}
                              
                             <button className="add-to-favourite-button">
                                     <FavoriteIcon  className="heart-icon" />

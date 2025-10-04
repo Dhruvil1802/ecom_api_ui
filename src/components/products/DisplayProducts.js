@@ -7,7 +7,7 @@ import DisplayProductRightSide from './RightSideProductDisplay';
 const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function DisplayProducts({navigate, search, setSearch, searched, setSearched, setSearchedProducts, searchedProducts, setProductId, setCurrentPage, currentPage}){
+function DisplayProducts({navigate, search, setSearch, searched, setSearched, setSearchedProducts, searchedProducts, setProductId, setCurrentPage, currentPage,cart, setCart, setFeatureId, featureId, content, setProductDisplayTitle, productDisplayTitle}) {
     
     const stored_priceRange = localStorage.getItem('priceRange')
     ? JSON.parse(localStorage.getItem("priceRange"))
@@ -34,11 +34,6 @@ function DisplayProducts({navigate, search, setSearch, searched, setSearched, se
     : "";
     const [category, setCategory] = useState(stored_category);
 
-    // const stored_current_page = localStorage.getItem('current_page')
-    // ? localStorage.getItem('current_page')
-    // : 1;
-    // const [currentPage, setCurrentPage] = useState(stored_current_page);
-
     const [openLeft, setOpenLeft] = useState(false);
 
 
@@ -57,51 +52,63 @@ useEffect(() => {
   }, []); 
     
 
-useEffect(()=>{
-        async function fetchProducts(){
-          try{  
-            const res = await fetch(
-              `${host}/products/search/?search=${searched?searched:""}&page_size=${openLeft?8:10}&page_no=${currentPage}`,
-              { 
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-            const data = await res.json();
-            if (data.status.code === 200) {
-              setSearchedProducts(data.data.product_list);
-              setTotalPages(data.data.total_pages);
-              
-              
-            }
-            if (data?.status?.code === 400 || data?.status?.code === 404)
-            {
-              
-              setIsErrorVisible(true)
-              setErrorMessage(data?.status?.message)
-              setTimeout(()=>setIsErrorVisible(false), 5000);
-            }
+// useEffect(()=>{
+//         async function fetchProducts(){
+//           try{  
+//             let url = "";
+//             if (content === "search") {
+//               url = `${local}/products/search/?search=${searched || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}`;
+//             } else if (content === "feature") {
+//               url = `${local}/products/features/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}`;
+//             } else {
+//               return; 
+//             }
 
-          }
-          catch(error) {
-            setIsErrorVisible(true)
-                setErrorMessage("service unavailable")
-                setTimeout(()=>setIsErrorVisible(false), 5000);
-          }
-          }
-          fetchProducts();
-      },[ searched, currentPage, openLeft]);
+//             const res = await fetch(url, {
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json",
+//               },
+//             });
+//             const data = await res.json();
+//             console.log("dataaaaaa",data)
+//             if (data.status.code === 200 ) {
+//               setSearchedProducts(data.data.product_list);
+//               setTotalPages(data.data.total_pages);           
+//             }
+ 
+//             if (data?.status?.code === 400 || data?.status?.code === 404)
+//             {
+              
+//               setIsErrorVisible(true)
+//               setErrorMessage(data?.status?.message)
+//               setTimeout(()=>setIsErrorVisible(false), 5000);
+//             }
+
+//           }
+//           catch(error) {
+//             setIsErrorVisible(true)
+//                 setErrorMessage("service unavailable")
+//                 setTimeout(()=>setIsErrorVisible(false), 5000);
+//           }
+//           }
+//           fetchProducts();
+//       },[ currentPage, openLeft, content, searched, featureId]);
 
 
 
     useEffect(()=>{
         async function fetchProducts(){
           try{  
-            const res = await fetch(
-              `${host}/products/sortandfilter/?search=${searched?searched:""}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`,
-              { 
+            let url = "";
+            if (content === "search") {
+              url = `${local}/products/sortandfilter/?search=${searched?searched:""}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
+            } else if (content === "feature") {
+              url = `${local}/products/featuredsorting/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
+            } else {
+              return; 
+            }
+            const res = await fetch(url, {
                 method: "GET",
                 headers: {
                   "Content-Type": "application/json",
@@ -109,11 +116,11 @@ useEffect(()=>{
               }
             );
             const data = await res.json();
-
+            // console.log("sort and filter data",data)
 
             if (data.status.code === 200) {
             
-              setSearchedProducts(data.data);
+              setSearchedProducts(data.data.product_list);
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
             {
@@ -131,7 +138,7 @@ useEffect(()=>{
           }
           }
           fetchProducts();
-      },[ sortType, priceRange, filterRating, currentPage, openLeft]);
+      },[ sortType, priceRange, filterRating, currentPage, openLeft, content, searched, featureId]);
 
 
 
@@ -157,6 +164,10 @@ useEffect(()=>{
                                     navigate={navigate}
                                     setProductId={setProductId}
                                     openLeft={openLeft}
+                                    cart={cart}
+                                    setCart={setCart}
+                                    setProductDisplayTitle={setProductDisplayTitle}
+                                    productDisplayTitle={productDisplayTitle}
                                     />
             
             {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}

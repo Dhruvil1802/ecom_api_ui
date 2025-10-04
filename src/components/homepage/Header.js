@@ -7,7 +7,7 @@ import './Header.css';
 
 
 
-const Header = ({navigate, token, customerName, setSearch, search, setSearched, searched, setCurrentPage, setCustomerName}) => {
+const Header = ({navigate, token, customerName, setSearch, search, setSearched, searched, setCurrentPage, setCustomerName, setContent}) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,8 +20,10 @@ const Header = ({navigate, token, customerName, setSearch, search, setSearched, 
     setSearched(search)
     localStorage.setItem("search", search);
     localStorage.setItem("searched", search);
+    localStorage.setItem("content", "search");
 
     setCurrentPage(1) 
+    setContent("search")
     navigate("/products") 
   }
   function openHomePage(){

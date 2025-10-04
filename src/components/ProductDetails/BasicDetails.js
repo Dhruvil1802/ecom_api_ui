@@ -25,7 +25,6 @@ function BasicDetails({ details }) {
     const data = await res.json();
     if (data.status.code === 201) {
       // await getProductList(); 
-      console.log("added to cart successfully");
     }
   } catch (error) {
     // setIsErrorVisible(true);

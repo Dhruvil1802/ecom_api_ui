@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import BuyerCategories from '../components/homepage/BuyerCategories';
+import BuyerGender from '../components/homepage/BuyerGender';
 import Footer from '../components/homepage/Footer';
 import Header from '../components/homepage/Header';
 import ProductGrid from '../components/homepage/ProductGrid';
@@ -10,7 +11,25 @@ const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-const HomePage = ({navigate, token, setSearch, search, banner, setBanner, features, setFeatures, customerName, setCustomerName, setSearched, setCurrentPage}) => {
+const HomePage = ({navigate, 
+                   token, 
+                   setSearch, 
+                   search, 
+                   banner, 
+                   setBanner, 
+                   features, 
+                   setFeatures, 
+                   setFeatureId, 
+                   categories, 
+                   setCategories, 
+                   customerName, 
+                   setCustomerName, 
+                   setSearched,
+                   setCurrentPage, 
+                   setContent,
+                   productDisplayTitle,
+                   setProductDisplayTitle
+                  }) => {
 
       const [isErrorVisible, setIsErrorVisible] = useState(false)
       const [errorMessage, setErrorMessage] = useState("")
@@ -19,7 +38,7 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
       async function getHomePageDetails(){
         try{
           const res = await fetch(
-            `${host}/homepage/web/`,
+            `${local}/homepage/web/`,
             { 
               method: "GET",
               headers: {
@@ -34,6 +53,8 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
             setBanner(data.data.banner[0]);
             setFeatures(data.data.features);
             setCustomerName(data.data.customer_name)
+            setCategories(data.data.categories)
+            console.log(data.data)
             localStorage.setItem("customer_name", data.data.customer_name);
             // setCurrentPage(1);
           }
@@ -73,6 +94,7 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
               setSearched={setSearched}
               setCurrentPage={setCurrentPage}
               setCustomerName={setCustomerName}
+              setContent={setContent}
 
               />
       {/* <SideMenu /> */}
@@ -83,9 +105,11 @@ const HomePage = ({navigate, token, setSearch, search, banner, setBanner, featur
           <button className="btn-secondary">Shop All</button> */}
         </div>
       </div>
-          
-      <ProductGrid features={features}/>
-      <BuyerCategories></BuyerCategories>
+
+      <ProductGrid features={features} setFeatureId={setFeatureId} navigate={navigate} setContent={setContent} setProductDisplayTitle={setProductDisplayTitle} />
+      <BuyerCategories categories={categories}></BuyerCategories>
+      <BuyerGender></BuyerGender>
+
       <Footer/>
       {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}
 

@@ -57,15 +57,35 @@ function App() {
     : "";
   const [productId, setProductId] = useState(stored_product_id);
 
+  //feature id
+  const stored_feature_id = localStorage.getItem('feature_id')
+    ? localStorage.getItem('feature_id')
+    : "";
+  const [featureId, setFeatureId] = useState(stored_feature_id);
+
 
   const [banner, setBanner] = useState([]); 
   const [features,setFeatures] = useState([]);
+  // const [featureId, setFeatureId] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   const [priceRange, setPriceRange] = useState([0, 8000]);
+
+  const [cart, setCart] = useState([]);
   // const [productDetails, setProductDetails] = useState();
   
   // console.log("token",token);
   // console.log("searchedProducts",searchedProducts);
+  const stored_content = localStorage.getItem('content')
+    ? localStorage.getItem('content')
+    : "";
+  const [content, setContent] = useState(stored_content);
+
+  // product display title
+  const stored_productDisplayTitle = localStorage.getItem('productDisplayTitle')
+    ? localStorage.getItem('productDisplayTitle')
+    : "";
+  const [productDisplayTitle, setProductDisplayTitle] = useState(stored_productDisplayTitle);
 
 
   const showHomePage = () => {
@@ -88,12 +108,18 @@ function App() {
                     banner={banner}
                     setBanner={setBanner}
                     features={features}
+                    featureId={featureId}
+                    setFeatureId={setFeatureId}
                     setFeatures={setFeatures}
+                    categories={categories}
+                    setCategories={setCategories}
                     customerName={customerName}
                     setCustomerName={setCustomerName}
                     setCurrentPage={setCurrentPage}
-
-
+                    setContent={setContent}
+                    productDisplayTitle={productDisplayTitle}
+                    setProductDisplayTitle={setProductDisplayTitle}
+                  
                     />}
       />
 
@@ -118,8 +144,15 @@ function App() {
           setPriceRange={setPriceRange}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-
           setProductId={setProductId}
+          setFeatureId={setFeatureId}
+          featureId={featureId}
+          cart={cart}
+          setCart={setCart}
+          content={content}
+          setContent={setContent}
+          setProductDisplayTitle={setProductDisplayTitle}
+          productDisplayTitle={productDisplayTitle}
 
         />} 
       />
@@ -137,6 +170,7 @@ function App() {
               setCurrentPage={setCurrentPage}
               productId={productId}
               setProductId={setProductId}
+              setContent={setContent}
 
               token={token}
 
@@ -155,7 +189,8 @@ function App() {
               setSearched={setSearched}
               setCurrentPage={setCurrentPage}
               setProductId={setProductId}
-              
+              cart={cart}
+              setCart={setCart}
               />
         }/>
 
@@ -169,8 +204,11 @@ function App() {
               setSearched={setSearched}
               setCurrentPage={setCurrentPage}
               token={token}
+              setContent={setContent}
               />
         }/>
+
+
 
     </Routes>
   );

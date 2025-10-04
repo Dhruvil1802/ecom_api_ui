@@ -3,7 +3,7 @@ import ProfileContent from '../components/profile/ProfileContent';
 
 import './Profile.css';
 
-function Profile({navigate, customerName, setSearch, search, setSearched, setCurrentPage, setCustomerName}){ 
+function Profile({navigate, customerName, setSearch, search, setSearched, setCurrentPage, setCustomerName, setContent}){ 
     return(
         <div>
             <Header navigate={navigate} 
@@ -13,6 +13,7 @@ function Profile({navigate, customerName, setSearch, search, setSearched, setCur
               search={search}
               setSearched={setSearched}
               setCurrentPage={setCurrentPage}
+              setContent={setContent}
             />
             <ProfileContent/>
         </div>

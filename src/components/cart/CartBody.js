@@ -7,13 +7,13 @@ const local = "http://127.0.0.1:8000";
 const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 
-function CartBody({setProductId, navigate}) {
+function CartBody({setProductId, navigate, cart, setCart}) {
     const [cartProducts, setCartProducts] = useState([]);
     const [subTotal, setSubTotal] = useState();
     const [shipping, setShipping] = useState();
     const [tax, setTax] = useState();
     const [total, setTotal] = useState();
-
+    // const [cart, setCart] = useState([]);
     const [isErrorVisible, setIsErrorVisible] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
@@ -25,7 +25,7 @@ useEffect(() => {
 async function getProductList() {
 
   try {
-    const res = await fetch(`${host}/cart/management/`, {
+    const res = await fetch(`${local}/cart/management/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -39,7 +39,9 @@ async function getProductList() {
       setShipping(data?.data?.delivery_fees);
       setTax(data?.data?.tax);
       setTotal(data?.data?.total);
+      setCart(data?.data);
     }
+
   } catch (error) {
     setIsErrorVisible(true);
     setErrorMessage("service unavailable");
@@ -47,15 +49,14 @@ async function getProductList() {
   }
 }
 async function increaseQuantity(product_id) {
-
   try {
-    const res = await fetch(`${host}/cart/management/`, {
+    const res = await fetch(`${local}/cart/management/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ product_id }),
+      body: JSON.stringify({ product_id, cart }),
     });
     const data = await res.json();
     if (data.status.code === 201) {
@@ -70,17 +71,17 @@ async function increaseQuantity(product_id) {
 }
 
 async function decreaseQuantity(product_id) {
+
   try {
-    const res = await fetch(`${host}/cart/management/`, {
+    const res = await fetch(`${local}/cart/management/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ action: "remove", product_id }),
+      body: JSON.stringify({ action: "remove", product_id, cart }),
     });
     const data = await res.json();
-
     if (data.status.code === 201) {
       await getProductList(); 
 
@@ -107,7 +108,7 @@ async function decreaseQuantity(product_id) {
                 <div className="product_cart" key={product.product_id} onClick={()=>{openProductDetails(product.product_id)}}>
                     <div className="product_cart_image_container">
                         <img
-                        src={`${host}/Media/${product?.product_image}`}
+                        src={`${local}/Media/${product?.product_image}`}
                         alt={product?.product_name}
                         className="product-image"
                         />
@@ -119,12 +120,17 @@ async function decreaseQuantity(product_id) {
                     <div className="product_cart_quantity">
                         <button className="sub-in-cart-button" onClick={(e) => {
                               e.stopPropagation(); 
+                              getProductList();
                               decreaseQuantity(product?.product_id);
+                              
+
                             }}><p>-</p></button>
                         <h2>{product?.product_quantity}</h2>
                         <button className="add-in-cart-button" onClick={(e) => {
                             e.stopPropagation(); 
+                            getProductList();
                             increaseQuantity(product?.product_id);
+                            
                           }}><p>+</p></button>
                     </div>
                     <div className="product_total">
@@ -148,31 +154,35 @@ async function decreaseQuantity(product_id) {
               <button className="apply-promotion-button">Apply</button>
             </div>
             <table className="payment-details-table">
-                <tr>
-                    <td>Sub Total</td>
-                    <td className="payment-details-value">{subTotal}</td>
-                </tr>
-                <tr>
-                    <td>Shipping</td>
-                    <td className="payment-details-value">{shipping}</td>
-                </tr>
-                 <tr>
-                    <td>Tax</td>
-                    <td className="payment-details-value">{tax}</td>
+            <tbody>
+              <tr>
+                <td>Sub Total</td>
+                <td className="payment-details-value">{subTotal}</td>
+              </tr>
+              <tr>
+                <td>Shipping</td>
+                <td className="payment-details-value">{shipping}</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td className="payment-details-value">{tax}</td>
+              </tr>
+              <tr>
+                <td>Discount</td>
+                <td className="payment-details-value">200</td>
+              </tr>
+            </tbody>
+          </table>
 
-                </tr>
-                <tr>
-                    <td>Discount</td>
-                    <td className="payment-details-value">200</td>
+          <table className="payment-details-total">
+            <tbody>
+              <tr>
+                <td>Total</td>
+                <td className="payment-details-value">{total}</td>
+              </tr>
+            </tbody>
+          </table>
 
-                </tr>
-            </table>
-            <table className="payment-details-total">
-                <tr>
-                    <td>Total</td>
-                    <td className="payment-details-value">{total}</td>
-                </tr>
-            </table>
             <button className="checkout-button">CHECKOUT</button>
         </div>
       </div>

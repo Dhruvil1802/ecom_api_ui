@@ -2,9 +2,28 @@ import Header from '../components/homepage/Header';
 import DisplayProducts from '../components/products/DisplayProducts';
 import './Products.css';
 
-function Products({navigate, token, search, setProductId, setSearch, setSearchedProducts, searchedProducts, customerName, searched, setSearched, setCurrentPage, currentPage, setCustomerName}){
+function Products({navigate, 
+                   token, 
+                   search, 
+                   setProductId,
+                   setSearch, 
+                   setSearchedProducts, 
+                   searchedProducts, 
+                   customerName, 
+                   searched, 
+                   setSearched, 
+                   setCurrentPage, 
+                   currentPage, 
+                   setCustomerName, 
+                   cart, setCart, 
+                   setFeatureId, 
+                   featureId, 
+                   content, 
+                   setContent,
+                   setProductDisplayTitle,
+                   productDisplayTitle
+                }){
 
-    
 
     return(<>
             <Header navigate={navigate} 
@@ -15,7 +34,7 @@ function Products({navigate, token, search, setProductId, setSearch, setSearched
               setSearched={setSearched}
               setCurrentPage={setCurrentPage}
               setCustomerName={setCustomerName}
-
+              setContent={setContent}
 />
             {/* <SideMenu /> */}
             <DisplayProducts navigate={navigate}
@@ -28,7 +47,14 @@ function Products({navigate, token, search, setProductId, setSearch, setSearched
                 setSearched={setSearched}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                
+                cart={cart}
+                setCart={setCart}
+                setFeatureId={setFeatureId}
+                featureId={featureId}
+                content={content}
+                setContent={setContent}
+                setProductDisplayTitle={setProductDisplayTitle}
+                productDisplayTitle={productDisplayTitle}
                 />
 
                 

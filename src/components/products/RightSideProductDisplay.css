@@ -139,8 +139,11 @@
     gap: 10px;
     justify-content: left; 
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     margin-left: 5%;
+    /* border:1px solid black; */
+    height:3rem;
+    position: relative;
   }
 .button-spacing{
     margin-left:0%;
@@ -173,6 +176,27 @@
        color: var(--dark);
     }
 
+  }
+  .sub-in-cart-button 
+  {
+    display: flex;
+    align-items: center;
+    background-color: var(--medium);
+    color: white;
+    border: none;
+    border-radius: 1.5rem;
+    /* padding: 0.6em 1.2em; */
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: 0.3s ease;
+    height:2rem;
+    width:2rem;
+    margin-left:0rem;
+    margin-top: -3rem;
+    
   }
   
   .icon-container {
@@ -212,7 +236,8 @@
     color: var(--medium);
     /* align-items: center; */
     /* justify-content: center; */
-    border: 1px solid rgb(197, 197, 197);    margin-top:0rem;
+    border: 1px solid rgb(197, 197, 197);    
+    margin-top:0rem;
     margin-left:1rem;
     background-color: white;
     /* padding:0.3rem; */
