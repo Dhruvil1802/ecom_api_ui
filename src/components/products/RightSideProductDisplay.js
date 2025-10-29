@@ -1,15 +1,35 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useEffect } from "react";
+import { inuse_url } from '../../App.js';
+import ManageQuantity from '../cart/ManageQuantity.js';
 import './RightSideProductDisplay.css';
+// const local = "http://127.0.0.1:8000";z
+// const inuse_url = "https://ecomapi-production-f9d8.up.railway.app";
 
-
-const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app";
-
-function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, currentPage, setTotalPages, navigate, setProductId, openLeft, cart, setCart, setProductDisplayTitle, productDisplayTitle}){
+function DisplayProductRightSide({searchedProducts, 
+                                  totalPages, 
+                                  setCurrentPage, 
+                                  currentPage, 
+                                  navigate, 
+                                  setProductId, 
+                                  openLeft, 
+                                  cart, 
+                                  setCart, 
+                                  setProductDisplayTitle, 
+                                  productDisplayTitle,cartProducts,
+                                    setCartProducts,
+                                    subTotal,
+                                    setSubTotal,
+                                    setShipping,
+                                    tax,
+                                    setTax,
+                                    total,
+                                    setTotal,
+                                    setIsErrorVisible,
+                                    setErrorMessage}){
     
-    // const [cartProducts, setCartProducts] = useState([]);
+
     const paginate = (pageNumber) => {
 
         if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -31,85 +51,42 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
     
     async function getProductList() {
 
-        try {
-            const res = await fetch(`${host}/cart/management/`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json",
-            },
-            });
-            const data = await res.json();
-            if (data.status.code === 200) {
-            setCart(data?.data);
-            //   setSubTotal(data?.data?.sub_total);
-            //   setShipping(data?.data?.delivery_fees);
-            //   setTax(data?.data?.tax);
-            //   setTotal(data?.data?.total);
-            }
-        } catch (error) {
-            // setIsErrorVisible(true);
-            // setErrorMessage("service unavailable");
-            // setTimeout(() => setIsErrorVisible(false), 5000);
-        }
-        }
-    async function increaseQuantity(product_id) {
-        try {
-            const res = await fetch(`${host}/cart/management/`, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ product_id, cart }),
-            });
-            const data = await res.json();
-            if (data.status.code === 201) {
-            await getProductList(); 
-            }
-            if (data?.status?.code === 400 || data?.status?.code === 404)
-            {
-                alert(data?.status?.message)
-            
-            }
-        } catch (error) {
-            // setIsErrorVisible(true);
-            // setErrorMessage("service unavailable");
-            // setTimeout(() => setIsErrorVisible(false), 5000);
-        }
-        }
-    async function decreaseQuantity(product_id) {
-        try {
-            const res = await fetch(`${host}/cart/management/`, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ action: "remove", product_id, cart }),
-            });
-            const data = await res.json();
+  try {
+    const res = await fetch(`${inuse_url}/cart/management/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (data.status.code === 200) {
+      setCartProducts(data?.data?.products);
+      setSubTotal(data?.data?.sub_total);
+      setShipping(data?.data?.delivery_fees);
+      setTax(data?.data?.tax);
+      setTotal(data?.data?.total);
+      setCart(data?.data);
 
-            if (data.status.code === 201) {
-            await getProductList(); 
-
-            }
-        } catch (error) {
-            // setIsErrorVisible(true);
-            // setErrorMessage("service unavailable");
-            // setTimeout(() => setIsErrorVisible(false), 5000);
-        }
     }
+
+  } catch (error) {
+    setIsErrorVisible(true);
+    setErrorMessage("service unavailable");
+    setTimeout(() => setIsErrorVisible(false), 5000);
+  } 
+    }
+
     return(
         <div className="right_side">
 
             {/* <div className="special-offer-card">
                 <div className="offer-image-section">
-                    <img src={`${host}/Media/features/special_product.png`} alt="Special Offer Headphones" />
+                    <img src={`${inuse_url}/Media/features/special_product.png`} alt="Special Offer Headphones" />
                 </div>
                 <div className="offer-details" onClick={()=>handleViewProductDetails(searchedProducts[0].product_id)}>
                     <div className="offer-badge">Special Offer</div>
-                    <img src={`${host}${searchedProducts[0]?.product_image}`} alt="Headphones" className="offer-product-img" />
+                    <img src={`${inuse_url}${searchedProducts[0]?.product_image}`} alt="Headphones" className="offer-product-img" />
                     <h2 className="offer-price">{searchedProducts[0]?.product_price}</h2>
                     <p className="offer-old-price">Was: <span>$3300</span></p>
                     
@@ -139,7 +116,7 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                 {searchedProducts?.map((product, index) => (
                     <div className="product-card" key={index} onClick={()=>handleViewProductDetails(product.product_id)}>
                         <div className="product-image-container">
-                           <img src={`${host}${product.product_image}`} alt={product.product_name} className="product-image" />
+                           <img src={`${inuse_url}${product.product_image}`} alt={product.product_name} className="product-image" />
                         </div>
                         <div className="products-other-details">
                             <h3 className="searched-product-name">{product.product_name}</h3>
@@ -158,17 +135,66 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                             ? (<div className="product_cart_quantity">
                                 <button className="sub-in-cart-button" onClick={(e) => {
                                     e.stopPropagation(); 
-                                    decreaseQuantity(product?.product_id);
+                                    ManageQuantity(
+                                                product,
+                                                "decrease",
+                                                cartProducts,
+                                                setCartProducts,
+                                                subTotal,
+                                                setSubTotal,
+                                                setShipping,
+                                                tax,
+                                                setTax,
+                                                total,
+                                                setTotal,
+                                                cart,
+                                                setCart,
+                                                setIsErrorVisible,
+                                                setErrorMessage
+                                            );            
                                     }}><p>-</p></button>
-                                <h2>{cart.products.find((cartProduct) => cartProduct.product_id === product.product_id)?.product_quantity}</h2>
+                                <h2 className="quantity-figure">{cart.products.find((cartProduct) => cartProduct.product_id === product.product_id)?.product_quantity}</h2>
                                 <button className="add-in-cart-button" onClick={(e) => {
                                     e.stopPropagation(); 
-                                    increaseQuantity(product?.product_id);
+                                    ManageQuantity(
+                                                product,
+                                                "increase",
+                                                cartProducts,
+                                                setCartProducts,
+                                                subTotal,
+                                                setSubTotal,
+                                                setShipping,
+                                                tax,
+                                                setTax,
+                                                total,
+                                                setTotal,
+                                                cart,
+                                                setCart,
+                                                setIsErrorVisible,
+                                                setErrorMessage
+                                            );            
                                 }}><p>+</p></button>
                             </div> )
                             :(<button className="add-to-cart-button" onClick={(e) => {
                                 e.stopPropagation(); 
-                                increaseQuantity(product?.product_id);
+        
+                                ManageQuantity(
+                                                product,
+                                                "add",
+                                                cartProducts,
+                                                setCartProducts,
+                                                subTotal,
+                                                setSubTotal,
+                                                setShipping,
+                                                tax,
+                                                setTax,
+                                                total,
+                                                setTotal,
+                                                cart,
+                                                setCart,
+                                                setIsErrorVisible,
+                                                setErrorMessage
+                                            );            
                             }}>
                                 <div className="icon-container">
                                     <div className="circular-div">
@@ -177,20 +203,6 @@ function DisplayProductRightSide({searchedProducts, totalPages, setCurrentPage, 
                                 </div>
                                 <span className="button-text">Add To Cart</span>
                             </button>)}
-                            
-                            {/* <button className="add-to-cart-button" onClick={(e) => {
-                                e.stopPropagation(); 
-                                getProductList();
-                                increaseQuantity(product?.product_id);
-                            }}>
-                                
-                                <div className="icon-container">
-                                    <div className="circular-div">
-                                    <ShoppingCartIcon className="cart-icon" />
-                                    </div>
-                                </div>
-                                <span className="button-text">Add To Cart</span>
-                            </button> */}
                              
                             <button className="add-to-favourite-button">
                                     <FavoriteIcon  className="heart-icon" />

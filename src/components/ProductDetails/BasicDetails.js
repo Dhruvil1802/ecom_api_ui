@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { inuse_url } from '../../App.js';
 
 import './BasicDetails.css';
-const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app";
+// const local = "http://127.0.0.1:8000";
+// const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 function BasicDetails({ details }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,7 +15,7 @@ function BasicDetails({ details }) {
   async function increaseQuantity(product_id) {
 
   try {
-    const res = await fetch(`${host}/cart/management/`, {
+    const res = await fetch(`${inuse_url}/cart/management/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -37,7 +38,7 @@ function BasicDetails({ details }) {
     <div className="upper-part">
         <div className='product-details-image'>
           <img 
-            src={`${host}${details?.product_image}`} 
+            src={`${inuse_url}${details?.product_image}`} 
             alt={details?.product_name}
             className="image"
           />
@@ -87,6 +88,7 @@ function BasicDetails({ details }) {
                 <table className="product-table">
                     <tbody>
                     <tr>
+                      
                         <td><strong>{Object.keys(details?.additional_specification[0])[0]}</strong></td>
                         <td>{details?.additional_specification[0][Object.keys(details?.additional_specification[0])[0]]}</td>
                     </tr>

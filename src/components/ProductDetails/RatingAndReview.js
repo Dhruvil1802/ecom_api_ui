@@ -2,13 +2,14 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
+import { inuse_url } from '../../App.js';
 
 import ErrorMessage from '../../error/errorMessage';
 
 
 import './RatingAndReview.css';
-const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app";
+// const local = "http://127.0.0.1:8000";
+// const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 function RatingAndReview({details, productDetails, setReload, token}) {
     const [isRateAndReviewOpen, setIsRateAndReviewOpen] = useState(false);
@@ -34,7 +35,7 @@ function RatingAndReview({details, productDetails, setReload, token}) {
                         "product_review": review}
 
       try {
-        const res = await fetch(`${host}/products/rating/`, {
+        const res = await fetch(`${inuse_url}/products/rating/`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -116,7 +117,7 @@ function RatingAndReview({details, productDetails, setReload, token}) {
                   </div>
                   <div className="rate-and-review-img-container">
                     <img 
-                      src={`${host}${details?.product_image}`} 
+                      src={`${inuse_url}${details?.product_image}`} 
                       alt={details?.product_name} 
                       className="image"
                     />

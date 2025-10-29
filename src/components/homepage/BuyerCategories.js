@@ -1,9 +1,10 @@
 import { useRef } from 'react';
+import { inuse_url } from '../../App.js';
 import "./BuyerCategories.css";
 
 
-const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app"
+// const local = "http://127.0.0.1:8000";
+// const host = "https://ecomapi-production-f9d8.up.railway.app"
 
 const BuyerCategories = ({categories}) => {
     const navRef = useRef();
@@ -31,7 +32,7 @@ return (
       <div className="buyer-categories-wrapper">
         {categories?.map((category, index) => (
           <div className='buyer-categories-item'>
-            <img src={`${host}/Media/buyer_categories/Men.png`} alt={category.category_title} className="buyer-category-image" />
+            <img src={`${inuse_url}/Media/buyer_categories/Men.png`} alt={category.category_title} className="buyer-category-image" />
             <p className="buyer-category-title">{category.category_title}</p>
           </div>
           ))} 
@@ -49,35 +50,35 @@ return (
 
   //       <div className='buyer-categories-item'>
 
-  //         <img src={`${host}/Media/buyer_categories/Men.png`} alt="Men's Fashion" className="buyer-category-image" />
+  //         <img src={`${inuse_url}/Media/buyer_categories/Men.png`} alt="Men's Fashion" className="buyer-category-image" />
   //         <p className="buyer-category-title">Electronics</p>
 
   //       </div>
 
   //       <div className='buyer-categories-item'>
 
-  //         <img src={`${host}/Media/buyer_categories/Women.png`} alt="Women's' Fashion" className="buyer-category-image"/>
+  //         <img src={`${inuse_url}/Media/buyer_categories/Women.png`} alt="Women's' Fashion" className="buyer-category-image"/>
   //         <p className="buyer-category-title">Furniture</p>
 
   //       </div>
 
   //       <div className='buyer-categories-item'>
 
-  //         <img src={`${host}/Media/buyer_categories/Kids.png`} alt="Kids' Fashion" className="buyer-category-image" />
+  //         <img src={`${inuse_url}/Media/buyer_categories/Kids.png`} alt="Kids' Fashion" className="buyer-category-image" />
   //         <p className="buyer-category-title">Fashion</p>
           
   //       </div>
 
   //       <div className='buyer-categories-item'>
 
-  //         <img src={`${host}/Media/buyer_categories/Men.png`} alt="Men's Fashion" className="buyer-category-image" />
+  //         <img src={`${inuse_url}/Media/buyer_categories/Men.png`} alt="Men's Fashion" className="buyer-category-image" />
   //         <p className="buyer-category-title">Cosmetics</p>
 
   //       </div>
 
   //       <div className='buyer-categories-item'>
 
-  //         <img src={`${host}/Media/buyer_categories/Women.png`} alt="Women's' Fashion" className="buyer-category-image"/>
+  //         <img src={`${inuse_url}/Media/buyer_categories/Women.png`} alt="Women's' Fashion" className="buyer-category-image"/>
   //         <p className="buyer-category-title">Grocery</p>
 
   //       </div>

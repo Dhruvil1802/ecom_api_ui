@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { inuse_url } from '../App';
 import BuyerCategories from '../components/homepage/BuyerCategories';
 import BuyerGender from '../components/homepage/BuyerGender';
 import Footer from '../components/homepage/Footer';
@@ -7,8 +8,8 @@ import ProductGrid from '../components/homepage/ProductGrid';
 import ErrorMessage from '../error/errorMessage';
 import './HomePage.css';
 
-const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app";
+// const local = "http://127.0.0.1:8000";
+// const inuse_url = "https://ecomapi-production-f9d8.up.railway.app";
 
 
 const HomePage = ({navigate, 
@@ -28,7 +29,8 @@ const HomePage = ({navigate,
                    setCurrentPage, 
                    setContent,
                    productDisplayTitle,
-                   setProductDisplayTitle
+                   setProductDisplayTitle,
+
                   }) => {
 
       const [isErrorVisible, setIsErrorVisible] = useState(false)
@@ -38,7 +40,7 @@ const HomePage = ({navigate,
       async function getHomePageDetails(){
         try{
           const res = await fetch(
-            `${host}/homepage/web/`,
+            `${inuse_url}/homepage/web/`,
             { 
               method: "GET",
               headers: {
@@ -54,7 +56,7 @@ const HomePage = ({navigate,
             setFeatures(data.data.features);
             setCustomerName(data.data.customer_name)
             setCategories(data.data.categories)
-            console.log(data.data)
+            
             localStorage.setItem("customer_name", data.data.customer_name);
             // setCurrentPage(1);
           }
@@ -84,7 +86,7 @@ const HomePage = ({navigate,
   return (
     <div className="homepage"    
     style={{
-      // backgroundImage: `url("${host}/static/banner/31.png")`,
+      // backgroundImage: `url("${inuse_url}/static/banner/31.png")`,
     }}>
       <Header navigate={navigate} 
               token={token}
@@ -106,7 +108,11 @@ const HomePage = ({navigate,
         </div>
       </div>
 
-      <ProductGrid features={features} setFeatureId={setFeatureId} navigate={navigate} setContent={setContent} setProductDisplayTitle={setProductDisplayTitle} />
+      <ProductGrid features={features} 
+                   setFeatureId={setFeatureId} 
+                   navigate={navigate} 
+                   setContent={setContent} 
+                   setProductDisplayTitle={setProductDisplayTitle} />
       <BuyerCategories categories={categories}></BuyerCategories>
       <BuyerGender></BuyerGender>
 

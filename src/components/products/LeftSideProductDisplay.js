@@ -7,7 +7,6 @@ function LeftSideDisplayProducts({priceRange, setPriceRange, setSortType, sortTy
     const [showSortBy, setShowSortBy] = useState(false);
     const [showCategories, setShowCategories] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
-    // const [openLeft, setOpenLeft] = useState(true);
     useEffect(()=>{
         localStorage.setItem('priceRange',JSON.stringify(priceRange));
     },[priceRange])

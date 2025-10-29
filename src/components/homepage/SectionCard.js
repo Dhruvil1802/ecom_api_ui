@@ -1,7 +1,7 @@
 import './SectionCard.css';
 
-const local = "http://127.0.0.1:8000";
-const host = "http://ecomapi-production-f9d8.up.railway.app"
+// const local = "http://127.0.0.1:8000";
+// const host = "http://ecomapi-production-f9d8.up.railway.app"
 
 const SectionCard = ({ feature }) => {
 

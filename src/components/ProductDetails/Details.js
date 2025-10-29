@@ -1,12 +1,13 @@
 
 import { useEffect, useState } from 'react';
+import { inuse_url } from '../../App.js';
 import ErrorMessage from '../../error/errorMessage';
 import BasicDetails from './BasicDetails';
 import './Details.css';
 import RatingAndReview from './RatingAndReview';
 
-const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app";
+// const local = "http://127.0.0.1:8000";
+// const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 function Details({ productId, token, setProductId }) {
 
@@ -28,7 +29,7 @@ useEffect(() => {
     async function getProductDetails() {
       try {
         const res = await fetch(
-          `${host}/products/details/?product_id=${productId}`,
+          `${inuse_url}/products/details/?product_id=${productId}`,
           {
             method: "GET",
             headers: {

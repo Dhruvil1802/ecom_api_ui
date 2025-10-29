@@ -10,8 +10,16 @@ import ProductDetails from "./screens/ProductDetails";
 import Products from "./screens/Products";
 import Profile from "./screens/Profile";
 
+
+  const local = "http://127.0.0.1:8000";
+  const host = "https://ecomapi-production-f9d8.up.railway.app";
+
+  export const inuse_url = local;
+
 function App() { 
   const navigate = useNavigate();
+
+
 
   //token
   const stored_token = localStorage.getItem('token')
@@ -74,8 +82,7 @@ function App() {
   const [cart, setCart] = useState([]);
   // const [productDetails, setProductDetails] = useState();
   
-  // console.log("token",token);
-  // console.log("searchedProducts",searchedProducts);
+
   const stored_content = localStorage.getItem('content')
     ? localStorage.getItem('content')
     : "";
@@ -86,6 +93,13 @@ function App() {
     ? localStorage.getItem('productDisplayTitle')
     : "";
   const [productDisplayTitle, setProductDisplayTitle] = useState(stored_productDisplayTitle);
+
+  // cart products and totals
+    const [cartProducts, setCartProducts] = useState([]);
+    const [subTotal, setSubTotal] = useState(0);
+    const [shipping, setShipping] = useState(0);
+    const [tax, setTax] = useState(0);
+    const [total, setTotal] = useState();
 
 
   const showHomePage = () => {
@@ -153,7 +167,18 @@ function App() {
           setContent={setContent}
           setProductDisplayTitle={setProductDisplayTitle}
           productDisplayTitle={productDisplayTitle}
+          cartProducts={cartProducts}
+          setCartProducts={setCartProducts}
+          subTotal={subTotal}
+          setSubTotal={setSubTotal}
+          shipping={shipping}
+          setShipping={setShipping}
+          tax={tax}
+          setTax={setTax}
+          total={total}
+          setTotal={setTotal}
 
+          
         />} 
       />
       <Route
@@ -191,6 +216,19 @@ function App() {
               setProductId={setProductId}
               cart={cart}
               setCart={setCart}
+              setCartProducts={setCartProducts}
+              cartProducts={cartProducts}
+              subTotal={subTotal}
+              setSubTotal={setSubTotal}
+              shipping={shipping}
+              setShipping={setShipping}
+              tax={tax}
+              setTax={setTax}
+              total={total}
+              setTotal={setTotal}
+              setContent={setContent}
+              content={content}
+
               />
         }/>
 

@@ -177,10 +177,9 @@
     }
 
   }
-  .sub-in-cart-button 
+  .sub-in-cart-button, .add-in-cart-button 
   {
-    display: flex;
-    align-items: center;
+    /* display: flex; */
     background-color: var(--medium);
     color: white;
     border: none;
@@ -198,6 +197,23 @@
     margin-top: -3rem;
     
   }
+
+   .sub-in-cart-button p, .add-in-cart-button p {
+    margin-left: 0.1rem;
+    margin-top: 0rem !important; 
+    font-size: 1.5rem;
+    font-weight: 600;
+    }
+   
+    .quantity-figure{
+        height:1rem;
+        width:1rem;
+        /* border:1px solid black; */
+        margin-left: 0rem;
+        margin-top: -2.8rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
   
   .icon-container {
     background-color: white;

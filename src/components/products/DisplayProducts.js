@@ -1,13 +1,43 @@
 import { useEffect, useState } from 'react';
+import { inuse_url } from '../../App.js';
 import ErrorMessage from '../../error/errorMessage';
 import './DisplayProducts.css';
 import LeftSideDisplayProducts from './LeftSideProductDisplay';
 import DisplayProductRightSide from './RightSideProductDisplay';
+// const local = "http://127.0.0.1:8000";
+// const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app";
-
-function DisplayProducts({navigate, search, setSearch, searched, setSearched, setSearchedProducts, searchedProducts, setProductId, setCurrentPage, currentPage,cart, setCart, setFeatureId, featureId, content, setProductDisplayTitle, productDisplayTitle}) {
+function DisplayProducts({
+                          navigate,
+                          search,
+                          setSearch,
+                          searched,
+                          setSearched,
+                          setSearchedProducts,
+                          searchedProducts,
+                          setProductId,
+                          setCurrentPage,
+                          currentPage,
+                          cart,
+                          setCart,
+                          setFeatureId,
+                          featureId,
+                          setContent,
+                          content,
+                          setProductDisplayTitle,
+                          productDisplayTitle,
+                          cartProducts,
+                          setCartProducts,
+                          subTotal,
+                          setSubTotal,
+                          setShipping,
+                          tax,
+                          setTax,
+                          total,
+                          setTotal
+                          
+                          })
+ {
     
     const stored_priceRange = localStorage.getItem('priceRange')
     ? JSON.parse(localStorage.getItem("priceRange"))
@@ -52,59 +82,14 @@ useEffect(() => {
   }, []); 
     
 
-// useEffect(()=>{
-//         async function fetchProducts(){
-//           try{  
-//             let url = "";
-//             if (content === "search") {
-//               url = `${host}/products/search/?search=${searched || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}`;
-//             } else if (content === "feature") {
-//               url = `${host}/products/features/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}`;
-//             } else {
-//               return; 
-//             }
-
-//             const res = await fetch(url, {
-//             method: "GET",
-//             headers: {
-//                 "Content-Type": "application/json",
-//               },
-//             });
-//             const data = await res.json();
-//             console.log("dataaaaaa",data)
-//             if (data.status.code === 200 ) {
-//               setSearchedProducts(data.data.product_list);
-//               setTotalPages(data.data.total_pages);           
-//             }
- 
-//             if (data?.status?.code === 400 || data?.status?.code === 404)
-//             {
-              
-//               setIsErrorVisible(true)
-//               setErrorMessage(data?.status?.message)
-//               setTimeout(()=>setIsErrorVisible(false), 5000);
-//             }
-
-//           }
-//           catch(error) {
-//             setIsErrorVisible(true)
-//                 setErrorMessage("service unavailable")
-//                 setTimeout(()=>setIsErrorVisible(false), 5000);
-//           }
-//           }
-//           fetchProducts();
-//       },[ currentPage, openLeft, content, searched, featureId]);
-
-
-
     useEffect(()=>{
         async function fetchProducts(){
           try{  
             let url = "";
             if (content === "search") {
-              url = `${host}/products/sortandfilter/?search=${searched?searched:""}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
+              url = `${inuse_url}/products/sortandfilter/?search=${searched?searched:""}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
             } else if (content === "feature") {
-              url = `${host}/products/featuredsorting/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
+              url = `${inuse_url}/products/featuredsorting/?feature_id=${featureId || ""}&page_size=${openLeft ? 8 : 10}&page_no=${currentPage}&sort_type=${sortType}&price_range=${JSON.stringify(priceRange)}&page_size=${openLeft?8:10}`;
             } else {
               return; 
             }
@@ -116,11 +101,10 @@ useEffect(() => {
               }
             );
             const data = await res.json();
-            // console.log("sort and filter data",data)
-
             if (data.status.code === 200) {
             
               setSearchedProducts(data.data.product_list);
+              setTotalPages(data.data.total_pages);
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
             {
@@ -168,6 +152,17 @@ useEffect(() => {
                                     setCart={setCart}
                                     setProductDisplayTitle={setProductDisplayTitle}
                                     productDisplayTitle={productDisplayTitle}
+                                    cartProducts={cartProducts}
+                                    setCartProducts={setCartProducts}
+                                    subTotal={subTotal}
+                                    setSubTotal={setSubTotal}
+                                    setShipping={setShipping}
+                                    tax={tax}
+                                    setTax={setTax}
+                                    total={total}
+                                    setTotal={setTotal}
+                                    setIsErrorVisible={setIsErrorVisible}
+                                    setErrorMessage={setErrorMessage}
                                     />
             
             {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}

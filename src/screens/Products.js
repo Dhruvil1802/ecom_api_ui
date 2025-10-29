@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Header from '../components/homepage/Header';
 import DisplayProducts from '../components/products/DisplayProducts';
 import './Products.css';
@@ -15,14 +16,28 @@ function Products({navigate,
                    setCurrentPage, 
                    currentPage, 
                    setCustomerName, 
-                   cart, setCart, 
+                   cart, 
+                   setCart, 
                    setFeatureId, 
                    featureId, 
                    content, 
                    setContent,
                    setProductDisplayTitle,
-                   productDisplayTitle
+                   productDisplayTitle,
+                   cartProducts,
+                   setCartProducts,
+                   subTotal,
+                   setSubTotal,
+                   shipping,
+                   setShipping,
+                   tax,
+                   setTax,
+                   total,
+                   setTotal,
+
                 }){
+                          const [isErrorVisible, setIsErrorVisible] = useState(false)
+                          const [errorMessage, setErrorMessage] = useState("")
 
 
     return(<>
@@ -55,6 +70,20 @@ function Products({navigate,
                 setContent={setContent}
                 setProductDisplayTitle={setProductDisplayTitle}
                 productDisplayTitle={productDisplayTitle}
+                cartProducts={cartProducts}
+                setCartProducts={setCartProducts}
+                subTotal={subTotal}
+                setSubTotal={setSubTotal}
+                shipping={shipping}
+                setShipping={setShipping}
+                tax={tax}
+                setTax={setTax}
+                total={total}
+                setTotal={setTotal}
+                setIsErrorVisible={setIsErrorVisible}
+                setErrorMessage={setErrorMessage}
+                errorMessage={errorMessage}
+                isErrorVisible={isErrorVisible}
                 />
 
                 

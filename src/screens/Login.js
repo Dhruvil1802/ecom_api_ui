@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { inuse_url } from '../App';
 import ErrorMessage from '../error/errorMessage';
 import './Login.css';
 
-const local = "http://127.0.0.1:8000";
-const host = "https://ecomapi-production-f9d8.up.railway.app";
+// const local = "http://127.0.0.1:8000";
+// const host = "https://ecomapi-production-f9d8.up.railway.app";
 
 function Login({showHomePage, setToken}) {
 
@@ -29,7 +30,7 @@ function Login({showHomePage, setToken}) {
         
         async function LoginHandler() {
             try {
-              const res = await fetch(`${host}/customer/login/`, {
+              const res = await fetch(`${inuse_url}/customer/login/`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -69,7 +70,9 @@ function Login({showHomePage, setToken}) {
         <div className="login_page">
             <div className="sub_login_page">
                 <div className='img-div'>
-                <img src={`${host}/Media/login_image/loginpage.jpeg`} className="background_image" />
+                <img src={`${inuse_url
+                    
+                }/Media/login_image/loginpage.jpeg`} className="background_image" />
                 </div>
                 <div className="form_div">
                     <div className="logo_div">
