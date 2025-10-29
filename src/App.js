@@ -14,7 +14,7 @@ import Profile from "./screens/Profile";
   const local = "http://127.0.0.1:8000";
   const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-  export const inuse_url = local;
+  export const inuse_url = host;
 
 function App() { 
   const navigate = useNavigate();
