@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { inuse_url } from "../../App.js";
 import ErrorMessage from '../../error/errorMessage';
 import "./CartBody.css";
+import GetCart from "./GetCart.js";
 import ManageQuantity from "./ManageQuantity.js";
-
 // const local = "http://127.0.0.1:8000";
 // const host = "https://ecomapi-production-f9d8.up.railway.app";
 
@@ -26,43 +26,34 @@ function CartBody({setProductId,
                   setIsErrorVisible,
                   isErrorVisible,
                   errorMessage,
-                  setErrorMessage}) {
+                  setErrorMessage,
+                  emptyMessage,
+                  setEmptyMessage
+                }) {
 
 
 
 useEffect(() => {
-  getProductList();
+GetCart(
+  setCartProducts,
+  setCart,
+  setSubTotal,
+  setShipping,
+  setTax,
+  setTotal,
+  setIsErrorVisible,
+  setErrorMessage
+);
 }, []);
 
+useEffect(() => {
+  if (cartProducts.length === 0) {
+        setEmptyMessage("Your cart is empty");
+      } else {
+        setEmptyMessage("");
+        }
+}, [cartProducts]);
 
-async function getProductList() {
-
-  try {
-    const res = await fetch(`${inuse_url}/cart/management/`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-
-    if (data.status.code === 200) {
-      setCartProducts(data?.data?.products);
-      setSubTotal(data?.data?.sub_total);
-      setShipping(data?.data?.delivery_fees);
-      setTax(data?.data?.tax);
-      setTotal(data?.data?.total);
-      setCart(data?.data);
-
-    }
-
-  } catch (error) {
-    setIsErrorVisible(true);
-    setErrorMessage("service unavailable");
-    setTimeout(() => setIsErrorVisible(false), 5000);
-  }
-}
 
 
 function openProductDetails(product_id){
@@ -73,7 +64,7 @@ function openProductDetails(product_id){
     <div className="cart-body">
 
       <div className="Left_Side">
-
+        <h1>{emptyMessage}</h1>
         <div className="Product_listing">
             {cartProducts?.map((product) => (
                 <div className="product_cart" key={product?.product_id} onClick={()=>{openProductDetails(product?.product_id)}}>
@@ -106,10 +97,10 @@ function openProductDetails(product_id){
                             cart,
                             setCart,
                             setIsErrorVisible,
-                            setErrorMessage
+                            setErrorMessage,
+                            emptyMessage,
+                            setEmptyMessage
                           );                           
-                              
-
                             }}><p>-</p></button>
                         <h2 className="quantity-figure">{product?.product_quantity}</h2>
                         <button className="add-in-cart-button" onClick={(e) => {
@@ -129,8 +120,10 @@ function openProductDetails(product_id){
                             cart,
                             setCart,
                             setIsErrorVisible,
-                            setErrorMessage
-                          ); 
+                            setErrorMessage,
+                            emptyMessage,
+                            setEmptyMessage
+                          );
                           }}><p>+</p></button>
                     </div>
                     <div className="product_total">

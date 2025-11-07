@@ -9,7 +9,25 @@ import RatingAndReview from './RatingAndReview';
 // const local = "http://127.0.0.1:8000";
 // const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function Details({ productId, token, setProductId }) {
+function Details({ productId,
+                  token,
+                  setProductId,
+                  cart,
+                  setCart,
+                  cartProducts,
+                  setCartProducts,
+                  subTotal,
+                  setSubTotal,
+                  shipping,
+                  setShipping,
+                  tax,
+                  setTax,
+                  total,
+                  setTotal,
+                  product,
+                  emptyMessage,
+                  setEmptyMessage
+                }) {
 
     const [productDetails, setProductDetails] = useState();
     const [isErrorVisible, setIsErrorVisible] = useState(false)
@@ -65,7 +83,28 @@ useEffect(() => {
   return (
     <div className="product-details-page">
    
-      <BasicDetails details={details}/>
+      <BasicDetails
+          details={details}
+          cart={cart}
+          setCart={setCart}
+          cartProducts={cartProducts}
+          setCartProducts={setCartProducts}
+          subTotal={subTotal}
+          setSubTotal={setSubTotal}
+          shipping={shipping}
+          setShipping={setShipping}
+          tax={tax}
+          setTax={setTax}
+          total={total}
+          setTotal={setTotal}
+          product={product}
+          setProductId={setProductId}
+          setIsErrorVisible={setIsErrorVisible}
+          setErrorMessage={setErrorMessage}
+          emptyMessage={emptyMessage}
+          setEmptyMessage={setEmptyMessage}
+        />
+
       <RatingAndReview details={details} productDetails={productDetails} setReload={setReload} token={token}/>
      
                           {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}

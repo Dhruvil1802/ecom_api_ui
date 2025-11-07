@@ -1,38 +1,50 @@
-import { useState } from 'react';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useEffect, useState } from 'react';
 import { inuse_url } from '../../App.js';
+import GetCart from '../cart/GetCart.js';
+import ManageQuantity from '../cart/ManageQuantity.js';
 
 import './BasicDetails.css';
 // const local = "http://127.0.0.1:8000";
 // const host = "https://ecomapi-production-f9d8.up.railway.app";
 
-function BasicDetails({ details }) {
+function BasicDetails({ details, 
+                        cart, 
+                        setCart, 
+                        cartProducts, 
+                        setCartProducts, 
+                        subTotal , 
+                        setSubTotal, 
+                        shipping, 
+                        setShipping, 
+                        tax, 
+                        setTax,
+                        total, 
+                        setTotal, 
+                        product, 
+                        setProductId, 
+                        setIsErrorVisible, 
+                        setErrorMessage, 
+                        emptyMessage, 
+                        setEmptyMessage}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     
     const toggleModal = () => {
   setIsModalOpen(!isModalOpen); 
   };
 
-  async function increaseQuantity(product_id) {
-
-  try {
-    const res = await fetch(`${inuse_url}/cart/management/`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ product_id }),
-    });
-    const data = await res.json();
-    if (data.status.code === 201) {
-      // await getProductList(); 
-    }
-  } catch (error) {
-    // setIsErrorVisible(true);
-    // setErrorMessage("service unavailable");
-    // setTimeout(() => setIsErrorVisible(false), 5000);
-  }
-}
+useEffect(() => {
+GetCart(
+  setCartProducts,
+  setCart,
+  setSubTotal,
+  setShipping,
+  setTax,
+  setTotal,
+  setIsErrorVisible,
+  setErrorMessage
+);
+}, []);
 
   return (
     <div className="upper-part">
@@ -47,10 +59,89 @@ function BasicDetails({ details }) {
         <div className="product-all-details">
           <h1 className="product-name">{details?.product_name}</h1>
           <h3 className="product-price">${details?.product_price}</h3>
-          <button className="add-to-cart-btn" onClick={(e) => {
-                            e.stopPropagation(); 
-                            increaseQuantity(details?.product_id);
-                          }} >ADD TO CART</button>
+          <div className="in-details-aligned-buttons button-spacing">
+                            {cartProducts?.map((cartProduct) => cartProduct.product_id).includes(details?.product_id)
+                            ? (<div className="product_cart_quantity">
+                                <button className="sub-in-cart-button-details" onClick={(e) => {
+                                    e.stopPropagation(); 
+                                    ManageQuantity(
+                                                details,
+                                                "decrease",
+                                                cartProducts,
+                                                setCartProducts,
+                                                subTotal,
+                                                setSubTotal,
+                                                setShipping,
+                                                tax,
+                                                setTax,
+                                                total,
+                                                setTotal,
+                                                cart,
+                                                setCart,
+                                                setIsErrorVisible,
+                                                setErrorMessage,
+                                                emptyMessage,
+                                                setEmptyMessage
+                                            );            
+                                    }}><p>-</p></button>
+                                    <h2 className="quantity-figure-indetails">
+                                      {cartProducts?.find((cartProduct) => cartProduct.product_id === details?.product_id)?.product_quantity}
+                                    </h2>                                
+                                    <button className="add-in-cart-button-details" onClick={(e) => {
+                                    e.stopPropagation(); 
+                                    ManageQuantity(
+                                                details,
+                                                "increase",
+                                                cartProducts,
+                                                setCartProducts,
+                                                subTotal,
+                                                setSubTotal,
+                                                setShipping,
+                                                tax,
+                                                setTax,
+                                                total,
+                                                setTotal,
+                                                cart,
+                                                setCart,
+                                                setIsErrorVisible,
+                                                setErrorMessage,
+                                                emptyMessage,
+                                                setEmptyMessage
+                                            );            
+                                }}><p>+</p></button>
+                            </div> )
+                            :(<button className="add-to-cart-button-details" onClick={(e) => {
+                                e.stopPropagation(); 
+        
+                                ManageQuantity(
+                                                details,
+                                                "add",
+                                                cartProducts,
+                                                setCartProducts,
+                                                subTotal,
+                                                setSubTotal,
+                                                setShipping,
+                                                tax,
+                                                setTax,
+                                                total,
+                                                setTotal,
+                                                cart,
+                                                setCart,
+                                                setIsErrorVisible,
+                                                setErrorMessage,
+                                                emptyMessage,
+                                                setEmptyMessage
+                                            );            
+                            }}>
+                                <div className="icon-container">
+                                    <div className="circular-div">
+                                    <ShoppingCartIcon className="cart-icon" />
+                                    </div>
+                                </div>
+                                <span className="button-text">Add To Cart</span>
+                            </button>)}
+                      
+                        </div>
 
           <div className="description-box">
             <h4>Description</h4>

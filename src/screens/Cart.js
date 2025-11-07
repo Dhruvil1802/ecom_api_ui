@@ -23,6 +23,8 @@ function Cart({navigate,
             setTax,
             total,
             setTotal,
+            emptyMessage,
+            setEmptyMessage
 }) {
         const [isErrorVisible, setIsErrorVisible] = useState(false)
         const [errorMessage, setErrorMessage] = useState("")
@@ -57,6 +59,8 @@ function Cart({navigate,
           setErrorMessage={setErrorMessage}
           isErrorVisible={isErrorVisible}
           errorMessage={errorMessage}
+          emptyMessage={emptyMessage}
+          setEmptyMessage={setEmptyMessage}
           />
     </>
   );

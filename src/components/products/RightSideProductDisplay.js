@@ -2,6 +2,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useEffect } from "react";
 import { inuse_url } from '../../App.js';
+import GetCart from '../cart/GetCart.js';
 import ManageQuantity from '../cart/ManageQuantity.js';
 import './RightSideProductDisplay.css';
 // const local = "http://127.0.0.1:8000";z
@@ -18,16 +19,19 @@ function DisplayProductRightSide({searchedProducts,
                                   setCart, 
                                   setProductDisplayTitle, 
                                   productDisplayTitle,cartProducts,
-                                    setCartProducts,
-                                    subTotal,
-                                    setSubTotal,
-                                    setShipping,
-                                    tax,
-                                    setTax,
-                                    total,
-                                    setTotal,
-                                    setIsErrorVisible,
-                                    setErrorMessage}){
+                                  setCartProducts,
+                                  subTotal,
+                                  setSubTotal,
+                                  setShipping,
+                                  tax,
+                                  setTax,
+                                  total,
+                                  setTotal,
+                                  setIsErrorVisible,
+                                  setErrorMessage,
+                                  emptyMessage,
+                                  setEmptyMessage
+                                }) {
     
 
     const paginate = (pageNumber) => {
@@ -44,38 +48,20 @@ function DisplayProductRightSide({searchedProducts,
          navigate("/productdetails")
     }
 
-    useEffect(()=>{
-        getProductList();
-    },[])
 
-    
-    async function getProductList() {
 
-  try {
-    const res = await fetch(`${inuse_url}/cart/management/`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    if (data.status.code === 200) {
-      setCartProducts(data?.data?.products);
-      setSubTotal(data?.data?.sub_total);
-      setShipping(data?.data?.delivery_fees);
-      setTax(data?.data?.tax);
-      setTotal(data?.data?.total);
-      setCart(data?.data);
-
-    }
-
-  } catch (error) {
-    setIsErrorVisible(true);
-    setErrorMessage("service unavailable");
-    setTimeout(() => setIsErrorVisible(false), 5000);
-  } 
-    }
+useEffect(() => {
+GetCart(
+  setCartProducts,
+  setCart,
+  setSubTotal,
+  setShipping,
+  setTax,
+  setTotal,
+  setIsErrorVisible,
+  setErrorMessage
+);
+}, []);
 
     return(
         <div className="right_side">
@@ -150,7 +136,9 @@ function DisplayProductRightSide({searchedProducts,
                                                 cart,
                                                 setCart,
                                                 setIsErrorVisible,
-                                                setErrorMessage
+                                                setErrorMessage,
+                                                emptyMessage,
+                                                setEmptyMessage
                                             );            
                                     }}><p>-</p></button>
                                 <h2 className="quantity-figure">{cart.products.find((cartProduct) => cartProduct.product_id === product.product_id)?.product_quantity}</h2>
@@ -171,7 +159,9 @@ function DisplayProductRightSide({searchedProducts,
                                                 cart,
                                                 setCart,
                                                 setIsErrorVisible,
-                                                setErrorMessage
+                                                setErrorMessage,
+                                                emptyMessage,
+                                                setEmptyMessage
                                             );            
                                 }}><p>+</p></button>
                             </div> )
@@ -193,7 +183,9 @@ function DisplayProductRightSide({searchedProducts,
                                                 cart,
                                                 setCart,
                                                 setIsErrorVisible,
-                                                setErrorMessage
+                                                setErrorMessage,
+                                                emptyMessage,
+                                                setEmptyMessage
                                             );            
                             }}>
                                 <div className="icon-container">
@@ -232,7 +224,7 @@ function DisplayProductRightSide({searchedProducts,
                         >
                         {page}
                         {                 
-}
+                    }
                         </button>
                     );
                 })}

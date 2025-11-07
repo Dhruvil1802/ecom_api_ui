@@ -34,10 +34,11 @@ function Products({navigate,
                    setTax,
                    total,
                    setTotal,
-
+                   emptyMessage,
+                   setEmptyMessage
                 }){
-                          const [isErrorVisible, setIsErrorVisible] = useState(false)
-                          const [errorMessage, setErrorMessage] = useState("")
+    const [isErrorVisible, setIsErrorVisible] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
 
     return(<>
@@ -84,6 +85,8 @@ function Products({navigate,
                 setErrorMessage={setErrorMessage}
                 errorMessage={errorMessage}
                 isErrorVisible={isErrorVisible}
+                emptyMessage={emptyMessage}
+                setEmptyMessage={setEmptyMessage}
                 />
 
                 

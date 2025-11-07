@@ -34,7 +34,10 @@ function DisplayProducts({
                           tax,
                           setTax,
                           total,
-                          setTotal
+                          setTotal,
+                          emptyMessage,
+                          setEmptyMessage
+                          
                           
                           })
  {
@@ -163,6 +166,8 @@ useEffect(() => {
                                     setTotal={setTotal}
                                     setIsErrorVisible={setIsErrorVisible}
                                     setErrorMessage={setErrorMessage}
+                                    emptyMessage={emptyMessage}
+                                    setEmptyMessage={setEmptyMessage}
                                     />
             
             {isErrorVisible?<ErrorMessage message={errorMessage}/>:""}

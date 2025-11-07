@@ -2,7 +2,23 @@
 import { inuse_url } from '../../App.js';
 import GetCart from '../cart/GetCart.js';
 
-async function ManageQuantity(product, action, cartProducts, setCartProducts, subTotal, setSubTotal, setShipping, tax, setTax, total, setTotal, cart, setCart, setIsErrorVisible, setErrorMessage) {
+async function ManageQuantity(product, 
+                              action, 
+                              cartProducts, 
+                              setCartProducts, 
+                              subTotal, 
+                              setSubTotal, 
+                              setShipping, 
+                              tax, 
+                              setTax, 
+                              total, 
+                              setTotal, 
+                              cart, 
+                              setCart, 
+                              setIsErrorVisible, 
+                              setErrorMessage, 
+                              emptyMessage, 
+                              setEmptyMessage) {
 
 let updatedProducts = cartProducts.map(p =>
   p.product_id === product?.product_id
@@ -63,12 +79,16 @@ const newTotal = +(newSubTotal + newShipping + newTax).toFixed(2);
     const data = await res.json();
     if (data.status.code === 201) {
 
-      <GetCart setCartProducts={setCartProducts} 
-               setCart={setCart} 
-               setTax={setTax} 
-               setTotal={setTotal} 
-               setShipping={setShipping} 
-               setSubTotal={setSubTotal} />
+        GetCart(emptyMessage,
+          setEmptyMessage,
+          setCartProducts,
+          setSubTotal,
+          setShipping,
+          setTax,
+          setTotal,
+          setCart,
+          setIsErrorVisible,
+          setErrorMessage);
 
     }
   } catch (error) {

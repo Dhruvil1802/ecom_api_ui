@@ -1,6 +1,14 @@
 import { inuse_url } from "../../App";
 
-async function GetCart(setCartProducts, setCart, setSubTotal, setShipping, setTax, setTotal, setIsErrorVisible, setErrorMessage) {
+async function GetCart(setCartProducts, 
+                       setCart, 
+                       setSubTotal, 
+                       setShipping, 
+                       setTax, 
+                       setTotal, 
+                       setIsErrorVisible, 
+                       setErrorMessage, 
+                        ) {
 
   try {
     const res = await fetch(`${inuse_url}/cart/management/`, {

@@ -100,6 +100,8 @@ function App() {
     const [shipping, setShipping] = useState(0);
     const [tax, setTax] = useState(0);
     const [total, setTotal] = useState();
+    const [emptyMessage, setEmptyMessage] = useState("");
+
 
 
   const showHomePage = () => {
@@ -177,31 +179,43 @@ function App() {
           setTax={setTax}
           total={total}
           setTotal={setTotal}
-
-          
+          emptyMessage={emptyMessage}
+          setEmptyMessage={setEmptyMessage}
         />} 
       />
       <Route
-        path="/productdetails"
-        element={<ProductDetails 
+          path="/productdetails"
+          element={
+            <ProductDetails
               customerName={customerName}
               setCustomerName={setCustomerName}
               navigate={navigate}
-              setSearch={setSearch} 
+              setSearch={setSearch}
               search={search}
               setSearched={setSearched}
-              // productDetails={productDetails} 
-              // setProductDetails={setProductDetails} 
               setCurrentPage={setCurrentPage}
               productId={productId}
               setProductId={setProductId}
               setContent={setContent}
-
               token={token}
+              cart={cart}
+              setCart={setCart}
+              cartProducts={cartProducts}
+              setCartProducts={setCartProducts}
+              subTotal={subTotal}
+              setSubTotal={setSubTotal}
+              shipping={shipping}
+              setShipping={setShipping}
+              tax={tax}
+              setTax={setTax}
+              total={total}
+              setTotal={setTotal}
+              emptyMessage={emptyMessage}
+              setEmptyMessage={setEmptyMessage}
+            />
+          }
+        />
 
-
-               />}
-      />
       <Route
         path="/cart"
         element={<Cart               
@@ -228,6 +242,8 @@ function App() {
               setTotal={setTotal}
               setContent={setContent}
               content={content}
+              emptyMessage={emptyMessage}
+              setEmptyMessage={setEmptyMessage}
 
               />
         }/>
