@@ -50,10 +50,7 @@ function DisplayProductRightSide({searchedProducts,
          navigate("/productdetails")
     }
 
-useEffect(() => {
-    setProductDisplayTitle(searched);
-    console.log("searched",searched)
-}, [searched]);
+
 
 useEffect(() => {
 GetCart(
