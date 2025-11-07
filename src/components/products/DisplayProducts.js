@@ -108,7 +108,8 @@ useEffect(() => {
             
               setSearchedProducts(data.data.product_list);
               setTotalPages(data.data.total_pages);
-              setProductDisplayTitle(searched);
+              // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa",searched)
+              // setProductDisplayTitle(searched);
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
             {
@@ -143,9 +144,10 @@ useEffect(() => {
                                      setCategory={setCategory}
                                      category={category}/>
             </div>:""}
-            
-           
+
+
             <DisplayProductRightSide searchedProducts={searchedProducts} 
+                                    searched={searched}
                                     totalPages={totalPages} 
                                     setCurrentPage={setCurrentPage} 
                                     currentPage={currentPage}

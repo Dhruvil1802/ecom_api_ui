@@ -9,6 +9,7 @@ import './RightSideProductDisplay.css';
 // const inuse_url = "https://ecomapi-production-f9d8.up.railway.app";
 
 function DisplayProductRightSide({searchedProducts, 
+                                  searched,
                                   totalPages, 
                                   setCurrentPage, 
                                   currentPage, 
@@ -49,7 +50,10 @@ function DisplayProductRightSide({searchedProducts,
          navigate("/productdetails")
     }
 
-
+useEffect(() => {
+    setProductDisplayTitle(searched);
+    console.log("searched",searched)
+}, [searched]);
 
 useEffect(() => {
 GetCart(
