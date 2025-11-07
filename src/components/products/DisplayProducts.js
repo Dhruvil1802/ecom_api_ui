@@ -84,6 +84,10 @@ useEffect(() => {
   }
   }, []); 
     
+  useEffect(() => {
+    setProductDisplayTitle(searched);
+    console.log("searched",searched)
+}, [searched]);
 
     useEffect(()=>{
         async function fetchProducts(){
