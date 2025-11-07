@@ -108,6 +108,7 @@ useEffect(() => {
             
               setSearchedProducts(data.data.product_list);
               setTotalPages(data.data.total_pages);
+              setProductDisplayTitle(searched);
             }
             if (data?.status?.code === 400 || data?.status?.code === 404)
             {
